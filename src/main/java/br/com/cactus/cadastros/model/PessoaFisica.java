@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class PessoaFisica implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    //teste de atualização com eGit
+    
     private Integer id;    
     private String cpf;    
     private String rg;    
