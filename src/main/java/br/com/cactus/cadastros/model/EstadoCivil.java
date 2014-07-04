@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class EstadoCivil implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+    //teste de atualizacao pelo github
     private Integer id;    
     private String nome;    
     private String descricao;
