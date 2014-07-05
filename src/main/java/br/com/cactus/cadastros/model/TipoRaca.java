@@ -4,4 +4,5 @@ public enum TipoRaca {
 	
 	BRANCO, PARDO, AFRO_DESCENDENTE
 
+	//teste
 }
