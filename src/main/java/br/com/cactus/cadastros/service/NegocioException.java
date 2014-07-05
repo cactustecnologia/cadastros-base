@@ -8,4 +8,5 @@ public class NegocioException extends RuntimeException {
 		super(msg);
 	}
 
+	//teste
 }
