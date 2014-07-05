@@ -38,4 +38,5 @@ public class CDIServiceLocator {
 		return o;
 	}
 
+	//teste
 }
