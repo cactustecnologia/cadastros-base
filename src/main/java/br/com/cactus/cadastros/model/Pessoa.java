@@ -24,7 +24,7 @@ public class Pessoa implements Serializable {
     private String transportadora;
     
     
-    //getter and setter
+    //getter and setter agora
     @Id
     @GeneratedValue
 	public Integer getId() {
