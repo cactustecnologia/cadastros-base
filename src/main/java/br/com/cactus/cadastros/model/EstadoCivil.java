@@ -18,6 +18,7 @@ public class EstadoCivil implements Serializable {
     private static final long serialVersionUID = 1L;
     //teste de atualizacao pelo github
     //teste de atualizacao pelo notebook
+    //teste notebook silvio
     private Integer id;    
     private String nome;    
     private String descricao;
