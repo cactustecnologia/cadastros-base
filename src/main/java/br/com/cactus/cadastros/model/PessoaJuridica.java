@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class PessoaJuridica implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+    //teste
     private Integer id;    
     private String cnpj;    
     private String fantasia;    
