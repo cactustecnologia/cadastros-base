@@ -20,6 +20,7 @@ public class EstadoCivil implements Serializable {
     //teste de atualizacao pelo notebook
     //teste notebook silvio
     //teste desktop Antonio
+    //teste notebook Silvio
     private Integer id;    
     private String nome;    
     private String descricao;
