@@ -22,6 +22,4 @@ public class ViewContextExtension implements Extension
 	{
 		event.addContext(new ViewScopedContext());
 	}
-	
-		//teste
 }
