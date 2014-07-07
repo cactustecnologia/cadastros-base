@@ -28,12 +28,10 @@
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 				<p:outputLabel value="Nome:" for="nome" />
-				<p:inputText id="nome" size="20" maxlength="20"
-					value="#{estadoCivilBean.estadoCivil.nome}" />
+				<p:inputText id="nome" size="20" maxlength="20" value="#{estadoCivilBean.estadoCivil.nome}" />
 
 				<p:outputLabel value="Descrição" for="descricao" />
-				<p:inputText id="descricao" size="80" maxlength="80"
-					value="#{estadoCivilBean.estadoCivil.nome}" />
+				<p:inputText id="descricao" size="80" maxlength="80" value="#{estadoCivilBean.estadoCivil.descricao}" />
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

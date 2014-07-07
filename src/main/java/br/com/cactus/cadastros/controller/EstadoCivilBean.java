@@ -2,7 +2,6 @@ package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,27 +17,25 @@ public class EstadoCivilBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@PostConstruct
-	public void init(){
+	private EstadoCivil estadoCivil;
+	
+	@Inject
+	private EstadoCivis estadoCivis;
+		
+	public EstadoCivilBean(){
 		limpar();
 	}
 	
-	private EstadoCivil estadoCivil;
-	@Inject
-	private EstadoCivis estadoCivis;
-	
-	public void limpar(){
-		this.estadoCivil = new EstadoCivil();
-	}
-	
 	@Transactional
-	public void salvar(){
-		this.estadoCivil = this.estadoCivis.salvar(estadoCivil);
+	public void salvar(){		
+		this.estadoCivil = estadoCivis.salvar(estadoCivil);
 		limpar();
 		FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
 	}
 	
-	
+	public void limpar(){
+		estadoCivil = new EstadoCivil();
+	}	
 	
 	//getter and setter
 	public EstadoCivil getEstadoCivil() {
