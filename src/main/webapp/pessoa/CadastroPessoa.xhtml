@@ -1,0 +1,174 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Cadastro Pessoa</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<h1>Cadastro - Pessoa</h1>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/pessoa/CadastroPessoa" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{pessoaBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:growl id="msgs" showDetail="true" />
+			<p:panelGrid columns="4" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText id="nome" size="30" maxlength="50"
+					value="#{pessoaBean.pessoa.nome}" />
+
+				<p:outputLabel value="Tipo" for="tipo" />
+				<p:selectOneMenu id="tipo" value="#{pessoaBean.pessoa.tipo}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" size="30" maxlength="40"
+					value="#{pessoaBean.pessoa.email}" />
+
+				<p:outputLabel value="Site:" for="site" />
+				<p:inputText id="site" size="30" maxlength="50"
+					value="#{pessoaBean.pessoa.site}" />
+
+				<p:outputLabel value="Cliente" for="cliente" />
+				<p:selectOneMenu id="cliente" value="#{pessoaBean.pessoa.cliente}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Fornecedor" for="fornecedor" />
+				<p:selectOneMenu id="fornecedor"
+					value="#{pessoaBean.pessoa.fornecedor}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Colaborador" for="colaborador" />
+				<p:selectOneMenu id="colaborador"
+					value="#{pessoaBean.pessoa.colaborador}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Contador" for="contador" />
+				<p:selectOneMenu id="contador" value="#{pessoaBean.pessoa.contador}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Convênio" for="convenio" />
+				<p:selectOneMenu id="convenio" value="#{pessoaBean.pessoa.convenio}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Transportadora" for="transportadora" />
+				<p:selectOneMenu id="transportadora"
+					value="#{pessoaBean.pessoa.transportadora}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+
+			<p:tabView>
+				<p:tab title="Informações do Tipo Pessoa">
+					<h:panelGrid columns="4" cellpadding="10">
+						<p:selectOneRadio id="tipoPessoa" value="">
+							<f:selectItem itemLabel="Pessoa Física" itemValue="Pessoa Física" />
+							<f:selectItem itemLabel="Pessoa Jurídica"
+								itemValue="Pessoa Jurídica" />
+						</p:selectOneRadio>
+
+						<p:outputLabel value="CPF:" for="cpf" />
+						<p:inputText id="cpf" size="20" maxlength="14"
+							value="#{pessoaFisicaBean.pessoaFisica.cpf}" />
+
+						<p:outputLabel value="Data Nascimento:" for="dataNascimento" />
+						<p:inputText id="dataNascimento" size="20" maxlength="10"
+							value="#{pessoaFisicaBean.pessoaFisica.dataNascimento}" />
+
+						<p:outputLabel value="Sexo:" for="sexo" />
+						<p:selectOneMenu id="sexo"
+							value="#{pessoaFisicaBean.pessoaFisica.sexo}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Estado Civil:" for="estadoCivil" />
+						<p:selectOneMenu id="estadoCivil"
+							value="#{pessoaFisicaBean.pessoaFisica.estadoCivil}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Raça:" for="raca" />
+						<p:selectOneMenu id="raca"
+							value="#{pessoaFisicaBean.pessoaFisica.raca}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Tipo Sanguínio:" for="tipoSanguinio" />
+						<p:selectOneMenu id="tipoSanguinio"
+							value="#{pessoaFisicaBean.pessoaFisica.tipoSangue}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Naturalidade:" for="naturalidade" />
+						<p:inputText id="naturalidade" size="20" maxlength="100"
+							value="#{pessoaFisicaBean.pessoaFisica.naturalidade}" />
+						
+						<p:outputLabel value="Nacionalidade:" for="nacionalidade" />
+						<p:inputText id="nacionalidade" size="20" maxlength="100"
+							value="#{pessoaFisicaBean.pessoaFisica.nacionalidade}" />
+						
+						<p:outputLabel value="Nome Mãe:" for="nomeMae" />
+						<p:inputText id="nomeMae" size="20" maxlength="100"
+							value="#{pessoaFisicaBean.pessoaFisica.nomeMae}" />
+						
+						<p:outputLabel value="Nome Pai:" for="nomePai" />
+						<p:inputText id="nomePai" size="20" maxlength="100"
+							value="#{pessoaFisicaBean.pessoaFisica.nomePai}" />
+						
+						<p:outputLabel value="RG:" for="rg" />
+						<p:inputText id="rg" size="20" maxlength="13"
+							value="#{pessoaFisicaBean.pessoaFisica.rg}" />
+						
+						<p:outputLabel value="Orgão RG:" for="orgaoRg" />
+						<p:inputText id="orgaoRg" size="20" maxlength="10"
+							value="#{pessoaFisicaBean.pessoaFisica.orgaoRg}" />
+							
+						<p:outputLabel value="Data Emissão RG:" for="DataEmissaoRg" />
+						<p:inputText id="DataEmissaoRg" size="20" maxlength="10"
+							value="#{pessoaFisicaBean.pessoaFisica.dataEmissaoRg}" />
+						
+						<p:outputLabel value="CHN Número:" for="cnhNumero" />
+						<p:inputText id="cnhNumero" size="20" maxlength="20"
+							value="#{pessoaFisicaBean.pessoaFisica.cnhNumero}" />
+						
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab title="Contatos">
+					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputLabel value="Contatos" for="contatos" />
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab title="Endereços">
+					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputLabel value="Endereços" for="enderecos" />
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
