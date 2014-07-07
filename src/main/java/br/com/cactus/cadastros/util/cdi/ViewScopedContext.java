@@ -173,6 +173,4 @@ public class ViewScopedContext implements Context, SystemEventListener {
 	private final static String CREATIONAL_MAP_NAME = "org.jboss.seam.faces.viewscope.creationalInstanceMap";
 
 	private boolean isJsfSubscribed = false;
-	
-		//teste
 }
