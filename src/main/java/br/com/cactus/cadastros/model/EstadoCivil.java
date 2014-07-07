@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "ESTADO_CIVIL")
+@Table(name = "estado_civil")
 public class EstadoCivil implements Serializable {
 
     private static final long serialVersionUID = 1L;

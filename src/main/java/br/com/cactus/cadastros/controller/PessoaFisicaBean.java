@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cactus.cadastros.model.PessoaFisica;
-import br.com.cactus.cadastros.repository.PessoaFisicas;
+import br.com.cactus.cadastros.repository.PessoaFisicaDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
@@ -20,7 +20,7 @@ public class PessoaFisicaBean implements Serializable {
 	private PessoaFisica pessoaFisica;
 	
 	@Inject
-	private PessoaFisicas pessoaFisicas;
+	private PessoaFisicaDao dao;
 	
 	public void limpar(){
 		this.pessoaFisica = new PessoaFisica();
@@ -29,10 +29,10 @@ public class PessoaFisicaBean implements Serializable {
 	@Transactional
 	public void salvar(){
 		if (pessoaFisica.getId() == null) {
-			pessoaFisicas.salvar(pessoaFisica);
+			dao.salvar(pessoaFisica);
 			FacesUtil.addInfoMessage("Pessoa Física salva com sucesso!");
 		} else {
-			pessoaFisicas.atualizar(pessoaFisica);
+			dao.atualizar(pessoaFisica);
 			FacesUtil.addInfoMessage("Pessoa Física atualizada com sucesso!");
 		}
 		limpar();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import br.com.cactus.cadastros.model.EstadoCivil;
 
-public class EstadoCivis extends GenericRepositoryImpl<EstadoCivil> implements Serializable {
+public class EstadoCivilDao extends GenericRepositoryDaoImpl<EstadoCivil> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

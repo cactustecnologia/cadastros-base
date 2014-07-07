@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cactus.cadastros.model.EstadoCivil;
-import br.com.cactus.cadastros.repository.EstadoCivis;
+import br.com.cactus.cadastros.repository.EstadoCivilDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
@@ -26,7 +26,7 @@ public class EstadoCivilBean implements Serializable {
 	private EstadoCivil estadoCivil;
 	
 	@Inject
-	private EstadoCivis estadoCivis;
+	private EstadoCivilDao dao;
 	
 	public void limpar(){
 		this.estadoCivil = new EstadoCivil();
@@ -35,10 +35,10 @@ public class EstadoCivilBean implements Serializable {
 	@Transactional
 	public void salvar(){
 		if(estadoCivil.getId() == null){
-			estadoCivis.salvar(estadoCivil);
+			dao.salvar(estadoCivil);
 			FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
 		} else{
-			estadoCivis.atualizar(estadoCivil);
+			dao.atualizar(estadoCivil);
 			FacesUtil.addInfoMessage("Estado Civil atualizado com sucesso!");
 		}
 		limpar();
