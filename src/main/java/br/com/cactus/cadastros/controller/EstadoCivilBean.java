@@ -25,7 +25,7 @@ public class EstadoCivilBean implements Serializable {
 	
 	private EstadoCivil estadoCivil;
 	@Inject
-	private EstadoCivis estadocivis;
+	private EstadoCivis estadoCivis;
 	
 	public void limpar(){
 		this.estadoCivil = new EstadoCivil();
@@ -33,7 +33,7 @@ public class EstadoCivilBean implements Serializable {
 	
 	@Transactional
 	public void salvar(){
-		this.estadoCivil = this.estadocivis.salvar(estadoCivil);
+		this.estadoCivil = this.estadoCivis.salvar(estadoCivil);
 		limpar();
 		FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
 	}
