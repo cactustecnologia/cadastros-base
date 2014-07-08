@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "PESSOA_JURIDICA")
+@Table(name = "pessoa_juridica")
 public class PessoaJuridica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,7 +62,8 @@ public class PessoaJuridica implements Serializable {
 		this.fantasia = fantasia;
 	}
 	
-	@Column(nullable = false, length = 14)
+	@NotNull
+	@Column(nullable = false, length = 30)
 	public String getInscricaoMunicipal() {
 		return inscricaoMunicipal;
 	}
@@ -71,6 +72,7 @@ public class PessoaJuridica implements Serializable {
 		this.inscricaoMunicipal = inscricaoMunicipal;
 	}
 	
+	@NotNull
 	@Column(nullable = false, length = 30)
 	public String getInscricaoEstadual() {
 		return inscricaoEstadual;
@@ -87,7 +89,7 @@ public class PessoaJuridica implements Serializable {
 	public void setDataConstituicao(Date dataConstituicao) {
 		this.dataConstituicao = dataConstituicao;
 	}	
-		
+	
 	@Column(nullable = false, length = 9)
 	public String getSuframa() {
 		return suframa;
@@ -97,6 +99,7 @@ public class PessoaJuridica implements Serializable {
 		this.suframa = suframa;
 	}
 	
+	@NotNull
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "PESSOA_FISICA")
+@Table(name = "pessoa_fisica")
 public class PessoaFisica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -85,7 +85,8 @@ public class PessoaFisica implements Serializable {
 	public void setOrgaoRg(String orgaoRg) {
 		this.orgaoRg = orgaoRg;
 	}
-		
+	
+	@NotNull
 	public Date getDataEmissaoRg() {
 		return dataEmissaoRg;
 	}
@@ -155,7 +156,8 @@ public class PessoaFisica implements Serializable {
 	public void setTipoSangue(TipoSangue tipoSangue) {
 		this.tipoSangue = tipoSangue;
 	}
-		
+	
+	@NotNull
 	@Column(nullable = false, length = 20)
 	public String getCnhNumero() {
 		return cnhNumero;
@@ -164,7 +166,7 @@ public class PessoaFisica implements Serializable {
 	public void setCnhNumero(String cnhNumero) {
 		this.cnhNumero = cnhNumero;
 	}
-		
+	
 	@Column(nullable = false, length = 2)
 	public String getCnhCategoria() {
 		return cnhCategoria;
@@ -174,6 +176,7 @@ public class PessoaFisica implements Serializable {
 		this.cnhCategoria = cnhCategoria;
 	}
 	
+	@NotNull
 	public Date getCnhVencimento() {
 		return cnhVencimento;
 	}
@@ -181,7 +184,8 @@ public class PessoaFisica implements Serializable {
 	public void setCnhVencimento(Date cnhVencimento) {
 		this.cnhVencimento = cnhVencimento;
 	}
-		
+	
+	@NotNull
 	@Column(nullable = false, length = 20)
 	public String getTituloEleitoralNumero() {
 		return tituloEleitoralNumero;
@@ -191,6 +195,7 @@ public class PessoaFisica implements Serializable {
 		this.tituloEleitoralNumero = tituloEleitoralNumero;	
 	}
 	
+	@NotNull
 	@Column(nullable = false, length = 10)
 	public Integer getTituloEleitoralZona() {
 		return tituloEleitoralZona;
@@ -200,6 +205,7 @@ public class PessoaFisica implements Serializable {
 		this.tituloEleitoralZona = tituloEleitoralZona;
 	}
 	
+	@NotNull
 	@Column(nullable = false, length = 10)
 	public Integer getTituloEleitoralSecao() {
 		return tituloEleitoralSecao;
@@ -209,6 +215,8 @@ public class PessoaFisica implements Serializable {
 		this.tituloEleitoralSecao = tituloEleitoralSecao;
 	}
 	
+	@NotBlank
+	@Column(nullable = false, length = 20)
 	public String getReservistaNumero() {
 		return reservistaNumero;
 	}
@@ -217,16 +225,17 @@ public class PessoaFisica implements Serializable {
 		this.reservistaNumero = reservistaNumero;
 	}
 	
+	@NotNull
 	@Column(nullable = false, length = 20)
 	public Integer getReservistaCategoria() {
 		return reservistaCategoria;
 	}
-		
-	@Column(nullable = false, length = 10)
+	
 	public void setReservistaCategoria(Integer reservistaCategoria) {
 		this.reservistaCategoria = reservistaCategoria;
 	}
 	
+	@NotNull
 	@Column(nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
@@ -236,6 +245,7 @@ public class PessoaFisica implements Serializable {
 		this.nomeMae = nomeMae;
 	}
 	
+	@NotNull
 	@Column(nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;

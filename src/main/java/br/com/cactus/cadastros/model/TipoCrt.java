@@ -6,6 +6,7 @@ public enum TipoCrt {
 	
 	private String descricao;
 
+	
 	TipoCrt(String descricao) {
 		this.descricao = descricao;
 	}
