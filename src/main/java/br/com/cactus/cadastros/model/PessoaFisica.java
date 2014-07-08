@@ -45,6 +45,8 @@ public class PessoaFisica implements Serializable {
     private EstadoCivil estadoCivil;    
     private Pessoa pessoa;
 	
+    
+    //getter and setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {

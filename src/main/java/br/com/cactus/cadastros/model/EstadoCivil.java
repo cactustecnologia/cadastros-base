@@ -21,6 +21,8 @@ public class EstadoCivil implements Serializable {
     private String nome;    
     private String descricao;
 	
+    
+    //getter and setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
@@ -41,7 +43,7 @@ public class EstadoCivil implements Serializable {
 		this.nome = nome;
 	}
 	
-	public String getDescricao() {
+		public String getDescricao() {
 		return descricao;
 	}
 	
