@@ -19,7 +19,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.primefaces.model.SortOrder;
 
-public class GenericRepositoryImpl<T> implements GenericRepository<T>, Serializable {
+public class GenericRepositoryDaoImpl<T> implements GenericRepositoryDao<T>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>, Serializa
 	private final Class<T> oClass;
 
 	@SuppressWarnings("unchecked")
-	public GenericRepositoryImpl() {
+	public GenericRepositoryDaoImpl() {
 		this.oClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.hibernate.criterion.Criterion;
 import org.primefaces.model.SortOrder;
 
-public interface GenericRepository<T> {
+public interface GenericRepositoryDao<T> {
 	
 	public Class<T> getObjectClass();
 

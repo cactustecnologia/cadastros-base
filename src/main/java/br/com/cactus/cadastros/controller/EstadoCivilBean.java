@@ -2,12 +2,13 @@ package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cactus.cadastros.model.EstadoCivil;
-import br.com.cactus.cadastros.repository.EstadoCivis;
+import br.com.cactus.cadastros.repository.EstadoCivilDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
@@ -17,25 +18,33 @@ public class EstadoCivilBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@PostConstruct
+	public void init(){
+		limpar();
+	}
+	
 	private EstadoCivil estadoCivil;
 	
 	@Inject
-	private EstadoCivis estadoCivis;
-		
-	public EstadoCivilBean(){
-		limpar();
-	}
-	
-	@Transactional	
-	public void salvar(){		
-		this.estadoCivil = estadoCivis.salvar(estadoCivil);
-		limpar();
-		FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
-	}
+	private EstadoCivilDao dao;
 	
 	public void limpar(){
-		estadoCivil = new EstadoCivil();
-	}	
+		this.estadoCivil = new EstadoCivil();
+	}
+	
+	@Transactional
+	public void salvar(){
+		if(estadoCivil.getId() == null){
+			dao.salvar(estadoCivil);
+			FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
+		} else{
+			dao.atualizar(estadoCivil);
+			FacesUtil.addInfoMessage("Estado Civil atualizado com sucesso!");
+		}
+		limpar();
+	}
+	
+	
 	
 	//getter and setter
 	public EstadoCivil getEstadoCivil() {
