@@ -32,8 +32,7 @@ public class Pessoa implements Serializable {
     private String contador;
     private String transportadora;
     
-    
-    
+        
     //getter and setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
