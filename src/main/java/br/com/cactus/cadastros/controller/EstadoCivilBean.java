@@ -26,7 +26,7 @@ public class EstadoCivilBean implements Serializable {
 		limpar();
 	}
 	
-	@Transactional
+	@Transactional	
 	public void salvar(){		
 		this.estadoCivil = estadoCivis.salvar(estadoCivil);
 		limpar();
