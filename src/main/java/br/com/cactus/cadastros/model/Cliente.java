@@ -1,6 +1,7 @@
 package br.com.cactus.cadastros.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,9 +27,9 @@ public class Cliente implements Serializable {
 	private String contaTomador;
 	private String geraFinanceiro;
 	private String indicadorPreco;
-	private double porcentoDesconto;
+	private BigDecimal porcentoDesconto;
 	private String formaDesconto;
-	private double limiteCredito;
+	private BigDecimal limiteCredito;
 	private String tipoFrete;
 	private ContabilConta contabilConta;
 	//tribut_operacao_fiscal
@@ -36,8 +37,6 @@ public class Cliente implements Serializable {
 	private Pessoa pessoa;
 	private AtividadeForCli atividadeForCli;
 	private SituacaoForCli situacaoForCli;
-	
-	
 	
 	//getter and setter
 	@Id
@@ -106,15 +105,6 @@ public class Cliente implements Serializable {
 		this.indicadorPreco = indicadorPreco;
 	}
 	
-	//não sei
-	public double getPorcentoDesconto() {
-		return porcentoDesconto;
-	}
-	
-	public void setPorcentoDesconto(double porcentoDesconto) {
-		this.porcentoDesconto = porcentoDesconto;
-	}
-	
 	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getFormaDesconto() {
@@ -124,16 +114,7 @@ public class Cliente implements Serializable {
 	public void setFormaDesconto(String formaDesconto) {
 		this.formaDesconto = formaDesconto;
 	}
-	
-	//não sei
-	public double getLimiteCredito() {
-		return limiteCredito;
-	}
-	
-	public void setLimiteCredito(double limiteCredito) {
-		this.limiteCredito = limiteCredito;
-	}
-	
+		
 	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getTipoFrete() {
@@ -188,7 +169,20 @@ public class Cliente implements Serializable {
 	public void setSituacaoForCli(SituacaoForCli situacaoForCli) {
 		this.situacaoForCli = situacaoForCli;
 	}
-	
-	
-	
+
+	public BigDecimal getPorcentoDesconto() {
+		return porcentoDesconto;
+	}
+
+	public void setPorcentoDesconto(BigDecimal porcentoDesconto) {
+		this.porcentoDesconto = porcentoDesconto;
+	}
+
+	public BigDecimal getLimiteCredito() {
+		return limiteCredito;
+	}
+
+	public void setLimiteCredito(BigDecimal limiteCredito) {
+		this.limiteCredito = limiteCredito;
+	}	
 }
