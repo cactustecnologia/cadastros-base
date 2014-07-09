@@ -7,8 +7,12 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.CloseEvent;
+import org.primefaces.model.LazyDataModel;
+
 import br.com.cactus.cadastros.model.EstadoCivil;
-import br.com.cactus.cadastros.repository.EstadoCivilDao;
+import br.com.cactus.cadastros.repository.filter.EstadoCivilFilter;
+import br.com.cactus.cadastros.service.EstadoCivilService;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
@@ -18,15 +22,18 @@ public class EstadoCivilBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private EstadoCivil estadoCivil;
+	private EstadoCivil estadoCivilSelecionado;
+	private LazyDataModel<EstadoCivil> lazyModel;
+	private EstadoCivilFilter filtro;
+	@Inject
+	private EstadoCivilService civilService;	
+	
 	@PostConstruct
 	public void init(){
 		limpar();
+		filtro = new EstadoCivilFilter();
 	}
-	
-	private EstadoCivil estadoCivil;
-	
-	@Inject
-	private EstadoCivilDao dao;
 	
 	public void limpar(){
 		this.estadoCivil = new EstadoCivil();
@@ -34,17 +41,32 @@ public class EstadoCivilBean implements Serializable {
 	
 	@Transactional
 	public void salvar(){
-		if(estadoCivil.getId() == null){
-			dao.salvar(estadoCivil);
-			FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
-		} else{
-			dao.atualizar(estadoCivil);
-			FacesUtil.addInfoMessage("Estado Civil atualizado com sucesso!");
-		}
+		civilService.salvar(estadoCivil);
 		limpar();
+		FacesUtil.addInfoMessage("Transação efetuada com sucesso.");
 	}
 	
+	public void pesquisar(){
+		lazyModel = civilService.filtrados(filtro); 
+	}
 	
+	public void excluir() {
+		civilService.remover(estadoCivilSelecionado);
+		pesquisar();
+		FacesUtil.addInfoMessage("Estado civil " + estadoCivilSelecionado.getNome()
+				+ " excluído com sucesso.");
+	}
+	
+	public void preparaAlterar() {
+		this.setEstadoCivil(estadoCivilSelecionado);
+	}
+	
+	public void handleClose(CloseEvent event) {
+		if (estadoCivil.getId() != null) {
+			estadoCivil = new EstadoCivil();
+			System.out.println("Chamou o fechar");
+		}
+	}
 	
 	//getter and setter
 	public EstadoCivil getEstadoCivil() {
@@ -54,5 +76,24 @@ public class EstadoCivilBean implements Serializable {
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
-	
+
+	public EstadoCivil getEstadoCivilSelecionado() {
+		return estadoCivilSelecionado;
+	}
+
+	public void setEstadoCivilSelecionado(EstadoCivil estadoCivilSelecionado) {
+		this.estadoCivilSelecionado = estadoCivilSelecionado;
+	}
+
+	public LazyDataModel<EstadoCivil> getLazyModel() {
+		return lazyModel;
+	}
+
+	public EstadoCivilFilter getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(EstadoCivilFilter filtro) {
+		this.filtro = filtro;
+	}	
 }

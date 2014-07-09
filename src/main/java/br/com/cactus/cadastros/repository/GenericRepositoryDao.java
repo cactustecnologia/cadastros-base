@@ -12,7 +12,7 @@ public interface GenericRepositoryDao<T> {
 
     public T salvar(T object);
 
-    public T pesquisarPorId(Long id);
+    public T pesquisarPorId(Integer id);
 
     public T atualizar(T object);    
     

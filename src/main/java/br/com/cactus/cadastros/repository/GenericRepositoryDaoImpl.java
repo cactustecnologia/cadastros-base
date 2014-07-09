@@ -45,7 +45,7 @@ public class GenericRepositoryDaoImpl<T> implements GenericRepositoryDao<T>, Ser
 		return object;
 	}
 
-	public T pesquisarPorId(Long id) {
+	public T pesquisarPorId(Integer id) {
 		return (T) getEntityManager().find(oClass, id);
 	}
 
