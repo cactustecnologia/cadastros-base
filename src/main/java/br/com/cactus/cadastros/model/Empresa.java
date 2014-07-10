@@ -1,6 +1,7 @@
 package br.com.cactus.cadastros.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -36,14 +37,14 @@ public class Empresa implements Serializable {
 	private String imagemLogotipo;
 	private String crt;
 	private String tipoRegime;
-	private double aliquotaPis;
+	private BigDecimal aliquotaPis;
 	private String contato;
-	private double aliquotaCofins;
+	private BigDecimal aliquotaCofins;
 	private Integer codigoIbgeCidade;
 	private Integer codigoIbgeUf;
 	private Integer codigoTerceiros;
 	private Integer codigoGps;
-	private double aliquotaSat;
+	private BigDecimal aliquotaSat;
 	private String cei;
 	private String codigoCnaePrincipal;
 	
@@ -222,16 +223,7 @@ public class Empresa implements Serializable {
 	public void setTipoRegime(String tipoRegime) {
 		this.tipoRegime = tipoRegime;
 	}
-	
-	//não sei
-	public double getAliquotaPis() {
-		return aliquotaPis;
-	}
-	
-	public void setAliquotaPis(double aliquotaPis) {
-		this.aliquotaPis = aliquotaPis;
-	}
-	
+		
 	@NotBlank
 	@Column(nullable = false, length = 50)
 	public String getContato() {
@@ -240,15 +232,6 @@ public class Empresa implements Serializable {
 	
 	public void setContato(String contato) {
 		this.contato = contato;
-	}
-	
-	//não sei
-	public double getAliquotaCofins() {
-		return aliquotaCofins;
-	}
-	
-	public void setAliquotaCofins(double aliquotaCofins) {
-		this.aliquotaCofins = aliquotaCofins;
 	}
 	
 	@NotBlank
@@ -289,15 +272,6 @@ public class Empresa implements Serializable {
 	
 	public void setCodigoGps(Integer codigoGps) {
 		this.codigoGps = codigoGps;
-	}
-	
-	//não sei
-	public double getAliquotaSat() {
-		return aliquotaSat;
-	}
-	
-	public void setAliquotaSat(double aliquotaSat) {
-		this.aliquotaSat = aliquotaSat;
 	}
 	
 	@NotBlank
@@ -354,6 +328,30 @@ public class Empresa implements Serializable {
 	
 	public void setContador(Contador contador) {
 		this.contador = contador;
+	}
+
+	public BigDecimal getAliquotaPis() {
+		return aliquotaPis;
+	}
+
+	public void setAliquotaPis(BigDecimal aliquotaPis) {
+		this.aliquotaPis = aliquotaPis;
+	}
+
+	public BigDecimal getAliquotaCofins() {
+		return aliquotaCofins;
+	}
+
+	public void setAliquotaCofins(BigDecimal aliquotaCofins) {
+		this.aliquotaCofins = aliquotaCofins;
+	}
+
+	public BigDecimal getAliquotaSat() {
+		return aliquotaSat;
+	}
+
+	public void setAliquotaSat(BigDecimal aliquotaSat) {
+		this.aliquotaSat = aliquotaSat;
 	}
 
 }

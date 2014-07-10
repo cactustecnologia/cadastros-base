@@ -1,6 +1,7 @@
 package br.com.cactus.cadastros.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ public class Fpas implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private double fap;
+	private BigDecimal fap;
 	private Date dataInicial;
 	private Date dataFinal;
 
@@ -33,15 +34,6 @@ public class Fpas implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	//não sei
-	public double getFap() {
-		return fap;
-	}
-
-	public void setFap(double fap) {
-		this.fap = fap;
 	}
 
 	@NotNull
@@ -69,6 +61,14 @@ public class Fpas implements Serializable {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	public BigDecimal getFap() {
+		return fap;
+	}
+
+	public void setFap(BigDecimal fap) {
+		this.fap = fap;
 	}
 
 }

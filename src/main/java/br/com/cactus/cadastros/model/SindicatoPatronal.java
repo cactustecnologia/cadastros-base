@@ -1,6 +1,7 @@
 package br.com.cactus.cadastros.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class SindicatoPatronal implements Serializable {
 	private String email;
 	private String tipoSindicato;
 	private Date dataBase;
-	private double pisoSalarial;
+	private BigDecimal pisoSalarial;
 	private String cnpj;
 
 	private ContabilConta contabilConta;
@@ -201,15 +202,6 @@ public class SindicatoPatronal implements Serializable {
 		this.dataBase = dataBase;
 	}
 
-	//não sei
-	public double getPisoSalarial() {
-		return pisoSalarial;
-	}
-
-	public void setPisoSalarial(double pisoSalarial) {
-		this.pisoSalarial = pisoSalarial;
-	}
-
 	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getCnpj() {
@@ -227,6 +219,14 @@ public class SindicatoPatronal implements Serializable {
 
 	public void setContabilConta(ContabilConta contabilConta) {
 		this.contabilConta = contabilConta;
+	}
+
+	public BigDecimal getPisoSalarial() {
+		return pisoSalarial;
+	}
+
+	public void setPisoSalarial(BigDecimal pisoSalarial) {
+		this.pisoSalarial = pisoSalarial;
 	}
 
 }
