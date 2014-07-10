@@ -33,6 +33,7 @@ public class EstadoCivilBean implements Serializable {
 	public void init(){
 		limpar();
 		filtro = new EstadoCivilFilter();
+		pesquisar();
 	}
 	
 	public void limpar(){
