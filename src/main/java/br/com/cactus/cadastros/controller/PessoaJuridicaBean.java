@@ -2,11 +2,14 @@ package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cactus.cadastros.model.PessoaJuridica;
+import br.com.cactus.cadastros.model.TipoCrt;
+import br.com.cactus.cadastros.model.TipoRegime;
 import br.com.cactus.cadastros.repository.PessoaJuridicaDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
@@ -22,6 +25,10 @@ public class PessoaJuridicaBean implements Serializable {
 	@Inject
 	private PessoaJuridicaDao dao;
 
+	@PostConstruct
+	public void init(){
+		limpar();
+	}
 	
 	public void limpar(){
 		this.pessoaJuridica = new PessoaJuridica();
@@ -40,6 +47,13 @@ public class PessoaJuridicaBean implements Serializable {
 		limpar();
 	}
 	
+	public TipoRegime[] getTiposRegimes() {
+	    return TipoRegime.values();
+	}
+	
+	public TipoCrt[] getTiposCrts() {
+	    return TipoCrt.values();
+	}
 	
 	//getter and setter
 	public PessoaJuridica getPessoaJuridica() {

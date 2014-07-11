@@ -28,7 +28,7 @@ public class PessoaJuridica implements Serializable {
     private String inscricaoEstadual;    
     private Date dataConstituicao;    
     private TipoRegime tipoRegime;    
-    private TipoCrt crt;    
+    private TipoCrt tipoCrt;    
     private String suframa;    
     private Pessoa pessoa;
     
@@ -122,11 +122,11 @@ public class PessoaJuridica implements Serializable {
 	@NotNull	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	public TipoCrt getCrt() {
-		return crt;
+	public TipoCrt getTipoCrt() {
+		return tipoCrt;
 	}
 
-	public void setCrt(TipoCrt crt) {
-		this.crt = crt;
+	public void setTipoCrt(TipoCrt tipoCrt) {
+		this.tipoCrt = tipoCrt;
 	}
 }

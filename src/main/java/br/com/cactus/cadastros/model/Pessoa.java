@@ -9,8 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -22,7 +23,6 @@ public class Pessoa implements Serializable {
     
     private Integer id;
     private String nome;
-    private TipoPessoa tipo;
     private String email;
     private String site;
     private String cliente;
@@ -32,6 +32,8 @@ public class Pessoa implements Serializable {
     private String contador;
     private String transportadora;
     
+    private TipoPessoa tipo;
+    private Contato contato;
         
     //getter and setter
     @Id
@@ -54,7 +56,7 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 	
-	@NotNull	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	public TipoPessoa getTipo() {
@@ -75,7 +77,6 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 250)
 	public String getSite() {
 		return site;
@@ -138,5 +139,23 @@ public class Pessoa implements Serializable {
 	public void setTransportadora(String transportadora) {
 		this.transportadora = transportadora;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "id_pessoa", nullable = false)
+	public Contato getContato() {
+		return contato;
+	}
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+	/*@OneToOne(orphanRemoval = true)
+	@JoinColumn(name = "id_pessoa", nullable = false)*/
+	
+
+	/*@OneToOne(orphanRemoval = true)
+	@JoinColumn(name = "id_pessoa", nullable = false)*/
+
 	
 }

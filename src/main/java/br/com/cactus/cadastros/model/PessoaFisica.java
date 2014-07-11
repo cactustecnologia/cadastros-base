@@ -10,10 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "pessoa_fisica")
@@ -57,7 +56,7 @@ public class PessoaFisica implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank
+	
 	@Column(nullable = false, length = 11)
 	public String getCpf() {
 		return cpf;
@@ -67,7 +66,7 @@ public class PessoaFisica implements Serializable {
 		this.cpf = cpf;
 	}
 	
-	@NotBlank
+	
 	@Column(nullable = false, length = 20)
 	public String getRg() {
 		return rg;
@@ -86,7 +85,7 @@ public class PessoaFisica implements Serializable {
 		this.orgaoRg = orgaoRg;
 	}
 	
-	@NotNull
+	
 	public Date getDataEmissaoRg() {
 		return dataEmissaoRg;
 	}
@@ -95,7 +94,7 @@ public class PessoaFisica implements Serializable {
 		this.dataEmissaoRg = dataEmissaoRg;
 	}
 	
-	@NotNull
+	
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -104,7 +103,7 @@ public class PessoaFisica implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 	
-	@NotNull	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	public TipoSexo getSexo() {
@@ -115,7 +114,7 @@ public class PessoaFisica implements Serializable {
 		this.sexo = sexo;
 	}
 	
-	@NotBlank
+	
 	@Column(nullable = false, length = 100)
 	public String getNaturalidade() {
 		return naturalidade;
@@ -125,7 +124,7 @@ public class PessoaFisica implements Serializable {
 		this.naturalidade = naturalidade;
 	}
 	
-	@NotBlank
+	
 	@Column(nullable = false, length = 100)
 	public String getNacionalidade() {
 		return nacionalidade;
@@ -135,7 +134,7 @@ public class PessoaFisica implements Serializable {
 		this.nacionalidade = nacionalidade;
 	}
 	
-	@NotNull	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	public TipoRaca getRaca() {
@@ -146,7 +145,7 @@ public class PessoaFisica implements Serializable {
 		this.raca = raca;
 	}
 	
-	@NotNull	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	public TipoSangue getTipoSangue() {
@@ -157,7 +156,7 @@ public class PessoaFisica implements Serializable {
 		this.tipoSangue = tipoSangue;
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 20)
 	public String getCnhNumero() {
 		return cnhNumero;
@@ -176,7 +175,7 @@ public class PessoaFisica implements Serializable {
 		this.cnhCategoria = cnhCategoria;
 	}
 	
-	@NotNull
+	
 	public Date getCnhVencimento() {
 		return cnhVencimento;
 	}
@@ -185,7 +184,7 @@ public class PessoaFisica implements Serializable {
 		this.cnhVencimento = cnhVencimento;
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 20)
 	public String getTituloEleitoralNumero() {
 		return tituloEleitoralNumero;
@@ -195,7 +194,7 @@ public class PessoaFisica implements Serializable {
 		this.tituloEleitoralNumero = tituloEleitoralNumero;	
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 10)
 	public Integer getTituloEleitoralZona() {
 		return tituloEleitoralZona;
@@ -205,7 +204,7 @@ public class PessoaFisica implements Serializable {
 		this.tituloEleitoralZona = tituloEleitoralZona;
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 10)
 	public Integer getTituloEleitoralSecao() {
 		return tituloEleitoralSecao;
@@ -215,7 +214,7 @@ public class PessoaFisica implements Serializable {
 		this.tituloEleitoralSecao = tituloEleitoralSecao;
 	}
 	
-	@NotBlank
+	
 	@Column(nullable = false, length = 20)
 	public String getReservistaNumero() {
 		return reservistaNumero;
@@ -225,7 +224,7 @@ public class PessoaFisica implements Serializable {
 		this.reservistaNumero = reservistaNumero;
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 20)
 	public Integer getReservistaCategoria() {
 		return reservistaCategoria;
@@ -235,7 +234,7 @@ public class PessoaFisica implements Serializable {
 		this.reservistaCategoria = reservistaCategoria;
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
@@ -245,7 +244,7 @@ public class PessoaFisica implements Serializable {
 		this.nomeMae = nomeMae;
 	}
 	
-	@NotNull
+	
 	@Column(nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;
@@ -255,7 +254,7 @@ public class PessoaFisica implements Serializable {
 		this.nomePai = nomePai;
 	}
 	
-	@NotNull
+	
 	public EstadoCivil getEstadoCivil() {
 		return estadoCivil;
 	}
@@ -264,7 +263,8 @@ public class PessoaFisica implements Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 	
-	@NotNull
+	/*@JoinColumn(name = "id_pessoa", referencedColumnName = "id")
+    @ManyToOne(optional = false)*/
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

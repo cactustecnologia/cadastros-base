@@ -2,7 +2,7 @@ package br.com.cactus.cadastros.model;
 
 public enum TipoCrt {
 	
-	FISICO("Físico"), JURIDICO("Jurídico");
+	FISICA("Física"), JURIDICA("Jurídica");
 	
 	private String descricao;
 
