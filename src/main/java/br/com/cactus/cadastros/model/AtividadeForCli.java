@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,8 +19,7 @@ public class AtividadeForCli implements Serializable {
 
 	private Integer id;
 	private String nome;
-	private String descricao;
-	
+	private String descricao;	
 		
 	//getter and setter
 	@Id
@@ -41,16 +39,15 @@ public class AtividadeForCli implements Serializable {
 	}
 	
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}
 	
-	@NotNull
 	public String getDescricao() {
 		return descricao;
 	}
 	
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.descricao = descricao.toUpperCase();
 	}
 	
 	

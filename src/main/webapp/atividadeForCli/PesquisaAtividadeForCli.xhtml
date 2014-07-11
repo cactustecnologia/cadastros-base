@@ -1,0 +1,121 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="titulo">Pesquisa Atividade Fornecedor Cliente</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<h1>Pesquisar Atividade Fornecedor Cliente</h1>
+			<p:growl autoUpdate="true" />
+			
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"						
+						action="#{atividadeForCliBean.pesquisar}"
+						update="atividadeForCliTable" process="@this, nome, descricao">
+					</p:commandButton>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">					
+					<p:commandButton						
+						value="Novo"
+						update=":frmPesquisa:inclusaoAtividadeForCliPanel"						
+						onclick="inclusaoAtividadeForCliDialog.show(); return false;">						
+					</p:commandButton>
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="20"
+					value="#{atividadeForCliBean.filtro.nome}" />
+
+				<p:outputLabel value="Descrição" for="descricao" />
+				<p:inputText id="descricao" size="60" 
+					value="#{atividadeForCliBean.filtro.descricao}"/>
+			</p:panelGrid>
+			
+			<p:dataTable style="margin-top: 15px;" 
+					id="atividadeForCliTable" value="#{atividadeForCliBean.lazyModel}" var="atividadeForCli" 
+					paginator="true" rows="5"
+                    rowKey="#{atividadeForCli.id}" selectionMode="single"                     
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    paginatorAlwaysVisible="false" paginatorPosition="bottom"                    
+                    lazy="true" rowsPerPageTemplate="5,10,15">
+				<p:column headerText="Nome">
+					<h:outputText value="#{atividadeForCli.nome}" />
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{atividadeForCli.descricao}" />
+				</p:column>
+				<p:column style="width: 100px; text-align: center">
+					<p:commandButton 
+						icon="ui-icon-pencil" title="Editar"
+						action="#{atividadeForCliBean.preparaAlterar}"
+						oncomplete="inclusaoAtividadeForCliDialog.show()"
+						process="@this" update=":frmPesquisa:inclusaoAtividadeForCliPanel">
+						<f:setPropertyActionListener target="#{atividadeForCliBean.atividadeForCliSelecionada}"
+							value="#{atividadeForCli}" />
+					</p:commandButton>
+					
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
+						process="@this" 
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener target="#{atividadeForCliBean.atividadeForCliSelecionada}"
+							value="#{atividadeForCli}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			
+			<p:confirmDialog header="Exclusão de Atividade Fornecedor Cliente" 
+				message="Tem certeza que deseja excluir está atividade #{atividadeForCliBean.atividadeForCliSelecionada.nome} ?"
+	    		widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+					action="#{atividadeForCliBean.excluir}" process="@this"
+					update=":frmPesquisa:atividadeForCliTable" />
+	    	</p:confirmDialog>
+	    	
+	    	<p:dialog id="inclusao" header="Inclusão de Atividade Fornecedor Cliente"
+				widgetVar="inclusaoAtividadeForCliDialog"				
+				modal="true"				
+				resizable="false">	
+				<p:ajax event="close" update="inclusaoAtividadeForCliPanel" listener="#{atividadeForCliBean.handleClose}" />							
+				<h:panelGroup id="inclusaoAtividadeForCliPanel">
+					<p:messages id="msgAtividadeForCli" closable="true"/>	
+					<p:panelGrid columns="2">
+						<p:outputLabel for="nomeAtividadeForCli" value="Nome" />
+						<p:inputText id="nomeAtividadeForCli" size="40"							
+							value="#{atividadeForCliBean.atividadeForCli.nome}" />
+	
+						<p:outputLabel value="Descrição" for="descricaoAtividadeForCli" />
+						<p:inputText id="descricaoAtividadeForCli" size="80"							
+							value="#{atividadeForCliBean.atividadeForCli.descricao}"/>
+					</p:panelGrid>
+	
+					<p:commandButton value="Incluir"						
+						action="#{atividadeForCliBean.salvar}"
+						update="inclusaoAtividadeForCliPanel atividadeForCliTable" /> 
+						
+					
+					<p:commandButton value="Fechar"					 	
+						action="#{atividadeForCliBean.limpar}"
+						update="inclusaoAtividadeForCliPanel"
+						process="@this"
+						oncomplete="inclusaoAtividadeForCliDialog.hide(); return false;" />						
+				</h:panelGroup>
+				<script>
+					function tratarInclusaoAtividadeForCli(args) {
+						if (!args.validationFailed) {
+							inclusaoAtividadeForCliDialog.hide();
+						}
+					}
+				</script>
+			</p:dialog>
+		</h:form>		
+	</ui:define>	
+</ui:composition>

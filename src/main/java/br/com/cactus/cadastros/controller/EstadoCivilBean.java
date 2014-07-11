@@ -13,7 +13,6 @@ import org.primefaces.model.LazyDataModel;
 import br.com.cactus.cadastros.model.EstadoCivil;
 import br.com.cactus.cadastros.repository.filter.EstadoCivilFilter;
 import br.com.cactus.cadastros.service.EstadoCivilService;
-import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
 @Named
@@ -36,11 +35,11 @@ public class EstadoCivilBean implements Serializable {
 		pesquisar();
 	}
 	
-	public void limpar(){
+	public void limpar(){		
 		this.estadoCivil = new EstadoCivil();
+		this.estadoCivilSelecionado = null;
 	}
-	
-	@Transactional
+		
 	public void salvar(){
 		civilService.salvar(estadoCivil);
 		limpar();
@@ -64,8 +63,7 @@ public class EstadoCivilBean implements Serializable {
 	
 	public void handleClose(CloseEvent event) {
 		if (estadoCivil.getId() != null) {
-			estadoCivil = new EstadoCivil();
-			System.out.println("Chamou o fechar");
+			estadoCivil = new EstadoCivil();			
 		}
 	}
 	
