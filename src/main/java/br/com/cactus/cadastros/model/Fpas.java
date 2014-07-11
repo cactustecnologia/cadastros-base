@@ -2,8 +2,8 @@ package br.com.cactus.cadastros.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
-@Table(name = "fap")
+@Table(name = "fpas")
 public class Fpas implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private BigDecimal fap;
-	private Date dataInicial;
-	private Date dataFinal;
+	private Integer codigo;
+	private String cnae;
+	private BigDecimal aliquotaSat;
+	private String descricao;
+	private BigDecimal percentualInssPatronal;
+	private BigDecimal codigoTerceiro;
+	private BigDecimal percentualTerceiros;
 
 	private Empresa empresa;
 
@@ -36,22 +42,66 @@ public class Fpas implements Serializable {
 		this.id = id;
 	}
 
-	@NotNull
-	public Date getDataInicial() {
-		return dataInicial;
+	@NotBlank
+	@Column(nullable = false, length = 10)
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
-	@NotNull
-	public Date getDataFinal() {
-		return dataFinal;
+	@NotBlank
+	@Column(nullable = false, length = 14)
+	public String getCnae() {
+		return cnae;
 	}
 
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
+	public void setCnae(String cnae) {
+		this.cnae = cnae;
+	}
+
+	public BigDecimal getAliquotaSat() {
+		return aliquotaSat;
+	}
+
+	public void setAliquotaSat(BigDecimal aliquotaSat) {
+		this.aliquotaSat = aliquotaSat;
+	}
+
+	@NotBlank
+	@Column(nullable = false, length = 250)
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public BigDecimal getPercentualInssPatronal() {
+		return percentualInssPatronal;
+	}
+
+	public void setPercentualInssPatronal(BigDecimal percentualInssPatronal) {
+		this.percentualInssPatronal = percentualInssPatronal;
+	}
+
+	public BigDecimal getCodigoTerceiro() {
+		return codigoTerceiro;
+	}
+
+	public void setCodigoTerceiro(BigDecimal codigoTerceiro) {
+		this.codigoTerceiro = codigoTerceiro;
+	}
+
+	public BigDecimal getPercentualTerceiros() {
+		return percentualTerceiros;
+	}
+
+	public void setPercentualTerceiros(BigDecimal percentualTerceiros) {
+		this.percentualTerceiros = percentualTerceiros;
 	}
 
 	@NotNull
@@ -61,14 +111,6 @@ public class Fpas implements Serializable {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-	}
-
-	public BigDecimal getFap() {
-		return fap;
-	}
-
-	public void setFap(BigDecimal fap) {
-		this.fap = fap;
 	}
 
 }

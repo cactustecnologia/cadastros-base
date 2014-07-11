@@ -48,11 +48,8 @@ public class Empresa implements Serializable {
 	private String cei;
 	private String codigoCnaePrincipal;
 	
-	//não sei
 	private Empresa empresa;
-	//não sei sindicato
 	private SindicatoPatronal sindicatoPatronal;
-	//não sei fpa
 	private Fpas fpas;
 	private Contador contador;
 	

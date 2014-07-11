@@ -54,7 +54,7 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 	
-	@NotNull
+	@NotNull	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	public TipoPessoa getTipo() {
