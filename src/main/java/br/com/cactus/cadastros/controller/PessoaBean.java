@@ -10,7 +10,6 @@ import javax.inject.Named;
 import br.com.cactus.cadastros.model.Contato;
 import br.com.cactus.cadastros.model.Pessoa;
 import br.com.cactus.cadastros.model.TipoPessoa;
-import br.com.cactus.cadastros.repository.ContatoDao;
 import br.com.cactus.cadastros.repository.PessoaDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
@@ -23,10 +22,10 @@ public class PessoaBean implements Serializable {
 
 	private Pessoa pessoa;
 	private Contato contato;
+	private Contato contatoSelecionado;
 	
 	@Inject
 	private PessoaDao pessoaDao;
-	private ContatoDao contatoDao;
 	
 	@PostConstruct
 	public void init(){
@@ -35,20 +34,33 @@ public class PessoaBean implements Serializable {
 	
 	public void limpar(){
 		this.pessoa = new Pessoa();
+		contato = new Contato();
 	}
 
 	@Transactional
 	public void salvar(){
-		if (pessoa.getId()  == null && contato.getId() == null) {
+		if (pessoa.getId()  == null) {
 			pessoaDao.salvar(pessoa);
-			contatoDao.salvar(contato);
 			FacesUtil.addInfoMessage("Pessoa salvo com sucesso!");
 		} else {
 			pessoaDao.atualizar(pessoa);
-			contatoDao.atualizar(contato);
 			FacesUtil.addInfoMessage("Pessoa atualizada com sucesso!");
 		}
 		limpar();
+	}
+	
+	@Transactional
+	public void adicionaContato(){
+		if(this.contatoSelecionado == null){
+			this.pessoa.getContatos().add(this.contato);
+			contato.setPessoa(pessoa);			
+		}
+		this.limparContato();
+	}
+
+	public void limparContato(){
+		this.contato = new Contato();
+		this.contatoSelecionado = null;
 	}
 	
 	public TipoPessoa[] getTiposPessoas() {
@@ -71,6 +83,20 @@ public class PessoaBean implements Serializable {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
+
+	public PessoaDao getPessoaDao() {
+		return pessoaDao;
+	}
+
+	public void setPessoaDao(PessoaDao pessoaDao) {
+		this.pessoaDao = pessoaDao;
+	}
 	
-	
+	public Contato getContatoSelecionado() {
+		return contatoSelecionado;
+	}
+
+	public void setContatoSelecionado(Contato contatoSelecionado) {
+		this.contatoSelecionado = contatoSelecionado;
+	}
 }

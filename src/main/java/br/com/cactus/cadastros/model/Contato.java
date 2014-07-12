@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -90,6 +92,8 @@ public class Contato implements Serializable {
 	}
 	
 	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
