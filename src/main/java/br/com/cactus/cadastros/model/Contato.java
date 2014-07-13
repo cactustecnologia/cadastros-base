@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,12 +24,10 @@ public class Contato implements Serializable {
 	private String email;
 	private String foneComercial;
 	private String foneResidencial;
-	private String foneCelular;
-	
+	private String foneCelular;	
 	private Pessoa pessoa;
 	private Empresa empresa;
 	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -62,7 +59,7 @@ public class Contato implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 14)
+	@Column(name = "fone_comercial" ,nullable = false, length = 14)
 	public String getFoneComercial() {
 		return foneComercial;
 	}
@@ -72,7 +69,7 @@ public class Contato implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 14)
+	@Column(name = "fone_residencial", nullable = false, length = 14)
 	public String getFoneResidencial() {
 		return foneResidencial;
 	}
@@ -82,16 +79,15 @@ public class Contato implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 14)
+	@Column(name = "fone_celular", nullable = false, length = 14)
 	public String getFoneCelular() {
 		return foneCelular;
 	}
 	
 	public void setFoneCelular(String foneCelular) {
 		this.foneCelular = foneCelular;
-	}
+	}	
 	
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	public Pessoa getPessoa() {
@@ -101,8 +97,9 @@ public class Contato implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
-	@NotNull
+		
+	@ManyToOne
+	@JoinColumn(name = "id_empresa", nullable = false)
 	public Empresa getEmpresa() {
 		return empresa;
 	}

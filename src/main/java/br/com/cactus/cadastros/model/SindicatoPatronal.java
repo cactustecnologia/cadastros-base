@@ -3,15 +3,14 @@ package br.com.cactus.cadastros.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -62,9 +61,8 @@ public class SindicatoPatronal implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	
+	@Column(name = "CODIGO_BANCO", nullable = false, length = 10)
 	public Integer getCodigoBanco() {
 		return codigoBanco;
 	}
@@ -74,7 +72,7 @@ public class SindicatoPatronal implements Serializable {
 	}
 
 	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "CODIGO_AGENCIA", nullable = false, length = 10)
 	public Integer getCodigoAgencia() {
 		return codigoAgencia;
 	}
@@ -83,8 +81,7 @@ public class SindicatoPatronal implements Serializable {
 		this.codigoAgencia = codigoAgencia;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 20)
+	@Column(name = "CONTA_BANCO", nullable = false, length = 20)
 	public String getContaBanco() {
 		return contaBanco;
 	}
@@ -93,8 +90,7 @@ public class SindicatoPatronal implements Serializable {
 		this.contaBanco = contaBanco;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 30)
+	@Column(name = "CODIGO_CEDENTE",nullable = false, length = 30)
 	public String getCodigoCedente() {
 		return codigoCedente;
 	}
@@ -103,7 +99,6 @@ public class SindicatoPatronal implements Serializable {
 		this.codigoCedente = codigoCedente;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 100)
 	public String getLogradouro() {
 		return logradouro;
@@ -113,7 +108,6 @@ public class SindicatoPatronal implements Serializable {
 		this.logradouro = logradouro;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 10)
 	public String getNumero() {
 		return numero;
@@ -123,7 +117,6 @@ public class SindicatoPatronal implements Serializable {
 		this.numero = numero;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 100)
 	public String getBairro() {
 		return bairro;
@@ -133,8 +126,7 @@ public class SindicatoPatronal implements Serializable {
 		this.bairro = bairro;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "MUNICIPIO_IBGE", nullable = false, length = 10)
 	public Integer getMunicipioIbge() {
 		return municipioIbge;
 	}
@@ -143,7 +135,6 @@ public class SindicatoPatronal implements Serializable {
 		this.municipioIbge = municipioIbge;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 2)
 	public String getUf() {
 		return uf;
@@ -153,7 +144,6 @@ public class SindicatoPatronal implements Serializable {
 		this.uf = uf;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getFone1() {
 		return fone1;
@@ -163,7 +153,6 @@ public class SindicatoPatronal implements Serializable {
 		this.fone1 = fone1;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getFone2() {
 		return fone2;
@@ -173,7 +162,6 @@ public class SindicatoPatronal implements Serializable {
 		this.fone2 = fone2;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 100)
 	public String getEmail() {
 		return email;
@@ -183,8 +171,7 @@ public class SindicatoPatronal implements Serializable {
 		this.email = email;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 1)
+	@Column(name = "TIPO_SINDICATO", nullable = false, length = 1)
 	public String getTipoSindicato() {
 		return tipoSindicato;
 	}
@@ -193,7 +180,7 @@ public class SindicatoPatronal implements Serializable {
 		this.tipoSindicato = tipoSindicato;
 	}
 
-	@NotNull
+	@Column(name = "DATA_BASE")
 	public Date getDataBase() {
 		return dataBase;
 	}
@@ -202,7 +189,6 @@ public class SindicatoPatronal implements Serializable {
 		this.dataBase = dataBase;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getCnpj() {
 		return cnpj;
@@ -212,7 +198,8 @@ public class SindicatoPatronal implements Serializable {
 		this.cnpj = cnpj;
 	}
 
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "ID_CONTABIL_CONTA", nullable = false)
 	public ContabilConta getContabilConta() {
 		return contabilConta;
 	}
@@ -221,6 +208,7 @@ public class SindicatoPatronal implements Serializable {
 		this.contabilConta = contabilConta;
 	}
 
+	@Column(name = "PISO_SALARIAL")
 	public BigDecimal getPisoSalarial() {
 		return pisoSalarial;
 	}
@@ -229,4 +217,28 @@ public class SindicatoPatronal implements Serializable {
 		this.pisoSalarial = pisoSalarial;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SindicatoPatronal other = (SindicatoPatronal) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

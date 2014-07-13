@@ -7,6 +7,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.CloseEvent;
+
 import br.com.cactus.cadastros.model.Contato;
 import br.com.cactus.cadastros.model.Pessoa;
 import br.com.cactus.cadastros.model.TipoPessoa;
@@ -22,8 +24,7 @@ public class PessoaBean implements Serializable {
 
 	private Pessoa pessoa;
 	private Contato contato;
-	private Contato contatoSelecionado;
-	
+	private Contato contatoSelecionado;	
 	@Inject
 	private PessoaDao pessoaDao;
 	
@@ -32,11 +33,11 @@ public class PessoaBean implements Serializable {
 		limpar();
 	}
 	
-	public void limpar(){
+	public void limpar(){		
 		this.pessoa = new Pessoa();
-		contato = new Contato();
+		contato = new Contato();		
 	}
-
+		
 	@Transactional
 	public void salvar(){
 		if (pessoa.getId()  == null) {
@@ -47,13 +48,12 @@ public class PessoaBean implements Serializable {
 			FacesUtil.addInfoMessage("Pessoa atualizada com sucesso!");
 		}
 		limpar();
-	}
-	
-	@Transactional
+	}	
+		
 	public void adicionaContato(){
 		if(this.contatoSelecionado == null){
-			this.pessoa.getContatos().add(this.contato);
 			contato.setPessoa(pessoa);			
+			this.pessoa.getContatos().add(this.contato);			
 		}
 		this.limparContato();
 	}
@@ -65,6 +65,14 @@ public class PessoaBean implements Serializable {
 	
 	public TipoPessoa[] getTiposPessoas() {
 	    return TipoPessoa.values();
+	}
+	
+	public void handleClose(CloseEvent event) {
+		if (contato != null) {
+			contato = new Contato();
+			this.contatoSelecionado = null;
+			System.out.println("Chamou o fechar");
+		}
 	}
 	
 	//getter and setter

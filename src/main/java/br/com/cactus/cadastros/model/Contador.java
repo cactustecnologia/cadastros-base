@@ -7,10 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "contador")
@@ -31,12 +30,9 @@ public class Contador implements Serializable {
 	private String cep;
 	private String municipioIbge;
 	private String Uf;
-	private String email;
-	
+	private String email;	
 	private Pessoa pessoa;
-
 	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -47,8 +43,7 @@ public class Contador implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 15)
+	@Column(name = "INSCRICAO_CRC", nullable = false, length = 15)
 	public String getInscricaoCrc() {
 		return inscricaoCrc;
 	}
@@ -57,8 +52,7 @@ public class Contador implements Serializable {
 		this.inscricaoCrc = inscricaoCrc;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 2)
+	@Column(name = "UF_CRC", nullable = false, length = 2)
 	public String getUfCrc() {
 		return ufCrc;
 	}
@@ -67,7 +61,6 @@ public class Contador implements Serializable {
 		this.ufCrc = ufCrc;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getFone() {
 		return fone;
@@ -77,7 +70,6 @@ public class Contador implements Serializable {
 		this.fone = fone;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getFax() {
 		return fax;
@@ -87,7 +79,6 @@ public class Contador implements Serializable {
 		this.fax = fax;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 100)
 	public String getLogradouro() {
 		return logradouro;
@@ -97,7 +88,6 @@ public class Contador implements Serializable {
 		this.logradouro = logradouro;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 10)
 	public String getNumero() {
 		return numero;
@@ -107,7 +97,6 @@ public class Contador implements Serializable {
 		this.numero = numero;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 100)
 	public String getComplemento() {
 		return complemento;
@@ -117,7 +106,6 @@ public class Contador implements Serializable {
 		this.complemento = complemento;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 60)
 	public String getBairro() {
 		return bairro;
@@ -127,7 +115,6 @@ public class Contador implements Serializable {
 		this.bairro = bairro;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -137,7 +124,6 @@ public class Contador implements Serializable {
 		this.cidade = cidade;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 8)
 	public String getCep() {
 		return cep;
@@ -147,8 +133,7 @@ public class Contador implements Serializable {
 		this.cep = cep;
 	}
 
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "MUNICIPIO_IBGE", nullable = false, length = 10)
 	public String getMunicipioIbge() {
 		return municipioIbge;
 	}
@@ -157,7 +142,6 @@ public class Contador implements Serializable {
 		this.municipioIbge = municipioIbge;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 2)
 	public String getUf() {
 		return Uf;
@@ -167,7 +151,6 @@ public class Contador implements Serializable {
 		Uf = uf;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 250)
 	public String getEmail() {
 		return email;
@@ -177,7 +160,8 @@ public class Contador implements Serializable {
 		this.email = email;
 	}
 
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -186,4 +170,28 @@ public class Contador implements Serializable {
 		this.pessoa = pessoa;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contador other = (Contador) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

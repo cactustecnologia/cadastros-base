@@ -9,8 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -46,15 +47,12 @@ public class Empresa implements Serializable {
 	private Integer codigoGps;
 	private BigDecimal aliquotaSat;
 	private String cei;
-	private String codigoCnaePrincipal;
-	
+	private String codigoCnaePrincipal;	
 	private Empresa empresa;
 	private SindicatoPatronal sindicatoPatronal;
 	private Fpas fpas;
-	private Contador contador;
+	private Contador contador;	
 	
-	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -66,7 +64,7 @@ public class Empresa implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 150)
+	@Column(name = "RAZAO_SOCIAL", nullable = false, length = 150)
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
@@ -76,7 +74,7 @@ public class Empresa implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 150)
+	@Column(name = "NOME_FANTASIA", nullable = false, length = 150)
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
@@ -84,8 +82,7 @@ public class Empresa implements Serializable {
 	public void setNomeFantasia(String nomeFantasia) {
 		this.nomeFantasia = nomeFantasia;
 	}
-	
-	@NotBlank
+		
 	@Column(nullable = false, length = 14)
 	public String getCnpj() {
 		return cnpj;
@@ -95,8 +92,7 @@ public class Empresa implements Serializable {
 		this.cnpj = cnpj;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 30)
+	@Column(name = "INSCRICAO_ESTADUAL", nullable = false, length = 30)
 	public String getInscricaoEstadual() {
 		return inscricaoEstadual;
 	}
@@ -105,8 +101,7 @@ public class Empresa implements Serializable {
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 30)
+	@Column(name = "INSCRICAO_ESTADUAL_ST", nullable = false, length = 30)
 	public String getInscricaoEstadualSt() {
 		return inscricaoEstadualSt;
 	}
@@ -115,8 +110,7 @@ public class Empresa implements Serializable {
 		this.inscricaoEstadualSt = inscricaoEstadualSt;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 30)
+	@Column(name = "INSCRICAO_MUNICIPAL", nullable = false, length = 30)
 	public String getInscricaoMunicipal() {
 		return inscricaoMunicipal;
 	}
@@ -125,8 +119,7 @@ public class Empresa implements Serializable {
 		this.inscricaoMunicipal = inscricaoMunicipal;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 30)
+	@Column(name = "INSCRICAO_JUNTA_COMERCIAL", nullable = false, length = 30)
 	public String getInscricaoJuntaComercial() {
 		return inscricaoJuntaComercial;
 	}
@@ -135,7 +128,7 @@ public class Empresa implements Serializable {
 		this.inscricaoJuntaComercial = inscricaoJuntaComercial;
 	}
 	
-	@NotNull
+	@Column(name = "DATA_INSC_JUNTA_COMERCIAL")
 	public Date getDataInscJuntaComercial() {
 		return dataInscJuntaComercial;
 	}
@@ -143,8 +136,7 @@ public class Empresa implements Serializable {
 	public void setDataInscJuntaComercial(Date dataInscJuntaComercial) {
 		this.dataInscJuntaComercial = dataInscJuntaComercial;
 	}
-	
-	@NotBlank
+		
 	@Column(nullable = false, length = 1)
 	public String getTipo() {
 		return tipo;
@@ -154,7 +146,7 @@ public class Empresa implements Serializable {
 		this.tipo = tipo;
 	}
 	
-	@NotNull
+	@Column(name = "DATA_CADASTRO")
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
@@ -163,7 +155,7 @@ public class Empresa implements Serializable {
 		this.dataCadastro = dataCadastro;
 	}
 	
-	@NotNull
+	@Column(name = "DATA_INICIO_ATIVIDADES")
 	public Date getDataInicioAtividades() {
 		return dataInicioAtividades;
 	}
@@ -172,7 +164,6 @@ public class Empresa implements Serializable {
 		this.dataInicioAtividades = dataInicioAtividades;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 9)
 	public String getSuframa() {
 		return suframa;
@@ -182,7 +173,6 @@ public class Empresa implements Serializable {
 		this.suframa = suframa;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 250)
 	public String getEmail() {
 		return email;
@@ -192,7 +182,7 @@ public class Empresa implements Serializable {
 		this.email = email;
 	}
 	
-	@NotNull
+	@Column(name = "IMAGEM_LOGOTIPO")
 	public String getImagemLogotipo() {
 		return imagemLogotipo;
 	}
@@ -201,7 +191,6 @@ public class Empresa implements Serializable {
 		this.imagemLogotipo = imagemLogotipo;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getCrt() {
 		return crt;
@@ -211,8 +200,7 @@ public class Empresa implements Serializable {
 		this.crt = crt;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 1)
+	@Column(name = "TIPO_REGIME", nullable = false, length = 1)
 	public String getTipoRegime() {
 		return tipoRegime;
 	}
@@ -221,7 +209,6 @@ public class Empresa implements Serializable {
 		this.tipoRegime = tipoRegime;
 	}
 		
-	@NotBlank
 	@Column(nullable = false, length = 50)
 	public String getContato() {
 		return contato;
@@ -229,10 +216,9 @@ public class Empresa implements Serializable {
 	
 	public void setContato(String contato) {
 		this.contato = contato;
-	}
+	}	
 	
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "CODIGO_IBGE_CIDADE", nullable = false, length = 10)
 	public Integer getCodigoIbgeCidade() {
 		return codigoIbgeCidade;
 	}
@@ -241,8 +227,7 @@ public class Empresa implements Serializable {
 		this.codigoIbgeCidade = codigoIbgeCidade;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "CODIGO_IBGE_UF", nullable = false, length = 10)
 	public Integer getCodigoIbgeUf() {
 		return codigoIbgeUf;
 	}
@@ -251,8 +236,7 @@ public class Empresa implements Serializable {
 		this.codigoIbgeUf = codigoIbgeUf;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "CODIGO_TERCEIROS", nullable = false, length = 10)
 	public Integer getCodigoTerceiros() {
 		return codigoTerceiros;
 	}
@@ -261,8 +245,7 @@ public class Empresa implements Serializable {
 		this.codigoTerceiros = codigoTerceiros;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "CODIGO_GPS", nullable = false, length = 10)
 	public Integer getCodigoGps() {
 		return codigoGps;
 	}
@@ -271,7 +254,6 @@ public class Empresa implements Serializable {
 		this.codigoGps = codigoGps;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 12)
 	public String getCei() {
 		return cei;
@@ -281,17 +263,17 @@ public class Empresa implements Serializable {
 		this.cei = cei;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 7)
+	@Column(name = "CODIGO_CNAE_PRINCIPAL", nullable = false, length = 7)
 	public String getCodigoCnaePrincipal() {
 		return codigoCnaePrincipal;
 	}
-	
+		
 	public void setCodigoCnaePrincipal(String codigoCnaePrincipal) {
 		this.codigoCnaePrincipal = codigoCnaePrincipal;
 	}
 	
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_empresa", nullable = false)
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -300,7 +282,8 @@ public class Empresa implements Serializable {
 		this.empresa = empresa;
 	}
 	
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_sindicato_patronal", nullable = false)
 	public SindicatoPatronal getSindicatoPatronal() {
 		return sindicatoPatronal;
 	}
@@ -309,7 +292,8 @@ public class Empresa implements Serializable {
 		this.sindicatoPatronal = sindicatoPatronal;
 	}
 	
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_fpas", nullable = false)
 	public Fpas getFpas() {
 		return fpas;
 	}
@@ -318,7 +302,8 @@ public class Empresa implements Serializable {
 		this.fpas = fpas;
 	}
 	
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_contador", nullable = false)
 	public Contador getContador() {
 		return contador;
 	}
@@ -327,6 +312,7 @@ public class Empresa implements Serializable {
 		this.contador = contador;
 	}
 
+	@Column(name = "ALIQUOTA_PIS")
 	public BigDecimal getAliquotaPis() {
 		return aliquotaPis;
 	}
@@ -335,6 +321,7 @@ public class Empresa implements Serializable {
 		this.aliquotaPis = aliquotaPis;
 	}
 
+	@Column(name = "ALIQUOTA_COFINS")
 	public BigDecimal getAliquotaCofins() {
 		return aliquotaCofins;
 	}
@@ -343,6 +330,7 @@ public class Empresa implements Serializable {
 		this.aliquotaCofins = aliquotaCofins;
 	}
 
+	@Column(name = "ALIQUOTA_SAT")
 	public BigDecimal getAliquotaSat() {
 		return aliquotaSat;
 	}
@@ -351,4 +339,28 @@ public class Empresa implements Serializable {
 		this.aliquotaSat = aliquotaSat;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empresa other = (Empresa) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}	
 }
