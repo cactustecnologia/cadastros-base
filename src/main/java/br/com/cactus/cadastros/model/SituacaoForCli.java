@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -20,10 +18,8 @@ public class SituacaoForCli implements Serializable {
 
 	private Integer id;
 	private String nome;
-	private String descricao;
-	
-	
-	//getter and setter
+	private String descricao;	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -43,14 +39,12 @@ public class SituacaoForCli implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	@NotNull
+		
 	public String getDescricao() {
 		return descricao;
 	}
 	
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	
+	}	
 }
