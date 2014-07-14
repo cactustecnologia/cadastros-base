@@ -47,7 +47,12 @@ public class EstadoCivilBean implements Serializable {
 	}
 	
 	public void pesquisar(){
-		lazyModel = civilService.filtrados(filtro); 
+		lazyModel = civilService.filtrados(filtro);
+		limparPesquisa();
+	}
+	
+	public void limparPesquisa(){
+		this.filtro = new EstadoCivilFilter();
 	}
 	
 	public void excluir() {

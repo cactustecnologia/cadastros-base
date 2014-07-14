@@ -26,10 +26,10 @@ public class PessoaFisica implements Serializable {
     private String orgaoRg;    
     private Date dataEmissaoRg;    
     private Date dataNascimento;    
-    private TipoSexo sexo;    
+    private TipoSexo tipoSexo;    
     private String naturalidade;    
     private String nacionalidade;    
-    private TipoRaca raca;    
+    private TipoRaca tipoRaca;    
     private TipoSangue tipoSangue;    
     private String cnhNumero;    
     private String cnhCategoria;    
@@ -106,12 +106,12 @@ public class PessoaFisica implements Serializable {
 		
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	public TipoSexo getSexo() {
-		return sexo;
+	public TipoSexo getTipoSexo() {
+		return tipoSexo;
 	}
 	
-	public void setSexo(TipoSexo sexo) {
-		this.sexo = sexo;
+	public void setTipoSexo(TipoSexo tipoSexo) {
+		this.tipoSexo = tipoSexo;
 	}
 	
 	
@@ -137,12 +137,12 @@ public class PessoaFisica implements Serializable {
 		
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	public TipoRaca getRaca() {
-		return raca;
+	public TipoRaca getTipoRaca() {
+		return tipoRaca;
 	}
 	
-	public void setRaca(TipoRaca raca) {
-		this.raca = raca;
+	public void setTipoRaca(TipoRaca tipoRaca) {
+		this.tipoRaca = tipoRaca;
 	}
 	
 		
@@ -263,8 +263,8 @@ public class PessoaFisica implements Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 	
-	/*@JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    @ManyToOne(optional = false)*/
+	@ManyToOne
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

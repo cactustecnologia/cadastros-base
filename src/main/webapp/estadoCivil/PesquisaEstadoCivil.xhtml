@@ -11,103 +11,103 @@
 		<h:form id="frmPesquisa">
 			<h1>Pesquisar Estado Civil</h1>
 			<p:growl autoUpdate="true" />
-			
+
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar"						
-						action="#{estadoCivilBean.pesquisar}"
-						update="estadoCivilTable" process="@this, nome, descricao">
+					<p:commandButton value="Pesquisar"
+						update=":frmPesquisa:inclusaoEstadoCivilPanel"
+						onclick="pesquisaEstadoCivilDialog.show(); return false;">
 					</p:commandButton>
 				</p:toolbarGroup>
-				<p:toolbarGroup align="right">					
-					<p:commandButton						
-						value="Novo"
-						update=":frmPesquisa:inclusaoEstadoCivilPanel"						
-						onclick="inclusaoEstadoCivilDialog.show(); return false;">						
+				
+				<p:toolbarGroup>
+					<p:commandButton value="Atualizar"
+						update="estadoCivilTable"
+						action="#{estadoCivilBean.pesquisar}"
+						process="@this, nome, descricao">
+					</p:commandButton>
+				</p:toolbarGroup>
+				
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Novo"
+						update=":frmPesquisa:inclusaoEstadoCivilPanel"
+						onclick="inclusaoEstadoCivilDialog.show(); return false;">
 					</p:commandButton>
 				</p:toolbarGroup>
 			</p:toolbar>
-			
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="20"
-					value="#{estadoCivilBean.filtro.nome}" />
 
-				<p:outputLabel value="Descrição" for="descricao" />
-				<p:inputText id="descricao" size="60" 
-					value="#{estadoCivilBean.filtro.descricao}"/>
-			</p:panelGrid>
-			
-			<p:dataTable style="margin-top: 15px;" 
-					id="estadoCivilTable" value="#{estadoCivilBean.lazyModel}" var="estadoCivil" paginator="true" rows="5"
-                    rowKey="#{estadoCivil.id}" selectionMode="single"                     
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    paginatorAlwaysVisible="false" paginatorPosition="bottom"                    
-                    lazy="true" rowsPerPageTemplate="5,10,15">
+			<p:dataTable style="margin-top: 15px;" id="estadoCivilTable"
+				value="#{estadoCivilBean.lazyModel}" var="estadoCivil"
+				paginator="true" rows="5" rowKey="#{estadoCivil.id}"
+				selectionMode="single"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				lazy="true" rowsPerPageTemplate="5,10,15">
 				<p:column headerText="Nome">
 					<h:outputText value="#{estadoCivil.nome}" />
 				</p:column>
 				<p:column headerText="Descrição">
 					<h:outputText value="#{estadoCivil.descricao}" />
 				</p:column>
+
 				<p:column style="width: 100px; text-align: center">
-					<p:commandButton 
-						icon="ui-icon-pencil" title="Editar"
+					<p:commandButton icon="ui-icon-pencil" title="Editar"
 						action="#{estadoCivilBean.preparaAlterar}"
-						oncomplete="inclusaoEstadoCivilDialog.show()"
-						process="@this" update=":frmPesquisa:inclusaoEstadoCivilPanel">
-						<f:setPropertyActionListener target="#{estadoCivilBean.estadoCivilSelecionado}"
+						oncomplete="inclusaoEstadoCivilDialog.show()" process="@this"
+						update=":frmPesquisa:inclusaoEstadoCivilPanel">
+						<f:setPropertyActionListener
+							target="#{estadoCivilBean.estadoCivilSelecionado}"
 							value="#{estadoCivil}" />
 					</p:commandButton>
-					
-					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
-						process="@this" 
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
 						update=":frmPesquisa:confirmacaoExclusaoDialog">
-						<f:setPropertyActionListener target="#{estadoCivilBean.estadoCivilSelecionado}"
+						<f:setPropertyActionListener
+							target="#{estadoCivilBean.estadoCivilSelecionado}"
 							value="#{estadoCivil}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
-			
-			<p:confirmDialog header="Exclusão de Estado Civil" 
+
+			<p:confirmDialog header="Exclusão de Estado Civil"
 				message="Tem certeza que deseja excluir o estado civil #{estadoCivilBean.estadoCivilSelecionado.nome} ?"
-	    		widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
-	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
-				<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusao.hide();"
 					action="#{estadoCivilBean.excluir}" process="@this"
 					update=":frmPesquisa:estadoCivilTable" />
-	    	</p:confirmDialog>
-	    	
-	    	<p:dialog id="inclusao" header="Inclusão de Estado civil"
-				widgetVar="inclusaoEstadoCivilDialog"				
-				modal="true"				
-				resizable="false">	
-				<p:ajax event="close" update="inclusaoEstadoCivilPanel" listener="#{estadoCivilBean.handleClose}" />							
+			</p:confirmDialog>
+
+			<p:dialog id="inclusao" header="Inclusão de Estado Civil"
+				widgetVar="inclusaoEstadoCivilDialog" modal="true" resizable="false">
+				<p:ajax event="close" update="inclusaoEstadoCivilPanel"
+					listener="#{estadoCivilBean.handleClose}" />
 				<h:panelGroup id="inclusaoEstadoCivilPanel">
-					<p:messages id="msgEstadoCivil" closable="true"/>
-	
+					<p:messages id="msgEstadoCivil" closable="true" />
+
 					<p:panelGrid columns="2">
 						<p:outputLabel for="nomeEstadoCivil" value="Nome" />
-						<p:inputText id="nomeEstadoCivil" size="40"							
+						<p:inputText id="nomeEstadoCivil" size="40"
 							value="#{estadoCivilBean.estadoCivil.nome}" />
-	
+
 						<p:outputLabel value="Descrição" for="descricaoEstadoCivil" />
-						<p:inputText id="descricaoEstadoCivil" size="80"							
-							value="#{estadoCivilBean.estadoCivil.descricao}"/>
+						<p:inputText id="descricaoEstadoCivil" size="80"
+							value="#{estadoCivilBean.estadoCivil.descricao}" />
 					</p:panelGrid>
-	
-					<p:commandButton value="Incluir"						
-						action="#{estadoCivilBean.salvar}"
-						update="inclusaoEstadoCivilPanel estadoCivilTable" /> 
-						
-					
-					<p:commandButton value="Fechar"					 	
-						action="#{estadoCivilBean.limpar}"
-						update="inclusaoEstadoCivilPanel"
-						process="@this"
-						oncomplete="inclusaoEstadoCivilDialog.hide(); return false;" />						
+
+					<p:commandButton value="Incluir" action="#{estadoCivilBean.salvar}"
+						update="inclusaoEstadoCivilPanel estadoCivilTable" />
+
+
+					<p:commandButton value="Fechar" action="#{estadoCivilBean.limpar}"
+						update="inclusaoEstadoCivilPanel" process="@this"
+						oncomplete="inclusaoEstadoCivilDialog.hide(); return false;" />
 				</h:panelGroup>
+
+
 				<script>
 					function tratarInclusaoEstadoCivil(args) {
 						if (!args.validationFailed) {
@@ -116,6 +116,46 @@
 					}
 				</script>
 			</p:dialog>
+
+			<p:dialog id="pesquisa" header="Pesquisa de Estado Civil"
+				widgetVar="pesquisaEstadoCivilDialog" modal="true" resizable="false">
+				<p:ajax event="close" update="pesquisaEstadoCivilPanel"
+					listener="#{estadoCivilBean.handleClose}" />
+				<h:panelGroup id="pesquisaEstadoCivilPanel">
+					<p:messages id="msgPesquisaEstadoCivil" closable="true" />
+
+					<p:panelGrid columns="2" id="painel"
+						style="width: 100%; margin-top: 20px"
+						columnClasses="rotulo, campo">
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" size="20"
+							value="#{estadoCivilBean.filtro.nome}" />
+
+						<p:outputLabel value="Descrição" for="descricao" />
+						<p:inputText id="descricao" size="60"
+							value="#{estadoCivilBean.filtro.descricao}" />
+					</p:panelGrid>
+
+					<p:commandButton value="Pequisar" action="#{estadoCivilBean.pesquisar}"
+						update="inclusaoEstadoCivilPanel estadoCivilTable pesquisa"
+						process="@this, nome, descricao" />
+
+
+					<p:commandButton value="Fechar" action="#{estadoCivilBean.limpar}"
+						update="inclusaoEstadoCivilPanel" process="@this"
+						oncomplete="pesquisaEstadoCivilDialog.hide(); return false;" />
+				</h:panelGroup>
+
+
+				<script>
+					function tratarPesquisaEstadoCivil(args) {
+						if (!args.validationFailed) {
+							pesquisaEstadoCivilDialog.hide();
+						}
+					}
+				</script>
+			</p:dialog>
+
 
 		</h:form>
 	</ui:define>

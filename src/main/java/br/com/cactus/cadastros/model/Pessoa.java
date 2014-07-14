@@ -33,9 +33,11 @@ public class Pessoa implements Serializable {
     private String colaborador;
     private String convenio;
     private String contador;
-    private String transportadora;
-    
+    private String transportadora;    
     private TipoPessoa tipo;
+    private PessoaFisica pessoaFisica;
+    private PessoaJuridica pessoaJuridica;
+    
     private List<Contato> contatos = new ArrayList<>();
     private List<Endereco> enderecos = new ArrayList<>();
         
@@ -163,5 +165,21 @@ public class Pessoa implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-	
+
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
+	}
+
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
+	}
+
+	public PessoaJuridica getPessoaJuridica() {
+		return pessoaJuridica;
+	}
+
+	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
+		this.pessoaJuridica = pessoaJuridica;
+	}
+
 }

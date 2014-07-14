@@ -1,6 +1,7 @@
 package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
@@ -11,8 +12,15 @@ import org.primefaces.event.CloseEvent;
 
 import br.com.cactus.cadastros.model.Contato;
 import br.com.cactus.cadastros.model.Endereco;
+import br.com.cactus.cadastros.model.EstadoCivil;
 import br.com.cactus.cadastros.model.Pessoa;
+import br.com.cactus.cadastros.model.PessoaFisica;
+import br.com.cactus.cadastros.model.PessoaJuridica;
 import br.com.cactus.cadastros.model.TipoPessoa;
+import br.com.cactus.cadastros.model.TipoRaca;
+import br.com.cactus.cadastros.model.TipoSangue;
+import br.com.cactus.cadastros.model.TipoSexo;
+import br.com.cactus.cadastros.repository.EstadoCivilDao;
 import br.com.cactus.cadastros.repository.PessoaDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
@@ -28,19 +36,28 @@ public class PessoaBean implements Serializable {
 	private Contato contatoSelecionado;
 	private Endereco endereco;
 	private Endereco enderecoSelecionado;
+	private PessoaFisica pessoaFisica;
+	private PessoaJuridica pessoaJuridica;
+	
+	private List<EstadoCivil> listaEstadoCivil;
 	
 	@Inject
 	private PessoaDao pessoaDao;
+	@Inject
+	private EstadoCivilDao estadoCivilDao; 
 	
 	@PostConstruct
 	public void init(){
 		limpar();
+		this.listarEstadoCivil();
 	}
 	
 	public void limpar(){		
 		this.pessoa = new Pessoa();
 		contato = new Contato();
 		endereco = new Endereco();
+		pessoaFisica = new PessoaFisica();
+		pessoaJuridica = new PessoaJuridica();
 	}
 		
 	@Transactional
@@ -81,8 +98,25 @@ public class PessoaBean implements Serializable {
 		this.enderecoSelecionado = null;
 	}
 	
+	
 	public TipoPessoa[] getTiposPessoas() {
 	    return TipoPessoa.values();
+	}
+	
+	public TipoSexo[] getTiposSexos(){
+		return TipoSexo.values();
+	}
+	
+	public TipoRaca[] getTiposRacas(){
+		return TipoRaca.values();
+	}
+	
+	public TipoSangue[] getTiposSangues(){
+		return TipoSangue.values();
+	}
+	
+	public void listarEstadoCivil(){
+		listaEstadoCivil = estadoCivilDao.todos();
 	}
 	
 	public void handleClose(CloseEvent event) {
@@ -97,6 +131,7 @@ public class PessoaBean implements Serializable {
 			System.out.println("Chamou o fechar");
 		}
 	}
+	
 	
 	//getter and setter
 	public Pessoa getPessoa() {
@@ -146,5 +181,30 @@ public class PessoaBean implements Serializable {
 	public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
 		this.enderecoSelecionado = enderecoSelecionado;
 	}
+
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
+	}
+
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
+	}
+
+	public PessoaJuridica getPessoaJuridica() {
+		return pessoaJuridica;
+	}
+
+	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
+		this.pessoaJuridica = pessoaJuridica;
+	}
+
+	public List<EstadoCivil> getListaEstadoCivil() {
+		return listaEstadoCivil;
+	}
+
+	public void setListaEstadoCivil(List<EstadoCivil> listaEstadoCivil) {
+		this.listaEstadoCivil = listaEstadoCivil;
+	}
+
 
 }

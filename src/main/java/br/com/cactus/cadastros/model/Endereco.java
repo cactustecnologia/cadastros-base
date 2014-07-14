@@ -109,7 +109,7 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 	
-	@NotNull
+	@Column(name = "municipio_ibge", nullable = false, length = 10)
 	public Integer getMunicipioIbge() {
 		return municipioIbge;
 	}
@@ -128,7 +128,6 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getFone() {
 		return fone;
