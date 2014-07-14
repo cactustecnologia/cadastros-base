@@ -10,6 +10,7 @@ import javax.inject.Named;
 import org.primefaces.event.CloseEvent;
 
 import br.com.cactus.cadastros.model.Contato;
+import br.com.cactus.cadastros.model.Endereco;
 import br.com.cactus.cadastros.model.Pessoa;
 import br.com.cactus.cadastros.model.TipoPessoa;
 import br.com.cactus.cadastros.repository.PessoaDao;
@@ -24,7 +25,10 @@ public class PessoaBean implements Serializable {
 
 	private Pessoa pessoa;
 	private Contato contato;
-	private Contato contatoSelecionado;	
+	private Contato contatoSelecionado;
+	private Endereco endereco;
+	private Endereco enderecoSelecionado;
+	
 	@Inject
 	private PessoaDao pessoaDao;
 	
@@ -35,7 +39,8 @@ public class PessoaBean implements Serializable {
 	
 	public void limpar(){		
 		this.pessoa = new Pessoa();
-		contato = new Contato();		
+		contato = new Contato();
+		endereco = new Endereco();
 	}
 		
 	@Transactional
@@ -63,6 +68,19 @@ public class PessoaBean implements Serializable {
 		this.contatoSelecionado = null;
 	}
 	
+	public void adicionaEndereco(){
+		if (this.enderecoSelecionado == null) {
+			endereco.setPessoa(pessoa);
+			this.pessoa.getEnderecos().add(this.endereco);
+		}
+		limparEndereco();
+	}
+	
+	public void limparEndereco(){
+		this.endereco = new Endereco();
+		this.enderecoSelecionado = null;
+	}
+	
 	public TipoPessoa[] getTiposPessoas() {
 	    return TipoPessoa.values();
 	}
@@ -71,6 +89,11 @@ public class PessoaBean implements Serializable {
 		if (contato != null) {
 			contato = new Contato();
 			this.contatoSelecionado = null;
+			System.out.println("Chamou o fechar");
+		}
+		if (endereco != null) {
+			endereco = new Endereco();
+			this.enderecoSelecionado = null;
 			System.out.println("Chamou o fechar");
 		}
 	}
@@ -107,4 +130,21 @@ public class PessoaBean implements Serializable {
 	public void setContatoSelecionado(Contato contatoSelecionado) {
 		this.contatoSelecionado = contatoSelecionado;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Endereco getEnderecoSelecionado() {
+		return enderecoSelecionado;
+	}
+
+	public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
+		this.enderecoSelecionado = enderecoSelecionado;
+	}
+
 }

@@ -37,8 +37,10 @@ public class Pessoa implements Serializable {
     
     private TipoPessoa tipo;
     private List<Contato> contatos = new ArrayList<>();
+    private List<Endereco> enderecos = new ArrayList<>();
         
-    //getter and setter
+
+	//getter and setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -152,15 +154,14 @@ public class Pessoa implements Serializable {
 		this.contatos = contatos;
 	}
 
-	
-	
+	@NotNull
+	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
 
-	/*@OneToOne(orphanRemoval = true)
-	@JoinColumn(name = "id_pessoa", nullable = false)*/
-	
-
-	/*@OneToOne(orphanRemoval = true)
-	@JoinColumn(name = "id_pessoa", nullable = false)*/
-
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 	
 }

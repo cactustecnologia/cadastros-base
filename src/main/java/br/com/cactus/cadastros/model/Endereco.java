@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -32,8 +34,7 @@ public class Endereco implements Serializable {
 	private String principal;
 	private String entrega;
 	private String cobranca;
-	private String correspondencia;
-	
+	private String correspondencia;	
 	private Empresa empresa;
 	private Pessoa pessoa;
 	
@@ -69,7 +70,6 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 60)
 	public String getComplemento() {
 		return complemento;
@@ -138,7 +138,6 @@ public class Endereco implements Serializable {
 		this.fone = fone;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 14)
 	public String getFax() {
 		return fax;
@@ -184,7 +183,8 @@ public class Endereco implements Serializable {
 		this.correspondencia = correspondencia;
 	}
 	
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_empresa", nullable = false)
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -193,7 +193,8 @@ public class Endereco implements Serializable {
 		this.empresa = empresa;
 	}
 	
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "id_pessoa", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
