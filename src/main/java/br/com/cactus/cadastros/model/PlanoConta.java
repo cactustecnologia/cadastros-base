@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -23,12 +22,9 @@ public class PlanoConta implements Serializable {
 	private String nome;
 	private Date dataInclusao;
 	private String mascara;
-	private Integer niveis;
-	
+	private Integer niveis;	
 	private Empresa empresa;
 
-	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -49,7 +45,7 @@ public class PlanoConta implements Serializable {
 		this.nome = nome;
 	}
 
-	@NotNull
+	@Column(name = "DATA_INCLUSAO")
 	public Date getDataInclusao() {
 		return dataInclusao;
 	}
@@ -58,7 +54,6 @@ public class PlanoConta implements Serializable {
 		this.dataInclusao = dataInclusao;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 50)
 	public String getMascara() {
 		return mascara;
@@ -68,7 +63,6 @@ public class PlanoConta implements Serializable {
 		this.mascara = mascara;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 10)
 	public Integer getNiveis() {
 		return niveis;
@@ -78,7 +72,7 @@ public class PlanoConta implements Serializable {
 		this.niveis = niveis;
 	}
 
-	@NotNull
+	@Column(name = "ID_EMPRESA")
 	public Empresa getEmpresa() {
 		return empresa;
 	}

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -44,8 +45,6 @@ public class PessoaFisica implements Serializable {
     private EstadoCivil estadoCivil;    
     private Pessoa pessoa;
 	
-    
-    //getter and setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
@@ -54,8 +53,7 @@ public class PessoaFisica implements Serializable {
     
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	
+	}	
 	
 	@Column(nullable = false, length = 11)
 	public String getCpf() {
@@ -64,8 +62,7 @@ public class PessoaFisica implements Serializable {
 	
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-	
+	}	
 	
 	@Column(nullable = false, length = 20)
 	public String getRg() {
@@ -76,7 +73,7 @@ public class PessoaFisica implements Serializable {
 		this.rg = rg;
 	}
 	
-	@Column(nullable = false, length = 20)
+	@Column(name = "ORGAO_RG", nullable = false, length = 20)
 	public String getOrgaoRg() {
 		return orgaoRg;
 	}
@@ -85,7 +82,7 @@ public class PessoaFisica implements Serializable {
 		this.orgaoRg = orgaoRg;
 	}
 	
-	
+	@Column(name = "DATA_EMISSAO_RG")
 	public Date getDataEmissaoRg() {
 		return dataEmissaoRg;
 	}
@@ -94,26 +91,24 @@ public class PessoaFisica implements Serializable {
 		this.dataEmissaoRg = dataEmissaoRg;
 	}
 	
-	
+	@Column(name = "DATA_NASCIMENTO")
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 	
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-	
+	}	
 		
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(name = "SEXO", nullable = false)
 	public TipoSexo getTipoSexo() {
 		return tipoSexo;
 	}
 	
 	public void setTipoSexo(TipoSexo tipoSexo) {
 		this.tipoSexo = tipoSexo;
-	}
-	
+	}	
 	
 	@Column(nullable = false, length = 100)
 	public String getNaturalidade() {
@@ -122,8 +117,7 @@ public class PessoaFisica implements Serializable {
 	
 	public void setNaturalidade(String naturalidade) {
 		this.naturalidade = naturalidade;
-	}
-	
+	}	
 	
 	@Column(nullable = false, length = 100)
 	public String getNacionalidade() {
@@ -132,32 +126,29 @@ public class PessoaFisica implements Serializable {
 	
 	public void setNacionalidade(String nacionalidade) {
 		this.nacionalidade = nacionalidade;
-	}
-	
+	}	
 		
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(name = "RACA", nullable = false)
 	public TipoRaca getTipoRaca() {
 		return tipoRaca;
 	}
 	
 	public void setTipoRaca(TipoRaca tipoRaca) {
 		this.tipoRaca = tipoRaca;
-	}
-	
+	}	
 		
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(name = "TIPO_SANGUE", nullable = false)
 	public TipoSangue getTipoSangue() {
 		return tipoSangue;
 	}
 	
 	public void setTipoSangue(TipoSangue tipoSangue) {
 		this.tipoSangue = tipoSangue;
-	}
+	}	
 	
-	
-	@Column(nullable = false, length = 20)
+	@Column(name = "CNH_NUMERO", nullable = false, length = 20)
 	public String getCnhNumero() {
 		return cnhNumero;
 	}
@@ -166,7 +157,7 @@ public class PessoaFisica implements Serializable {
 		this.cnhNumero = cnhNumero;
 	}
 	
-	@Column(nullable = false, length = 2)
+	@Column(name = "CNH_CATEGORIA" ,nullable = false, length = 2)
 	public String getCnhCategoria() {
 		return cnhCategoria;
 	}
@@ -175,7 +166,7 @@ public class PessoaFisica implements Serializable {
 		this.cnhCategoria = cnhCategoria;
 	}
 	
-	
+	@Column(name = "CNH_VENCIMENTO")
 	public Date getCnhVencimento() {
 		return cnhVencimento;
 	}
@@ -185,7 +176,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 20)
+	@Column(name = "TITULO_ELEITORAL_NUMERO", nullable = false, length = 20)
 	public String getTituloEleitoralNumero() {
 		return tituloEleitoralNumero;
 	}
@@ -195,7 +186,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 10)
+	@Column(name = "TITULO_ELEITORAL_ZONA", nullable = false, length = 10)
 	public Integer getTituloEleitoralZona() {
 		return tituloEleitoralZona;
 	}
@@ -205,7 +196,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 10)
+	@Column(name = "TITULO_ELEITORAL_SECAO", nullable = false, length = 10)
 	public Integer getTituloEleitoralSecao() {
 		return tituloEleitoralSecao;
 	}
@@ -215,7 +206,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 20)
+	@Column(name = "RESERVISTA_NUMERO", nullable = false, length = 20)
 	public String getReservistaNumero() {
 		return reservistaNumero;
 	}
@@ -225,7 +216,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 20)
+	@Column(name = "RESERVISTA_CATEGORIA", nullable = false, length = 20)
 	public Integer getReservistaCategoria() {
 		return reservistaCategoria;
 	}
@@ -235,7 +226,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 100)
+	@Column(name = "NOME_MAE", nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
 	}
@@ -245,7 +236,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	
-	@Column(nullable = false, length = 100)
+	@Column(name = "NOME_PAI", nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;
 	}
@@ -254,7 +245,8 @@ public class PessoaFisica implements Serializable {
 		this.nomePai = nomePai;
 	}
 	
-	
+	@JoinColumn(name = "ID_ESTADO_CIVIL", referencedColumnName = "ID")
+    @ManyToOne
 	public EstadoCivil getEstadoCivil() {
 		return estadoCivil;
 	}
@@ -263,13 +255,38 @@ public class PessoaFisica implements Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
+    @OneToOne
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
 	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PessoaFisica other = (PessoaFisica) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}    
 }

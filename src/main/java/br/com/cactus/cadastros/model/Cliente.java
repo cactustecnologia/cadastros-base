@@ -9,10 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name ="cliente")
@@ -31,14 +30,12 @@ public class Cliente implements Serializable {
 	private String formaDesconto;
 	private BigDecimal limiteCredito;
 	private String tipoFrete;
-	private ContabilConta contabilConta;
-	//tribut_operacao_fiscal
+	private ContabilConta contabilConta;	
 	private OperacaoFiscal operacaoFiscal;
 	private Pessoa pessoa;
 	private AtividadeForCli atividadeForCli;
 	private SituacaoForCli situacaoForCli;
 	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -47,21 +44,20 @@ public class Cliente implements Serializable {
 	
 	public void setId(Integer id) {
 		this.id = id;
-	}
+	}	
 	
-	@NotNull
 	public Date getDesde() {
 		return desde;
-	}
+	}	
 	
 	public void setDesde(Date desde) {
 		this.desde = desde;
-	}
+	}	
 	
-	@NotNull
+	@Column(name = "data_cadastro")
 	public Date getDataCadastro() {
 		return dataCadastro;
-	}
+	}	
 	
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
@@ -74,29 +70,26 @@ public class Cliente implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
-	@NotBlank
-	@Column(nullable = false, length = 30)
+
+	@Column(name = "CONTA_TOMADOR", nullable = false, length = 30)
 	public String getContaTomador() {
 		return contaTomador;
 	}
 	
 	public void setContaTomador(String contaTomador) {
 		this.contaTomador = contaTomador;
-	}
+	}	
 	
-	@NotBlank
-	@Column(nullable = false, length = 1)
+	@Column(name = "GERA_FINANCEIRO", nullable = false, length = 1)
 	public String getGeraFinanceiro() {
 		return geraFinanceiro;
 	}
 	
 	public void setGeraFinanceiro(String geraFinanceiro) {
 		this.geraFinanceiro = geraFinanceiro;
-	}
+	}	
 	
-	@NotBlank
-	@Column(nullable = false, length = 1)
+	@Column(name = "INDICADOR_PRECO", nullable = false, length = 1)
 	public String getIndicadorPreco() {
 		return indicadorPreco;
 	}
@@ -104,9 +97,8 @@ public class Cliente implements Serializable {
 	public void setIndicadorPreco(String indicadorPreco) {
 		this.indicadorPreco = indicadorPreco;
 	}
-	
-	@NotBlank
-	@Column(nullable = false, length = 1)
+		
+	@Column(name = "FORMA_DESCONTO", nullable = false, length = 1)
 	public String getFormaDesconto() {
 		return formaDesconto;
 	}
@@ -114,45 +106,48 @@ public class Cliente implements Serializable {
 	public void setFormaDesconto(String formaDesconto) {
 		this.formaDesconto = formaDesconto;
 	}
-		
-	@NotBlank
-	@Column(nullable = false, length = 1)
+			
+	@Column(name = "TIPO_FRETE", nullable = false, length = 1)
 	public String getTipoFrete() {
 		return tipoFrete;
 	}
 	
 	public void setTipoFrete(String tipoFrete) {
 		this.tipoFrete = tipoFrete;
-	}
+	}	
 	
-	@NotNull
+	@JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
+    @ManyToOne
 	public ContabilConta getContabilConta() {
 		return contabilConta;
 	}
 	
 	public void setContabilConta(ContabilConta contabilConta) {
 		this.contabilConta = contabilConta;
-	}
+	}	
 	
-	@NotNull
+	@JoinColumn(name = "ID_OPERACAO_FISCAL", referencedColumnName = "ID")
+    @ManyToOne
 	public OperacaoFiscal getOperacaoFiscal() {
 		return operacaoFiscal;
 	}
 	
 	public void setOperacaoFiscal(OperacaoFiscal operacaoFiscal) {
 		this.operacaoFiscal = operacaoFiscal;
-	}
-	
-	@NotNull
+	}	
+		
+    @ManyToOne
+    @JoinColumn(name = "ID_PESSOA", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
 	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
+	}	
 	
-	@NotNull
+	@JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
+    @ManyToOne
 	public AtividadeForCli getAtividadeForCli() {
 		return atividadeForCli;
 	}
@@ -160,8 +155,9 @@ public class Cliente implements Serializable {
 	public void setAtividadeForCli(AtividadeForCli atividadeForCli) {
 		this.atividadeForCli = atividadeForCli;
 	}
-	
-	@NotNull
+		
+	@JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
+    @ManyToOne    
 	public SituacaoForCli getSituacaoForCli() {
 		return situacaoForCli;
 	}
@@ -170,6 +166,7 @@ public class Cliente implements Serializable {
 		this.situacaoForCli = situacaoForCli;
 	}
 
+	@Column(name = "PORCENTO_DESCONTO")
 	public BigDecimal getPorcentoDesconto() {
 		return porcentoDesconto;
 	}
@@ -178,11 +175,37 @@ public class Cliente implements Serializable {
 		this.porcentoDesconto = porcentoDesconto;
 	}
 
+	@Column(name = "LIMITE_CREDITO")
 	public BigDecimal getLimiteCredito() {
 		return limiteCredito;
 	}
 
 	public void setLimiteCredito(BigDecimal limiteCredito) {
 		this.limiteCredito = limiteCredito;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}	
 }

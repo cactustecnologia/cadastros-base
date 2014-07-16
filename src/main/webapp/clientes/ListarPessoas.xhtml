@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog widgetVar="">
+		<p:dataTable style="margin-top: 15px;" id="pessoaTable"
+				value="#{estadoCivilBean.lazyModel}" var="estadoCivil"
+				paginator="true" rows="5" rowKey="#{estadoCivil.id}"
+				selectionMode="single"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				lazy="true" rowsPerPageTemplate="5,10,15">
+		</p:dataTable>
+	</p:dialog>
+
+</html>

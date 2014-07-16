@@ -6,7 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import org.primefaces.event.CloseEvent;
+import org.primefaces.model.LazyDataModel;
 import br.com.cactus.cadastros.model.SituacaoForCli;
 import br.com.cactus.cadastros.repository.filter.SituacaoForCliFilter;
 import br.com.cactus.cadastros.service.SituacaoForCliService;
@@ -21,6 +22,7 @@ public class SituacaoForCliBean implements Serializable {
 	private SituacaoForCli situacaoForCli;
 	private SituacaoForCli situacaoForCliSelecionada;
 	private SituacaoForCliFilter filtro;
+	private LazyDataModel<SituacaoForCli> lazyModel;
 	@Inject
 	private SituacaoForCliService situacaoForCliService;
 	
@@ -43,6 +45,23 @@ public class SituacaoForCliBean implements Serializable {
 	
 	public void preparaAlterar(){
 		this.setSituacaoForCli(situacaoForCliSelecionada);		
+	}
+	
+	public void pesquisar(){
+		lazyModel = situacaoForCliService.filtrados(filtro);
+	}
+	
+	public void excluir(){
+		situacaoForCliService.remover(situacaoForCliSelecionada);
+		FacesUtil.addInfoMessage("Situação fornecedor cliente " + 
+				situacaoForCliSelecionada.getNome() + " excluída com sucesso.");
+	}
+	
+	public void handleClose(CloseEvent event) {
+		if (situacaoForCli.getId() != null) {
+			situacaoForCli = new SituacaoForCli();
+			System.out.println("chamou fechar");
+		}
 	}
 
 	//GETTER AND SETTER
@@ -69,5 +88,9 @@ public class SituacaoForCliBean implements Serializable {
 
 	public void setFiltro(SituacaoForCliFilter filtro) {
 		this.filtro = filtro;
+	}
+
+	public LazyDataModel<SituacaoForCli> getLazyModel() {
+		return lazyModel;
 	}
 }

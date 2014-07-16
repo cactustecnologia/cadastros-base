@@ -11,10 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -30,7 +28,7 @@ public class PessoaJuridica implements Serializable {
     private String inscricaoEstadual;    
     private Date dataConstituicao;    
     private TipoRegime tipoRegime;    
-    private TipoCrt tipoCrt;    
+    private String tipoCrt;    
     private String suframa;    
     private Pessoa pessoa;
     
@@ -64,8 +62,7 @@ public class PessoaJuridica implements Serializable {
 		this.fantasia = fantasia;
 	}
 	
-	@NotNull
-	@Column(nullable = false, length = 30)
+	@Column(name = "INSCRICAO_MUNICIPAL", nullable = false, length = 30)
 	public String getInscricaoMunicipal() {
 		return inscricaoMunicipal;
 	}
@@ -74,8 +71,7 @@ public class PessoaJuridica implements Serializable {
 		this.inscricaoMunicipal = inscricaoMunicipal;
 	}
 	
-	@NotNull
-	@Column(nullable = false, length = 30)
+	@Column(name = "INSCRICAO_ESTADUAL", nullable = false, length = 30)
 	public String getInscricaoEstadual() {
 		return inscricaoEstadual;
 	}
@@ -84,6 +80,7 @@ public class PessoaJuridica implements Serializable {
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 	
+	@Column(name = "DATA_CONSTITUICAO")
 	public Date getDataConstituicao() {
 		return dataConstituicao;
 	}
@@ -101,7 +98,7 @@ public class PessoaJuridica implements Serializable {
 		this.suframa = suframa;
 	}
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -110,10 +107,9 @@ public class PessoaJuridica implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-
-	@NotNull	
+	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(name = "TIPO_REGIME", nullable = false)
 	public TipoRegime getTipoRegime() {
 		return tipoRegime;
 	}
@@ -121,15 +117,38 @@ public class PessoaJuridica implements Serializable {
 	public void setTipoRegime(TipoRegime tipoRegime) {
 		this.tipoRegime = tipoRegime;
 	}
-
-	@NotNull	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	public TipoCrt getTipoCrt() {
+	
+	@Column(name = "CRT", nullable = false)
+	public String getTipoCrt() {
 		return tipoCrt;
 	}
 
-	public void setTipoCrt(TipoCrt tipoCrt) {
+	public void setTipoCrt(String tipoCrt) {
 		this.tipoCrt = tipoCrt;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PessoaJuridica other = (PessoaJuridica) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 }

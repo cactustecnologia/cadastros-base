@@ -9,9 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "plano_conta_ref_sped")
@@ -27,8 +24,6 @@ public class PlanoContaRefSped implements Serializable {
 	private Date fimValidade;
 	private String tipo;
 	
-	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -39,8 +34,7 @@ public class PlanoContaRefSped implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 30)
+	@Column(name = "COD_CTA_REF", nullable = false, length = 30)
 	public String getCodCtaRef() {
 		return codCtaRef;
 	}
@@ -49,7 +43,6 @@ public class PlanoContaRefSped implements Serializable {
 		this.codCtaRef = codCtaRef;
 	}
 	
-	@NotBlank
 	public String getDescricao() {
 		return descricao;
 	}
@@ -58,7 +51,6 @@ public class PlanoContaRefSped implements Serializable {
 		this.descricao = descricao;
 	}
 	
-	@NotNull
 	public String getOrientacoes() {
 		return orientacoes;
 	}
@@ -67,7 +59,7 @@ public class PlanoContaRefSped implements Serializable {
 		this.orientacoes = orientacoes;
 	}
 	
-	@NotNull
+	@Column(name = "INICIO_VALIDADE")
 	public Date getInicioValidade() {
 		return inicioValidade;
 	}
@@ -76,7 +68,7 @@ public class PlanoContaRefSped implements Serializable {
 		this.inicioValidade = inicioValidade;
 	}
 	
-	@NotNull
+	@Column(name = "FIM_VALIDADE")
 	public Date getFimValidade() {
 		return fimValidade;
 	}
@@ -85,7 +77,6 @@ public class PlanoContaRefSped implements Serializable {
 		this.fimValidade = fimValidade;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getTipo() {
 		return tipo;
@@ -94,5 +85,29 @@ public class PlanoContaRefSped implements Serializable {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PlanoContaRefSped other = (PlanoContaRefSped) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

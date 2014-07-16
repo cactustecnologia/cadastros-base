@@ -8,10 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "contabil_conta")
@@ -32,15 +31,10 @@ public class ContabilConta implements Serializable {
 	private String ordem;
 	private String codigoReduzido;
 	private String codigoEfd;
-	
-	//não sei
 	private ContabilConta contabilConta;
 	private PlanoConta planoConta;
 	private PlanoContaRefSped planoContaRefSped;
 	
-	
-	
-	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -50,8 +44,7 @@ public class ContabilConta implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	@NotBlank
+		
 	@Column(nullable = false, length = 30)
 	public String getClassificacao() {
 		return classificacao;
@@ -60,8 +53,7 @@ public class ContabilConta implements Serializable {
 	public void setClassificacao(String classificacao) {
 		this.classificacao = classificacao;
 	}
-	
-	@NotBlank
+		
 	@Column(nullable = false, length = 1)
 	public String getTipo() {
 		return tipo;
@@ -70,8 +62,7 @@ public class ContabilConta implements Serializable {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	@NotNull
+		
 	public String getDescricao() {
 		return descricao;
 	}
@@ -80,7 +71,7 @@ public class ContabilConta implements Serializable {
 		this.descricao = descricao;
 	}
 	
-	@NotNull
+	@Column(name = "DATA_INCLUSAO")
 	public Date getDataInclusao() {
 		return dataInclusao;
 	}
@@ -89,7 +80,6 @@ public class ContabilConta implements Serializable {
 		this.dataInclusao = dataInclusao;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getSituacao() {
 		return situacao;
@@ -99,7 +89,6 @@ public class ContabilConta implements Serializable {
 		this.situacao = situacao;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getNatureza() {
 		return natureza;
@@ -108,9 +97,8 @@ public class ContabilConta implements Serializable {
 	public void setNatureza(String natureza) {
 		this.natureza = natureza;
 	}
-	
-	@NotBlank
-	@Column(nullable = false, length = 1)
+		
+	@Column(name = "PATRIMONIO_RESULTADO", nullable = false, length = 1)
 	public String getPatrimonioResultado() {
 		return patrimonioResultado;
 	}
@@ -119,8 +107,7 @@ public class ContabilConta implements Serializable {
 		this.patrimonioResultado = patrimonioResultado;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 1)
+	@Column(name = "LIVRO_CAIXA", nullable = false, length = 1)
 	public String getLivroCaixa() {
 		return livroCaixa;
 	}
@@ -129,7 +116,6 @@ public class ContabilConta implements Serializable {
 		this.livroCaixa = livroCaixa;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 1)
 	public String getDfc() {
 		return dfc;
@@ -139,7 +125,6 @@ public class ContabilConta implements Serializable {
 		this.dfc = dfc;
 	}
 	
-	@NotBlank
 	@Column(nullable = false, length = 20)
 	public String getOrdem() {
 		return ordem;
@@ -149,8 +134,7 @@ public class ContabilConta implements Serializable {
 		this.ordem = ordem;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 10)
+	@Column(name = "CODIGO_REDUZIDO", nullable = false, length = 10)
 	public String getCodigoReduzido() {
 		return codigoReduzido;
 	}
@@ -159,8 +143,7 @@ public class ContabilConta implements Serializable {
 		this.codigoReduzido = codigoReduzido;
 	}
 	
-	@NotBlank
-	@Column(nullable = false, length = 2)
+	@Column(name = "CODIGO_EFD", nullable = false, length = 2)
 	public String getCodigoEfd() {
 		return codigoEfd;
 	}
@@ -169,7 +152,8 @@ public class ContabilConta implements Serializable {
 		this.codigoEfd = codigoEfd;
 	}
 	
-	@NotNull
+	@JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
+    @ManyToOne
 	public ContabilConta getContabilConta() {
 		return contabilConta;
 	}
@@ -178,7 +162,8 @@ public class ContabilConta implements Serializable {
 		this.contabilConta = contabilConta;
 	}
 	
-	@NotNull
+	@JoinColumn(name = "ID_PLANO_CONTA", referencedColumnName = "ID")
+    @ManyToOne
 	public PlanoConta getPlanoConta() {
 		return planoConta;
 	}
@@ -187,7 +172,8 @@ public class ContabilConta implements Serializable {
 		this.planoConta = planoConta;
 	}
 	
-	@NotNull
+	@JoinColumn(name = "ID_PLANO_CONTA_REF_SPED", referencedColumnName = "ID")
+    @ManyToOne
 	public PlanoContaRefSped getPlanoContaRefSped() {
 		return planoContaRefSped;
 	}
@@ -195,6 +181,29 @@ public class ContabilConta implements Serializable {
 	public void setPlanoContaRefSped(PlanoContaRefSped planoContaRefSped) {
 		this.planoContaRefSped = planoContaRefSped;
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ContabilConta other = (ContabilConta) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}	
 }

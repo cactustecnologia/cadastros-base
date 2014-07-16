@@ -7,10 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "tribut_operacao_fiscal")
@@ -22,12 +21,9 @@ public class OperacaoFiscal implements Serializable {
 	private String descricao;
 	private String descricaoNaNf;
 	private Integer cfop;
-	private String observacao;
-	
+	private String observacao;	
 	private Empresa empresa;
-
-	
-	//getter and setter
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -37,8 +33,7 @@ public class OperacaoFiscal implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	@NotNull
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -47,7 +42,7 @@ public class OperacaoFiscal implements Serializable {
 		this.descricao = descricao;
 	}
 
-	@NotNull
+	@Column(name = "DESCRICAO_NA_NF")
 	public String getDescricaoNaNf() {
 		return descricaoNaNf;
 	}
@@ -56,7 +51,6 @@ public class OperacaoFiscal implements Serializable {
 		this.descricaoNaNf = descricaoNaNf;
 	}
 
-	@NotBlank
 	@Column(nullable = false, length = 10)
 	public Integer getCfop() {
 		return cfop;
@@ -66,7 +60,6 @@ public class OperacaoFiscal implements Serializable {
 		this.cfop = cfop;
 	}
 
-	@NotNull
 	public String getObservacao() {
 		return observacao;
 	}
@@ -75,7 +68,8 @@ public class OperacaoFiscal implements Serializable {
 		this.observacao = observacao;
 	}
 
-	@NotNull
+	@JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
+    @ManyToOne
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -84,4 +78,28 @@ public class OperacaoFiscal implements Serializable {
 		this.empresa = empresa;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OperacaoFiscal other = (OperacaoFiscal) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

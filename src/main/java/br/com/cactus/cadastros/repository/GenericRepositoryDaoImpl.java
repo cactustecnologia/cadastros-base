@@ -68,11 +68,17 @@ public class GenericRepositoryDaoImpl<T> implements GenericRepositoryDao<T>, Ser
 		return entityManager.createQuery(cq).getResultList();
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findByCriteria(List<Criterion> params) {
+	public List<T> findByCriteria(List<Criterion> params, Map<String, String> alias) {
 		session = entityManager.unwrap(Session.class);
 		criteria = session.createCriteria(oClass);
+		if (alias != null) {
+			for (String chave : alias.keySet()) {
+				criteria.createAlias(alias.get(chave), alias.get(chave));
+			}
+		}
 		for (Criterion criterion : params) {
 			criteria.add(criterion);
 		}

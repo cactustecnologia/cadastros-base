@@ -20,7 +20,7 @@ public interface GenericRepositoryDao<T> {
 
     public List<T> todos();
     
-    public List<T> findByCriteria(List<Criterion> params);    
+    public List<T> findByCriteria(List<Criterion> params, Map<String, String> alias);    
     
     public List<T> listaFiltradaCriteria(int first, int count, String sortField, SortOrder sortOrder, 
     		List<Criterion> params,Map<String, String> alias);    
