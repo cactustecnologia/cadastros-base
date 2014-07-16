@@ -75,6 +75,11 @@
 				<p:outputLabel value="Tipo Frete:" for="tipoFrete" />
 				<p:inputText id="tipoFrete" value="#{cadastroClienteBean.cliente.tipoFrete}" />
 				
+				<p:outputLabel value="Pessoa Teste" for="pessoaTeste" />
+				<p:autoComplete id="pessoaTeste" size="40" dropdown="true"
+		        	value="#{cadastroClienteBean.cliente.pessoa}" completeMethod="#{cadastroClienteBean.completarPessoa}"
+		        	var="pessoa" itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" forceSelection="true" />
+				
 			</p:panelGrid>
 		</h:form>
 		<ui:include src="/clientes/ListarPessoas.xhtml" />

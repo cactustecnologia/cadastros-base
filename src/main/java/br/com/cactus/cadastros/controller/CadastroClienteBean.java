@@ -10,7 +10,9 @@ import javax.inject.Named;
 
 import br.com.cactus.cadastros.model.AtividadeForCli;
 import br.com.cactus.cadastros.model.Cliente;
+import br.com.cactus.cadastros.model.Pessoa;
 import br.com.cactus.cadastros.model.SituacaoForCli;
+import br.com.cactus.cadastros.repository.PessoaDao;
 import br.com.cactus.cadastros.service.ClienteService;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
@@ -25,6 +27,8 @@ public class CadastroClienteBean implements Serializable {
 	private List<SituacaoForCli> listaSituacaoForCli;
 	@Inject
 	private ClienteService clienteService;
+	@Inject
+	private PessoaDao pessoaDao;
 		
 	@PostConstruct
 	public void init(){
@@ -41,8 +45,8 @@ public class CadastroClienteBean implements Serializable {
 		FacesUtil.addInfoMessage("Transação efetuada com sucesso.");
 	}
 	
-	public List<Cliente> completarPessoa(String nome){
-		return this.clienteService.porNome(nome);
+	public List<Pessoa> completarPessoa(String nome){
+		return pessoaDao.porNome(nome);
 	}
 	
 	//GETTER AND SETTER

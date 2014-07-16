@@ -58,8 +58,6 @@ public class ClienteService implements Serializable {
 		return lazyModel = new LazyDataModelBase<>(clienteDao, params, alias);
 	}
 	
-
-	
 	public List<Cliente> porNome(String nome){
 		params = new ArrayList<>();
 		alias.put("pessoa", "pessoa");
