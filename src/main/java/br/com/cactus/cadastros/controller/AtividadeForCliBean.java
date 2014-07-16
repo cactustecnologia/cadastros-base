@@ -105,4 +105,5 @@ public class AtividadeForCliBean implements Serializable {
 	public LazyDataModel<AtividadeForCli> getLazyModel() {
 		return lazyModel;
 	}
+	
 }
