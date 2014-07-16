@@ -29,13 +29,55 @@
 			
 			<p:messages id="msgCliente" closable="true" />
 			
-			<p:panelGrid columns="2" id="painel"
+			<p:panelGrid columns="4" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 				
 				<p:outputLabel value="Pessoa" for="pessoa" />
-				<p:inputText id="pessoa" value="#{cadastroClienteBean.cliente.pessoa}">
-				<p:button />  			
+				<h:panelGroup>
+					<p:inputText id="pessoa" 
+						value="#{cadastroClienteBean.cliente.pessoa}" size="40" />
+					<p:button value=".." onclick="pessoasDialog.show(); return false;" />  			
+				</h:panelGroup>
+				
+				<p:outputLabel value="Contabil Conta:" for="contabilConta" />
+				<h:panelGroup>
+					<p:inputText id="contabilConta" 
+						value="#{cadastroClienteBean.cliente.contabilConta}" size="40" />
+					<p:button value=".." onclick="contabilContaDialog.show(); return false;" />  			
+				</h:panelGroup>
+				
+				<p:outputLabel value="Cliente desde:" for="desde" />
+				<p:calendar id="desde" value="#{cadastroClienteBean.cliente.desde}" />
+				
+				<p:outputLabel value="Data do Cadastro:" for="dtCadastro" />
+				<p:calendar id="dtCadastro"
+					navigator="true" 
+					value="#{cadastroClienteBean.cliente.dataCadastro}" />
+				
+				<p:outputLabel value="Conta Tomador:" for="ctTomador" />
+				<p:inputText id="ctTomador" value="#{cadastroClienteBean.cliente.contaTomador}" />
+				
+				<p:outputLabel value="Gera Financeiro:" for="geraFinanceiro" />
+				<p:inputText id="geraFinanceiro" value="#{cadastroClienteBean.cliente.geraFinanceiro}" />
+				
+				<p:outputLabel value="Indicador Preço:" for="indicadorPreco" />
+				<p:inputText id="indicadorPreco" value="#{cadastroClienteBean.cliente.indicadorPreco}" />
+				
+				<p:outputLabel value="Porcentagem Desc.:" for="porcDesconto" />
+				<p:inputText id="porcDesconto" value="#{cadastroClienteBean.cliente.porcentoDesconto}" />
+				
+				<p:outputLabel value="Forma Desconto:" for="formaDesconto" />
+				<p:inputText id="formaDesconto" value="#{cadastroClienteBean.cliente.formaDesconto}" />
+				
+				<p:outputLabel value="Limite Crediário:" for="limiteCrediario" />
+				<p:inputText id="limiteCrediario" value="#{cadastroClienteBean.cliente.limiteCredito}" />
+				
+				<p:outputLabel value="Tipo Frete:" for="tipoFrete" />
+				<p:inputText id="tipoFrete" value="#{cadastroClienteBean.cliente.tipoFrete}" />
+				
 			</p:panelGrid>
 		</h:form>
+		<ui:include src="/clientes/ListarPessoas.xhtml" />
+		<ui:include src="/financeiro/ListarContabilConta.xhtml" />
 	</ui:define>
 </ui:composition>
