@@ -38,8 +38,7 @@ public class CadastroClienteBean implements Serializable {
 		
 	@PostConstruct
 	public void init(){
-		limpar();
-		inicializar();
+		limpar();		
 	}
 	
 	public void inicializar(){

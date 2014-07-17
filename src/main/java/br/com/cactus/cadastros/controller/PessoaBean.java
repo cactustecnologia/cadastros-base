@@ -39,10 +39,8 @@ public class PessoaBean implements Serializable {
 	private Endereco endereco;
 	private Endereco enderecoSelecionado;
 	private PessoaFisica pessoaFisica;
-	private PessoaJuridica pessoaJuridica;
-	
-	private List<EstadoCivil> listaEstadoCivil;
-	
+	private PessoaJuridica pessoaJuridica;	
+	private List<EstadoCivil> listaEstadoCivil;	
 	@Inject
 	private PessoaDao pessoaDao;
 	@Inject
@@ -59,23 +57,24 @@ public class PessoaBean implements Serializable {
 	}
 	
 	public void limpar(){		
+		this.pessoaJuridica = new PessoaJuridica();
 		this.pessoa = new Pessoa();
 		contato = new Contato();
 		endereco = new Endereco();
 		pessoaFisica = new PessoaFisica();
-		pessoaJuridica = new PessoaJuridica();
+		
 	}
 		
 	@Transactional
 	public void salvar(){
-		if (pessoa.getId()  == null) {			
+		if (pessoa.getId()  == null) {	
+			pessoaDao.salvar(pessoa);
 			if(TipoPessoa.FISICA.equals(pessoa.getTipo())){
 				pessoaFisicaDao.salvar(pessoaFisica);
 			}
 			if (TipoPessoa.JURIDICA.equals(pessoa.getTipo())){
 				pessoaJuridicaDao.salvar(pessoaJuridica);
-			}
-			pessoaDao.salvar(pessoa);
+			}			
 			FacesUtil.addInfoMessage("Pessoa salvo com sucesso!");
 		} else {
 			pessoaDao.atualizar(pessoa);
@@ -108,8 +107,7 @@ public class PessoaBean implements Serializable {
 	public void limparEndereco(){
 		this.endereco = new Endereco();
 		this.enderecoSelecionado = null;
-	}
-	
+	}	
 	
 	public TipoPessoa[] getTiposPessoas() {
 	    return TipoPessoa.values();

@@ -16,7 +16,7 @@
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/pessoa/CadastroPessoa" />
 					<p:commandButton value="Salvar" id="botaoSalvar"
-						process="@this painel" action="#{pessoaBean.salvar}"
+						process="@this painel tabPessoa" action="#{pessoaBean.salvar}"
 						update="painel :frmPessoa:tabPessoa:pessoaContatoTable msgPessoa" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
