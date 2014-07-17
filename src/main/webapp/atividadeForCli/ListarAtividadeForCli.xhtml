@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+		
+	<p:dialog header="Pesquisa Atividade Fornecedor Cliente" 
+		widgetVar="atividadeForCliDialog"
+		modal="true">		
+		<p:dataTable style="margin-top: 15px;" 
+			id="atividadeForCliTable" value="#{cadastroClienteBean.lazyAtividade}" var="atividadeForCli" 
+			paginator="true" rows="5"
+            rowKey="#{atividadeForCli.id}" selectionMode="single"                     
+            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            paginatorAlwaysVisible="false" paginatorPosition="bottom"                    
+            lazy="true" rowsPerPageTemplate="5,10,15">
+			<p:column headerText="Nome">
+				<h:outputText value="#{atividadeForCli.nome}" />
+			</p:column>
+			<p:column headerText="Descrição">
+				<h:outputText value="#{atividadeForCli.descricao}" />
+			</p:column>
+			<p:column style="width: 100px; text-align: center">
+				<p:commandButton 
+					icon="ui-icon-pencil" title="Selecionar"
+					action="#{cadastroClienteBean.selecionarAtividade}"					
+					process="@this"
+					update=":frmCliente:painel">	
+					<f:setPropertyActionListener target="#{cadastroClienteBean.atividadeSelecionada}"
+						value="#{atividadeForCli}" />					
+				</p:commandButton>				
+			</p:column>
+		</p:dataTable>		
+	</p:dialog>
+</html>

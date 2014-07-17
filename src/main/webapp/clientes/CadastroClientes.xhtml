@@ -46,6 +46,30 @@
 					<p:button value=".." onclick="contabilContaDialog.show(); return false;" />  			
 				</h:panelGroup>
 				
+				<p:outputLabel value="Operação Fiscal:" for="operacaoFiscal" />
+				<h:panelGroup>
+					<p:inputText id="operacaoFiscal" 
+						value="#{cadastroClienteBean.cliente.operacaoFiscal}" size="40" />
+					<p:button value=".." onclick="operacaoFiscalDialog.show(); return false;" />  			
+				</h:panelGroup>
+				
+				<p:outputLabel value="Atividade For. Cli.:" for="atividadeForCli" />
+				<h:panelGroup>
+					<p:inputText id="atividadeForCli" 						
+						value="#{cadastroClienteBean.atividadeSelecionada.nome}" size="40" />						
+					<p:commandButton icon="ui-icon-extlink"
+						onclick="atividadeForCliDialog.show(); return false"
+						process="@this">						
+					</p:commandButton>					  			
+				</h:panelGroup>
+				
+				<p:outputLabel value="Situação For. Cli.:" for="situacaoForCli" />
+				<h:panelGroup>
+					<p:inputText id="situacaoForCli" 
+						value="#{cadastroClienteBean.cliente.situacaoForCli}" size="40" />
+					<p:button value=".." onclick="situacaoForCliDialog.show(); return false;" />  			
+				</h:panelGroup>
+				
 				<p:outputLabel value="Cliente desde:" for="desde" />
 				<p:calendar id="desde" value="#{cadastroClienteBean.cliente.desde}" />
 				
@@ -78,11 +102,19 @@
 				<p:outputLabel value="Pessoa Teste" for="pessoaTeste" />
 				<p:autoComplete id="pessoaTeste" size="40" dropdown="true"
 		        	value="#{cadastroClienteBean.cliente.pessoa}" completeMethod="#{cadastroClienteBean.completarPessoa}"
-		        	var="pessoa" itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" forceSelection="true" />
-				
+		        	var="pessoa" itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" forceSelection="true" />	        		
 			</p:panelGrid>
+			<p:panelGrid columns="1" 
+				style="width: 100%; margin-top: 3px; padding-right: 10px;" columnClasses="rotulo, campo">
+		    	<p:outputLabel value="Observação" for="observacao" />
+		        <p:inputTextarea id="observacao" rows="10" style="width: 99%;"
+					value="#{cadastroClienteBean.cliente.observacao}" />
+		    </p:panelGrid>
 		</h:form>
 		<ui:include src="/clientes/ListarPessoas.xhtml" />
 		<ui:include src="/financeiro/ListarContabilConta.xhtml" />
+		<ui:include src="/fiscal/ListarOperacaoFiscal.xhtml" />
+		<ui:include src="/atividadeForCli/ListarAtividadeForCli.xhtml" />
+		<ui:include src="/situacaoForCli/ListarSituacaoForCli.xhtml" />
 	</ui:define>
 </ui:composition>

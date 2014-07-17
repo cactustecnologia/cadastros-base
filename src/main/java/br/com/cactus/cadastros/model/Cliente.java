@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name ="cliente")
@@ -136,6 +137,7 @@ public class Cliente implements Serializable {
 		this.operacaoFiscal = operacaoFiscal;
 	}	
 		
+	@NotNull
     @ManyToOne
     @JoinColumn(name = "ID_PESSOA", nullable = false)
 	public Pessoa getPessoa() {
@@ -146,6 +148,7 @@ public class Cliente implements Serializable {
 		this.pessoa = pessoa;
 	}	
 	
+	@NotNull
 	@JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne
 	public AtividadeForCli getAtividadeForCli() {
@@ -156,6 +159,7 @@ public class Cliente implements Serializable {
 		this.atividadeForCli = atividadeForCli;
 	}
 		
+	@NotNull
 	@JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne    
 	public SituacaoForCli getSituacaoForCli() {
