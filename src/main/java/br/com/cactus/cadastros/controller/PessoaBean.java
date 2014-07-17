@@ -22,6 +22,8 @@ import br.com.cactus.cadastros.model.TipoSangue;
 import br.com.cactus.cadastros.model.TipoSexo;
 import br.com.cactus.cadastros.repository.EstadoCivilDao;
 import br.com.cactus.cadastros.repository.PessoaDao;
+import br.com.cactus.cadastros.repository.PessoaFisicaDao;
+import br.com.cactus.cadastros.repository.PessoaJuridicaDao;
 import br.com.cactus.cadastros.util.jpa.Transactional;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
@@ -45,6 +47,10 @@ public class PessoaBean implements Serializable {
 	private PessoaDao pessoaDao;
 	@Inject
 	private EstadoCivilDao estadoCivilDao; 
+	@Inject
+	private PessoaFisicaDao pessoaFisicaDao;
+	@Inject
+	private PessoaJuridicaDao pessoaJuridicaDao;
 	
 	@PostConstruct
 	public void init(){
@@ -62,7 +68,13 @@ public class PessoaBean implements Serializable {
 		
 	@Transactional
 	public void salvar(){
-		if (pessoa.getId()  == null) {
+		if (pessoa.getId()  == null) {			
+			if(TipoPessoa.FISICA.equals(pessoa.getTipo())){
+				pessoaFisicaDao.salvar(pessoaFisica);
+			}
+			if (TipoPessoa.JURIDICA.equals(pessoa.getTipo())){
+				pessoaJuridicaDao.salvar(pessoaJuridica);
+			}
 			pessoaDao.salvar(pessoa);
 			FacesUtil.addInfoMessage("Pessoa salvo com sucesso!");
 		} else {
@@ -131,9 +143,8 @@ public class PessoaBean implements Serializable {
 			System.out.println("Chamou o fechar");
 		}
 	}
-	
-	
-	//getter and setter
+
+	//GETTER AND SETTER
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -150,14 +161,6 @@ public class PessoaBean implements Serializable {
 		this.contato = contato;
 	}
 
-	public PessoaDao getPessoaDao() {
-		return pessoaDao;
-	}
-
-	public void setPessoaDao(PessoaDao pessoaDao) {
-		this.pessoaDao = pessoaDao;
-	}
-	
 	public Contato getContatoSelecionado() {
 		return contatoSelecionado;
 	}
@@ -201,10 +204,4 @@ public class PessoaBean implements Serializable {
 	public List<EstadoCivil> getListaEstadoCivil() {
 		return listaEstadoCivil;
 	}
-
-	public void setListaEstadoCivil(List<EstadoCivil> listaEstadoCivil) {
-		this.listaEstadoCivil = listaEstadoCivil;
-	}
-
-
 }
