@@ -5,14 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -27,7 +26,7 @@ public class PessoaJuridica implements Serializable {
     private String inscricaoMunicipal;    
     private String inscricaoEstadual;    
     private Date dataConstituicao;    
-    private TipoRegime tipoRegime;    
+    private String tipoRegime;    
     private String tipoCrt;    
     private String suframa;    
     private Pessoa pessoa;
@@ -43,7 +42,7 @@ public class PessoaJuridica implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 14)
+	@Column(name = "CNPJ", nullable = false, length = 14)
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -53,7 +52,7 @@ public class PessoaJuridica implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(nullable = false, length = 150)
+	@Column(name = "FANTASIA", nullable = false, length = 150)
 	public String getFantasia() {
 		return fantasia;
 	}
@@ -89,7 +88,7 @@ public class PessoaJuridica implements Serializable {
 		this.dataConstituicao = dataConstituicao;
 	}	
 	
-	@Column(nullable = false, length = 9)
+	@Column(name = "SUFRAMA", nullable = false, length = 9)
 	public String getSuframa() {
 		return suframa;
 	}
@@ -99,26 +98,25 @@ public class PessoaJuridica implements Serializable {
 	}
 	
 	@OneToOne
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "ID_PESSOA", nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
 	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TIPO_REGIME", nullable = false)
-	public TipoRegime getTipoRegime() {
+	}	
+		
+	@Column(name = "TIPO_REGIME", nullable = false, length = 20)
+	public String getTipoRegime() {
 		return tipoRegime;
 	}
 
-	public void setTipoRegime(TipoRegime tipoRegime) {
+	public void setTipoRegime(String tipoRegime) {
 		this.tipoRegime = tipoRegime;
 	}
-	
-	@Column(name = "CRT", nullable = false)
+
+	@Column(name = "CRT", nullable = false, length = 20)
 	public String getTipoCrt() {
 		return tipoCrt;
 	}

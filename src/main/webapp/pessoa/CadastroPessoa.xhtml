@@ -222,48 +222,40 @@
 							rendered="#{pessoaBean.pessoa.tipo == 'JURIDICA'}">
 							<p:outputLabel value="CNPJ:" for="cnpj" />
 							<p:inputText id="cnpj" size="14" maxlength="14"
-								value="#{pessoaJuridicaBean.pessoaJuridica.cnpj}" />
+								value="#{pessoaBean.pessoaJuridica.cnpj}" />
 
 							<p:outputLabel value="Nome Fantasia:" for="nomeFantasia" />
 							<p:inputText id="nomeFantasia" size="30" maxlength="150"
-								value="#{pessoaJuridicaBean.pessoaJuridica.fantasia}" />
+								value="#{pessoaBean.pessoaJuridica.fantasia}" />
 
 							<p:outputLabel value="Inscrição Municipal:"
 								for="inscricaoMunicipal" />
 							<p:inputText id="inscricaoMunicipal" size="20" maxlength="30"
-								value="#{pessoaJuridicaBean.pessoaJuridica.inscricaoMunicipal}" />
+								value="#{pessoaBean.pessoaJuridica.inscricaoMunicipal}" />
 
 							<p:outputLabel value="Inscrição Estadual:"
 								for="inscricaoEstadual" />
 							<p:inputText id="inscricaoEstadual" size="20" maxlength="30"
-								value="#{pessoaJuridicaBean.pessoaJuridica.inscricaoEstadual}" />
+								value="#{pessoaBean.pessoaJuridica.inscricaoEstadual}" />
 
 							<p:outputLabel value="Data da Constituição:"
 								for="dataConstituicao" />
 							<p:calendar
-								value="#{pessoaJuridicaBean.pessoaJuridica.dataConstituicao}"
+								value="#{pessoaBean.pessoaJuridica.dataConstituicao}"
 								pattern="dd/MM/yyyy" id="dataConstituicao" size="10"
 								maxlength="10" />
 
 							<p:outputLabel value="Tipo do Regime:" for="tipoRegime" />
-							<p:selectOneRadio id="tipoRegime"
-								value="#{pessoaJuridicaBean.pessoaJuridica.tipoRegime}">
-								<f:selectItems value="#{pessoaJuridicaBean.tiposRegimes}"
-									var="tipoRegime" itemLabel="#{tipoRegime.descricao}"
-									itemValue="#{tipoRegime}" />
-							</p:selectOneRadio>
+							<p:inputText id="tipoRegime" size="20" maxlength="20"
+								value="#{pessoaBean.pessoaJuridica.tipoRegime}" />
 
 							<p:outputLabel value="CRT:" for="tipoCrt" />
-							<p:selectOneRadio id="tipoCrt"
-								value="#{pessoaJuridicaBean.pessoaJuridica.tipoCrt}">
-								<f:selectItems value="#{pessoaJuridicaBean.tiposCrts}"
-									var="tipoCrt" itemLabel="#{tipoCrt.descricao}"
-									itemValue="#{tipoCrt}" />
-							</p:selectOneRadio>
+							<p:inputText id="tipoCrt" size="20" maxlength="20"
+								value="#{pessoaBean.pessoaJuridica.tipoCrt}" />
 
 							<p:outputLabel value="Suframa:" for="suframa" />
 							<p:inputText id="suframa" size="20" maxlength="9"
-								value="#{pessoaJuridicaBean.pessoaJuridica.suframa}" />
+								value="#{pessoaBean.pessoaJuridica.suframa}" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:tab>
