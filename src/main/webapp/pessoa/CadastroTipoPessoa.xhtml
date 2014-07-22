@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+<!-- RADIO - PESSOA FISICA E JURIDICA -->
+<h:panelGrid columns="1" cellpadding="10">
+	<p:selectOneRadio id="tipo" value="#{pessoaBean.pessoa.tipo}">
+		<p:ajax event="change" process="@this "
+			update="panelPessoaFisica panelPessoaJuridica" />
+		<f:selectItems value="#{pessoaBean.tiposPessoas}" var="tipoPessoa"
+			itemLabel="#{tipoPessoa.descricao}" itemValue="#{tipoPessoa}" />
+	</p:selectOneRadio>
+
+</h:panelGrid>
+
+<!-- PESSOA FÍSICA -->
+<h:panelGrid id="panelPessoaFisica">
+	<h:panelGrid columns="6"
+		rendered="#{pessoaBean.pessoa.tipo == 'FISICA'}">
+
+		<p:outputLabel value="CPF:" for="cpf" />
+		<p:inputText id="cpf" size="11" maxlength="11"
+			value="#{pessoaBean.pessoaFisica.cpf}" />
+
+		<p:outputLabel value="Data Nascimento:" for="dataNascimento" />
+		<p:calendar value="#{pessoaBean.pessoaFisica.dataNascimento}"
+			pattern="dd/MM/yyyy" id="dataNascimento" size="10" maxlength="10" />
+
+		<p:outputLabel value="Sexo:" for="tipoSexo" />
+		<p:selectOneMenu id="tipoSexo"
+			value="#{pessoaBean.pessoaFisica.tipoSexo}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{pessoaBean.tiposSexos}" var="tipoSexo"
+				itemLabel="#{tipoSexo.descricao}" itemValue="#{tipoSexo}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Estado Civil:" for="estadoCivil" />
+		<p:selectOneMenu id="estadoCivil"
+			value="#{pessoaBean.pessoaFisica.estadoCivil}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems var="estadoCivil"
+				value="#{pessoaBean.listaEstadoCivil}"
+				itemLabel="#{estadoCivil.nome}" itemValue="#{estadoCivil}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Raça:" for="tipoRaca" />
+		<p:selectOneMenu id="tipoRaca"
+			value="#{pessoaBean.pessoaFisica.tipoRaca}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{pessoaBean.tiposRacas}" var="tipoRaca"
+				itemLabel="#{tipoRaca.descricao}" itemValue="#{tipoRaca}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Tipo Sanguínio" for="tipoSangue" />
+		<p:selectOneMenu id="tipoSangue"
+			value="#{pessoaBean.pessoaFisica.tipoSangue}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{pessoaBean.tiposSangues}" var="tipoSangue"
+				itemLabel="#{tipoSangue.descricao}" itemValue="#{tipoSangue}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Natural:" for="naturalidade" />
+		<p:inputText id="naturalidade" size="20" maxlength="100"
+			value="#{pessoaBean.pessoaFisica.naturalidade}" />
+
+		<p:outputLabel value="Nacionalidade:" for="nacionalidade" />
+		<p:inputText id="nacionalidade" size="20" maxlength="100"
+			value="#{pessoaBean.pessoaFisica.nacionalidade}" />
+
+		<p:outputLabel value="Nome Mãe:" for="nomeMae" />
+		<p:inputText id="nomeMae" size="30" maxlength="100"
+			value="#{pessoaBean.pessoaFisica.nomeMae}" />
+
+		<p:outputLabel value="Nome Pai:" for="nomePai" />
+		<p:inputText id="nomePai" size="30" maxlength="100"
+			value="#{pessoaBean.pessoaFisica.nomePai}" />
+
+		<p:outputLabel value="RG:" for="rg" />
+		<p:inputText id="rg" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaFisica.rg}" />
+
+		<p:outputLabel value="Orgão RG:" for="orgaoRg" />
+		<p:inputText id="orgaoRg" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaFisica.orgaoRg}" />
+
+		<p:outputLabel value="Data Emissão RG:" for="dataEmissaoRg" />
+		<p:calendar value="#{pessoaBean.pessoaFisica.dataEmissaoRg}"
+			pattern="dd/MM/yyyy" id="dataEmissaoRg" size="10" maxlength="10" />
+
+		<p:outputLabel value="CHN Número:" for="cnhNumero" />
+		<p:inputText id="cnhNumero" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaFisica.cnhNumero}" />
+
+		<p:outputLabel value="CHN Categoria:" for="cnhCategoria" />
+		<p:inputText id="cnhCategoria" size="20" maxlength="2"
+			value="#{pessoaBean.pessoaFisica.cnhCategoria}" />
+
+		<p:outputLabel value="CHN Vencimento:" for="cnhVencimento" />
+		<p:calendar value="#{pessoaBean.pessoaFisica.cnhVencimento}"
+			pattern="dd/MM/yyyy" id="cnhVencimento" size="10" maxlength="10" />
+
+		<p:outputLabel value="Título Eleitoral Número:"
+			for="tituloEleitoralNumero" />
+		<p:inputText id="tituloEleitoralNumero" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaFisica.tituloEleitoralNumero}" />
+
+		<p:outputLabel value="Título Eleitoral Zona:"
+			for="tituloEleitoralZona" />
+		<p:inputText id="tituloEleitoralZona" size="20" maxlength="10"
+			value="#{pessoaBean.pessoaFisica.tituloEleitoralZona}" />
+
+		<p:outputLabel value="Título Eleitoral Seção:"
+			for="tituloEleitoralSecao" />
+		<p:inputText id="tituloEleitoralSecao" size="20" maxlength="10"
+			value="#{pessoaBean.pessoaFisica.tituloEleitoralSecao}" />
+
+		<p:outputLabel value="Reservista Número:" for="reservistaNumero" />
+		<p:inputText id="reservistaNumero" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaFisica.reservistaNumero}" />
+
+		<p:outputLabel value="Reservista Categoria:" for="reservistaCategoria" />
+		<p:inputText id="reservistaCategoria" size="20" maxlength="10"
+			value="#{pessoaBean.pessoaFisica.reservistaCategoria}" />
+	</h:panelGrid>
+</h:panelGrid>
+
+<!-- PESSOA JURIDICA -->
+<h:panelGrid id="panelPessoaJuridica">
+	<h:panelGrid columns="6"
+		rendered="#{pessoaBean.pessoa.tipo == 'JURIDICA'}">
+		<p:outputLabel value="CNPJ:" for="cnpj" />
+		<p:inputText id="cnpj" size="14" maxlength="14"
+			value="#{pessoaBean.pessoaJuridica.cnpj}" />
+
+		<p:outputLabel value="Nome Fantasia:" for="nomeFantasia" />
+		<p:inputText id="nomeFantasia" size="30" maxlength="150"
+			value="#{pessoaBean.pessoaJuridica.fantasia}" />
+
+		<p:outputLabel value="Inscrição Municipal:" for="inscricaoMunicipal" />
+		<p:inputText id="inscricaoMunicipal" size="20" maxlength="30"
+			value="#{pessoaBean.pessoaJuridica.inscricaoMunicipal}" />
+
+		<p:outputLabel value="Inscrição Estadual:" for="inscricaoEstadual" />
+		<p:inputText id="inscricaoEstadual" size="20" maxlength="30"
+			value="#{pessoaBean.pessoaJuridica.inscricaoEstadual}" />
+
+		<p:outputLabel value="Data da Constituição:" for="dataConstituicao" />
+		<p:calendar value="#{pessoaBean.pessoaJuridica.dataConstituicao}"
+			pattern="dd/MM/yyyy" id="dataConstituicao" size="10" maxlength="10" />
+
+		<p:outputLabel value="Tipo do Regime:" for="tipoRegime" />
+		<p:inputText id="tipoRegime" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaJuridica.tipoRegime}" />
+
+		<p:outputLabel value="CRT:" for="tipoCrt" />
+		<p:inputText id="tipoCrt" size="20" maxlength="20"
+			value="#{pessoaBean.pessoaJuridica.tipoCrt}" />
+
+		<p:outputLabel value="Suframa:" for="suframa" />
+		<p:inputText id="suframa" size="20" maxlength="9"
+			value="#{pessoaBean.pessoaJuridica.suframa}" />
+	</h:panelGrid>
+</h:panelGrid>
+
+</html>

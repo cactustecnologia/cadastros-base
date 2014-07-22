@@ -59,17 +59,18 @@ public class PessoaBean implements Serializable {
 		contato = new Contato();
 		endereco = new Endereco();
 		pessoaFisica = new PessoaFisica();
-		
 	}
 		
 	@Transactional
 	public void salvar(){
 		if (pessoa.getId()  == null) {	
-			pessoaDao.salvar(pessoa);
+			this.pessoa = pessoaDao.salvar(pessoa);
 			if(TipoPessoa.FISICA.equals(pessoa.getTipo())){
+				this.pessoaFisica.setPessoa(pessoa);
 				pessoaFisicaDao.salvar(pessoaFisica);
 			}
 			if (TipoPessoa.JURIDICA.equals(pessoa.getTipo())){
+				this.pessoaJuridica.setPessoa(pessoa);
 				pessoaJuridicaDao.salvar(pessoaJuridica);
 			}			
 			FacesUtil.addInfoMessage("Pessoa salvo com sucesso!");
