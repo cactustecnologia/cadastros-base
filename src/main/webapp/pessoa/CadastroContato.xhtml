@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<p:commandButton value="Adicionar Contato" style="margin-top: 20px"
+	update="inclusaoContatoPanel"
+	onclick="inclusaoContatoDialog.show(); return false;" />
+
+<p:dataTable id="pessoaContatoTable"
+	value="#{pessoaBean.pessoa.contatos}" var="contato" paginator="true"
+	rows="20" emptyMessage="Nenhum contato adicionado!"
+	paginatorAlwaysVisible="false" paginatorPosition="bottom"
+	style="margin-top:5px;">
+
+	<p:column headerText="Nome">
+		<h:outputText value="#{contato.nome}" />
+	</p:column>
+	<p:column headerText="Email" width="100">
+		<h:outputText value="#{contato.email}" />
+	</p:column>
+	<p:column headerText="Fone Comercial" width="300">
+		<h:outputText value="#{contato.foneComercial}" />
+	</p:column>
+	<p:column headerText="Fone Residencial" width="150">
+		<h:outputText value="#{contato.foneResidencial}" />
+	</p:column>
+	<p:column headerText="Celular">
+		<h:outputText value="#{contato.foneCelular}" />
+	</p:column>
+	<p:column style="width: 100px; text-align: center">
+		<p:commandButton icon="ui-icon-pencil" title="Editar">
+		</p:commandButton>
+		<p:commandButton icon="ui-icon-trash">
+		</p:commandButton>
+	</p:column>
+</p:dataTable>
+
+
+<p:dialog header="Inclusão de Contato" id="dialogContato"
+	widgetVar="inclusaoContatoDialog" modal="true" resizable="false">
+	<p:ajax event="close"
+		update="inclusaoContatoPanel msgContato dialogContato"
+		listener="#{pessoaBean.handleClose}" />
+	<h:panelGroup id="inclusaoContatoPanel">
+		<p:messages id="msgContato" closable="true" />
+
+		<p:panelGrid columns="2">
+			<p:outputLabel for="nomeContato" value="Nome:" />
+			<p:inputText id="nomeContato" size="55"
+				value="#{pessoaBean.contato.nome}" />
+
+			<p:outputLabel value="Email:" for="emailContato" />
+			<p:inputText id="emailContato" size="55"
+				value="#{pessoaBean.contato.email}" />
+
+			<p:outputLabel value="Fone comercial" for="foneComercial" />
+			<p:inputText id="foneComercial"
+				value="#{pessoaBean.contato.foneComercial}" />
+
+			<p:outputLabel value="Fone residencial" for="foneResidencial" />
+			<p:inputText id="foneResidencial"
+				value="#{pessoaBean.contato.foneResidencial}" />
+
+			<p:outputLabel value="Fone celular" for="foneCelular" />
+			<p:inputText id="foneCelular"
+				value="#{pessoaBean.contato.foneCelular}" />
+		</p:panelGrid>
+
+		<p:commandButton value="Incluir" process="@this inclusaoContatoPanel"
+			action="#{pessoaBean.adicionaContato}"
+			update="msgContato :frmPessoa:tabPessoa:pessoaContatoTable inclusaoContatoPanel"
+			oncomplete="tratarInclusaoContato(args);" />
+	</h:panelGroup>
+</p:dialog>
+
+<script>
+	function tratarInclusaoContato(args) {
+		if (!args.validationFailed) {
+			inclusaoContatoDialog.hide();
+		}
+	}
+</script>
+</html>

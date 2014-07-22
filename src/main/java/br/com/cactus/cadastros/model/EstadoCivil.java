@@ -42,12 +42,14 @@ public class EstadoCivil implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome.toUpperCase();
 	}
-	
-		public String getDescricao() {
+
+	@NotBlank
+	public String getDescricao() {
 		return descricao;
 	}
-	
+
 	public void setDescricao(String descricao) {
-		this.descricao = descricao.toUpperCase();
-	}    
+		this.descricao = descricao;
+	}
+
 }
