@@ -2,11 +2,15 @@ package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.primefaces.event.CloseEvent;
+import org.primefaces.model.LazyDataModel;
+
 import br.com.cactus.cadastros.model.Contato;
 import br.com.cactus.cadastros.model.Endereco;
 import br.com.cactus.cadastros.model.EstadoCivil;
@@ -31,6 +35,7 @@ public class PessoaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Pessoa pessoa;
+	private Pessoa pessoaSelecionada;
 	private Contato contato;
 	private Contato contatoSelecionado;
 	private Endereco endereco;
@@ -46,6 +51,7 @@ public class PessoaBean implements Serializable {
 	private PessoaFisicaDao pessoaFisicaDao;
 	@Inject
 	private PessoaJuridicaDao pessoaJuridicaDao;
+	private LazyDataModel<Pessoa> lazyModel;
 	
 	@PostConstruct
 	public void init(){
@@ -139,6 +145,10 @@ public class PessoaBean implements Serializable {
 			System.out.println("Chamou o fechar");
 		}
 	}
+	
+	public void preparaAlterar(){
+		this.setPessoa(pessoaSelecionada);
+	}
 
 	//GETTER AND SETTER
 	public Pessoa getPessoa() {
@@ -200,4 +210,13 @@ public class PessoaBean implements Serializable {
 	public List<EstadoCivil> getListaEstadoCivil() {
 		return listaEstadoCivil;
 	}
+
+	public LazyDataModel<Pessoa> getLazyModel() {
+		return lazyModel;
+	}
+
+	public void setLazyModel(LazyDataModel<Pessoa> lazyModel) {
+		this.lazyModel = lazyModel;
+	}
+
 }

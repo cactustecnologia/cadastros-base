@@ -65,12 +65,12 @@
 		<h:panelGrid columns="4">
 			<p:outputLabel for="logradouroEndereco" value="Logradouro:" />
 			<p:inputText id="logradouroEndereco" size="30"
-				value="#{pessoaBean.endereco.logradouro}" />
+				value="#{pessoaBean.endereco.logradouro}" required="true" />
 
 
 			<p:outputLabel for="numeroEndereco" value="Número:" />
 			<p:inputText id="numeroEndereco" size="10"
-				value="#{pessoaBean.endereco.numero}" />
+				value="#{pessoaBean.endereco.numero}" required="true" />
 
 			<p:outputLabel for="complementoEndereco" value="Complemento:" />
 			<p:inputText id="complementoEndereco" size="30"
@@ -78,23 +78,23 @@
 
 			<p:outputLabel for="bairroEndereco" value="Bairro:" />
 			<p:inputText id="bairroEndereco" size="30"
-				value="#{pessoaBean.endereco.bairro}" />
+				value="#{pessoaBean.endereco.bairro}" required="true" />
 
 			<p:outputLabel for="cidadeEndereco" value="Cidade:" />
 			<p:inputText id="cidadeEndereco" size="30"
-				value="#{pessoaBean.endereco.cidade}" />
+				value="#{pessoaBean.endereco.cidade}" required="true" />
 
 			<p:outputLabel for="cepEndereco" value="CEP:" />
 			<p:inputText id="cepEndereco" size="10"
-				value="#{pessoaBean.endereco.cep}" />
+				value="#{pessoaBean.endereco.cep}" required="true" />
 
 			<p:outputLabel for="municipioEndereco" value="Município:" />
 			<p:inputText id="municipioEndereco" size="30"
-				value="#{pessoaBean.endereco.municipioIbge}" />
+				value="#{pessoaBean.endereco.municipioIbge}" required="true" />
 
 			<p:outputLabel for="ufEndereco" value="UF:" />
 			<p:inputText id="ufEndereco" size="30"
-				value="#{pessoaBean.endereco.uf}" />
+				value="#{pessoaBean.endereco.uf}" required="true" />
 
 			<p:outputLabel for="foneEndereco" value="Fone:" />
 			<p:inputText id="foneEndereco" size="10"
@@ -106,7 +106,7 @@
 
 			<p:outputLabel for="principalEndereco" value="Principal:" />
 			<p:selectOneMenu id="principalEndereco"
-				value="#{pessoaBean.endereco.principal}">
+				value="#{pessoaBean.endereco.principal}" required="true">
 				<f:selectItem itemLabel="Selecione" />
 				<f:selectItem itemLabel="Sim" itemValue="S" />
 				<f:selectItem itemLabel="Não" itemValue="N" />

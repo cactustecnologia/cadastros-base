@@ -49,11 +49,11 @@
 		<p:panelGrid columns="2">
 			<p:outputLabel for="nomeContato" value="Nome:" />
 			<p:inputText id="nomeContato" size="55"
-				value="#{pessoaBean.contato.nome}" />
+				value="#{pessoaBean.contato.nome}" required="true"/>
 
 			<p:outputLabel value="Email:" for="emailContato" />
 			<p:inputText id="emailContato" size="55"
-				value="#{pessoaBean.contato.email}" />
+				value="#{pessoaBean.contato.email}" required="true" />
 
 			<p:outputLabel value="Fone comercial" for="foneComercial" />
 			<p:inputText id="foneComercial"

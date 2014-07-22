@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+			<p:dataTable style="margin-top: 15px;" 
+					id="PesquisaPessoaTable" value="#{pessoaBean.lazyModel}" var="pesquisaPessoa" 
+					paginator="true" rows="5"
+                    rowKey="#{pesquisaPessoa.id}" selectionMode="single"                     
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    paginatorAlwaysVisible="false" paginatorPosition="bottom"                    
+                    lazy="true" rowsPerPageTemplate="5,10,15">
+				<p:column headerText="Nome">
+					<h:outputText value="#{pesquisaPessoa.nome}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{pesquisaPessoa.email}" />
+				</p:column>
+				<p:column style="width: 100px; text-align: center">
+					<p:commandButton 
+						icon="ui-icon-pencil" title="Editar"
+						action="#{pessoaBean.preparaAlterar}"
+						oncomplete="inclusaoPesquisaPessoaDialog.show()"
+						process="@this" update=":frmPesquisa:inclusaoPesquisaPessoaPanel">
+						<f:setPropertyActionListener target="#{pessoaBean.pessoaSelecionada}"
+							value="#{pesquisaPessoa}" />
+					</p:commandButton>
+					
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
+						process="@this" 
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener target="#{pessoaBean.pessoaSelecionada}"
+							value="#{atividadeForCli}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+</html>
