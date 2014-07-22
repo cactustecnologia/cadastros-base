@@ -2,14 +2,11 @@ package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.primefaces.event.CloseEvent;
-
 import br.com.cactus.cadastros.model.Contato;
 import br.com.cactus.cadastros.model.Endereco;
 import br.com.cactus.cadastros.model.EstadoCivil;
