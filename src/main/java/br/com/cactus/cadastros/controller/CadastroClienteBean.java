@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.CloseEvent;
 import org.primefaces.model.LazyDataModel;
 
 import br.com.cactus.cadastros.model.AtividadeForCli;
@@ -50,6 +51,10 @@ public class CadastroClienteBean implements Serializable {
 	
 	public void limpar(){
 		this.cliente = new Cliente();
+		this.limparFiltroAtividade();
+	}
+	
+	public void limparFiltroAtividade(){
 		this.filtroAtividade = new AtividadeForCliFilter();
 	}
 	
@@ -70,6 +75,12 @@ public class CadastroClienteBean implements Serializable {
 	public void selecionarAtividade(){
 		this.cliente.setAtividadeForCli(atividadeSelecionada);
 		System.out.println("Atividade selecionada: " + this.cliente.getAtividadeForCli().getNome());
+	}
+	
+	public void handleAtividadeClose(CloseEvent event) {
+		filtroAtividade = new AtividadeForCliFilter();
+		System.out.println("chamou fechar");
+		
 	}
 	
 	//GETTER AND SETTER
