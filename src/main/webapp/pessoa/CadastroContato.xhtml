@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 
@@ -49,22 +50,27 @@
 		<p:panelGrid columns="2">
 			<p:outputLabel for="nomeContato" value="Nome:" />
 			<p:inputText id="nomeContato" size="55"
-				value="#{pessoaBean.contato.nome}" required="true"/>
+				value="#{pessoaBean.contato.nome}" required="true" />
 
 			<p:outputLabel value="Email:" for="emailContato" />
 			<p:inputText id="emailContato" size="55"
-				value="#{pessoaBean.contato.email}" required="true" />
+				value="#{pessoaBean.contato.email}" required="true"
+				validatorMessage="Formato do E-mail Inválido">
+				<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</p:inputText>
+			<p:message for="emailContato" />
 
 			<p:outputLabel value="Fone comercial" for="foneComercial" />
-			<p:inputText id="foneComercial"
+			<p:inputMask mask="99 9999-9999" id="foneComercial"
 				value="#{pessoaBean.contato.foneComercial}" />
 
 			<p:outputLabel value="Fone residencial" for="foneResidencial" />
-			<p:inputText id="foneResidencial"
+			<p:inputMask mask="99 9999-9999" id="foneResidencial"
 				value="#{pessoaBean.contato.foneResidencial}" />
 
 			<p:outputLabel value="Fone celular" for="foneCelular" />
-			<p:inputText id="foneCelular"
+			<p:inputMask mask="99 99999-9999" id="foneCelular"
 				value="#{pessoaBean.contato.foneCelular}" />
 		</p:panelGrid>
 

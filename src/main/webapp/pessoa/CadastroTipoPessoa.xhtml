@@ -22,7 +22,7 @@
 		rendered="#{pessoaBean.pessoa.tipo == 'FISICA'}">
 
 		<p:outputLabel value="CPF:" for="cpf" />
-		<p:inputText id="cpf" size="11" maxlength="11"
+		<p:inputMask mask="999.999.999-99" id="cpf" size="11" maxlength="11"
 			value="#{pessoaBean.pessoaFisica.cpf}" />
 
 		<p:outputLabel value="Data Nascimento:" for="dataNascimento" />
@@ -131,8 +131,9 @@
 <h:panelGrid id="panelPessoaJuridica">
 	<h:panelGrid columns="6"
 		rendered="#{pessoaBean.pessoa.tipo == 'JURIDICA'}">
+		
 		<p:outputLabel value="CNPJ:" for="cnpj" />
-		<p:inputText id="cnpj" size="14" maxlength="14"
+		<p:inputMask mask="99.999.999/9999-99" id="cnpj" size="14" maxlength="14"
 			value="#{pessoaBean.pessoaJuridica.cnpj}" />
 
 		<p:outputLabel value="Nome Fantasia:" for="nomeFantasia" />

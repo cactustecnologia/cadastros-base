@@ -57,7 +57,7 @@ public class PessoaBean implements Serializable {
 	public void init(){
 		limpar();
 		this.listarEstadoCivil();
-		filtro = new PessoaFisicaFilter();
+		filtro = new PessoaFisicaFilter();		
 		filtroJuridica = new PessoaJuridicaFilter();
 		pesquisar();
 		pesquisarJuridica();

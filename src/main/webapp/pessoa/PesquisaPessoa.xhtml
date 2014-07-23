@@ -5,15 +5,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Pesquisa Cliente</ui:define>
+	<ui:define name="titulo">Pesquisa Pessoa</ui:define>
 
 	<ui:define name="corpo">
-		<h1>Pesquisa Cliente</h1>
+		<h1>Pesquisa Pessoa</h1>
 		<h:form id="frmPesquisa">
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar" />
-					<p:button value="Limpar" outcome="/pessoa/PesquisaPessoa" />
+					<p:commandButton value="Pesquisar"
+						update=":frmPesquisa:inclusaoPessoaPanel"
+						onclick="pesquisaPessoaDialog.show(); return false;">
+					</p:commandButton>
+					<p:button value="Atualizar" outcome="/pessoa/PesquisaPessoa" />
 				</p:toolbarGroup>
 
 				<p:toolbarGroup>
@@ -63,7 +66,8 @@
 							oncomplete="confirmacaoExclusaoFisica.show()" process="@this"
 							update=":frmPesquisa:confirmacaoExclusaoFisicaDialog">
 							<f:setPropertyActionListener
-								target="#{pessoaBean.pessoaFisicaSelecionada}" value="#{pessoaFisica}" />
+								target="#{pessoaBean.pessoaFisicaSelecionada}"
+								value="#{pessoaFisica}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -117,7 +121,8 @@
 							oncomplete="confirmacaoExclusaoJuridica.show()" process="@this"
 							update=":frmPesquisa:confirmacaoExclusaoJuridicaDialog">
 							<f:setPropertyActionListener
-								target="#{pessoaBean.pessoaJuridicaSelecionada}" value="#{pessoaJuridica}" />
+								target="#{pessoaBean.pessoaJuridicaSelecionada}"
+								value="#{pessoaJuridica}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -134,6 +139,90 @@
 						update=":frmPesquisa:panelPessoaJuridica" />
 				</p:confirmDialog>
 			</h:panelGrid>
+
+			<p:dialog id="inclusao" header="Inclusão de Pessoa"
+				widgetVar="inclusaoPessoaDialog" modal="true" resizable="false">
+				<p:ajax event="close" update="inclusaoPessoaPanel"
+					listener="#{pessoaBean.handleClose}" />
+				<h:panelGroup id="inclusaoPessoaPanel">
+					<p:messages id="msgPessoa" closable="true" />
+
+					<p:panelGrid columns="2">
+						<p:outputLabel for="cpfPessoa" value="CPF" />
+						<p:inputText id="cpfPessoa" size="40"
+							value="#{pessoaBean.pessoaFisica.cpf}" />
+							
+					</p:panelGrid>
+
+					<p:commandButton value="Incluir" action="#{pessoaBean.salvar}"
+						update="inclusaoPessoaPanel panelPessoaJuridica" />
+
+
+					<p:commandButton value="Fechar" action="#{pessoaBean.limpar}"
+						update="inclusaoPessoaPanel" process="@this"
+						oncomplete="inclusaoPessoaDialog.hide(); return false;" />
+				</h:panelGroup>
+
+
+				<script>
+					function tratarInclusaoPessoa(args) {
+						if (!args.validationFailed) {
+							inclusaoPessoaDialog.hide();
+						}
+					}
+				</script>
+			</p:dialog>
+
+
+			<p:dialog id="pesquisa" header="Pesquisa de Pessoa"
+				widgetVar="pesquisaPessoaDialog" modal="true" resizable="false">
+				<p:ajax event="close" update="pesquisaPessoaPanel"
+					listener="#{pessoaBean.handleClose}" />
+				<h:panelGroup id="pesquisaPessoaPanel">
+					<p:messages id="msgPesquisaPessoa" closable="true" />
+
+					<p:selectOneRadio id="tipoPesquisa" value="#{pessoaBean.pessoa.tipo}">
+						<p:ajax event="change" process="@this "
+							update="painelFisica painelJuridica" />
+						<f:selectItems value="#{pessoaBean.tiposPessoas}" var="tipoPessoa"
+							itemLabel="#{tipoPessoa.descricao}" itemValue="#{tipoPessoa}" />
+					</p:selectOneRadio>
+					
+					<p:panelGrid columns="2" id="painelFisica"
+						style="width: 100%; margin-top: 20px"
+						columnClasses="rotulo, campo"
+						rendered="#{pessoaBean.pessoa.tipo == 'FISICA'}">
+						<p:outputLabel value="CPF" for="cpf" />
+						<p:inputText id="cpf" size="20" value="#{pessoaBean.filtro.cpf}" />
+					</p:panelGrid>
+					
+					<p:panelGrid columns="2" id="painelJuridica"
+						style="width: 100%; margin-top: 20px"
+						columnClasses="rotulo, campo"
+						rendered="#{pessoaBean.pessoa.tipo == 'JURIDICA'}">
+						<p:outputLabel value="CNPJ" for="cpfJuridica" />
+						<p:inputText id="cpfJuridica" size="20" value="#{pessoaBean.filtro.cpf}" />
+					</p:panelGrid>
+
+					<p:commandButton value="Pequisar" action="#{pessoaBean.pesquisar}"
+						update="inclusaoPessoaPanel panelPessoaJuridica pesquisa"
+						process="@this, cpf" />
+
+
+					<p:commandButton value="Fechar" action="#{pessoa.limpar}"
+						update="inclusaoPessoaPanel" process="@this"
+						oncomplete="pesquisaPessoaDialog.hide(); return false;" />
+				</h:panelGroup>
+
+
+				<script>
+					function tratarPesquisaPessoa(args) {
+						if (!args.validationFailed) {
+							pesquisaPessoaDialog.hide();
+						}
+					}
+				</script>
+			</p:dialog>
 
 		</h:form>
 	</ui:define>

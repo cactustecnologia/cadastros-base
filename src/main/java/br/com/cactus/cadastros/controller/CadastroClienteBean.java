@@ -1,7 +1,6 @@
 package br.com.cactus.cadastros.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
@@ -13,8 +12,6 @@ import org.primefaces.model.LazyDataModel;
 
 import br.com.cactus.cadastros.model.AtividadeForCli;
 import br.com.cactus.cadastros.model.Cliente;
-import br.com.cactus.cadastros.model.Pessoa;
-import br.com.cactus.cadastros.repository.PessoaDao;
 import br.com.cactus.cadastros.repository.filter.AtividadeForCliFilter;
 import br.com.cactus.cadastros.service.AtividadeForCliService;
 import br.com.cactus.cadastros.service.ClienteService;
@@ -31,9 +28,7 @@ public class CadastroClienteBean implements Serializable {
 	private LazyDataModel<AtividadeForCli> lazyAtividade;
 	private AtividadeForCliFilter filtroAtividade;
 	@Inject
-	private ClienteService clienteService;
-	@Inject
-	private PessoaDao pessoaDao;
+	private ClienteService clienteService;	
 	@Inject
 	private AtividadeForCliService atividadeService;
 		
@@ -66,12 +61,8 @@ public class CadastroClienteBean implements Serializable {
 	
 	public void pesquisarAtividade(){
 		lazyAtividade = atividadeService.filtrados(filtroAtividade);
-	}
-	
-	public List<Pessoa> completarPessoa(String nome){
-		return pessoaDao.porNome(nome);
-	}
-			
+	}	
+				
 	public void selecionarAtividade(){
 		this.cliente.setAtividadeForCli(atividadeSelecionada);
 		System.out.println("Atividade selecionada: " + this.cliente.getAtividadeForCli().getNome());

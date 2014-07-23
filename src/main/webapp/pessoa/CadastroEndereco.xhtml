@@ -85,7 +85,7 @@
 				value="#{pessoaBean.endereco.cidade}" required="true" />
 
 			<p:outputLabel for="cepEndereco" value="CEP:" />
-			<p:inputText id="cepEndereco" size="10"
+			<p:inputMask mask="99.999-999" id="cepEndereco" size="10"
 				value="#{pessoaBean.endereco.cep}" required="true" />
 
 			<p:outputLabel for="municipioEndereco" value="Município:" />
@@ -97,11 +97,11 @@
 				value="#{pessoaBean.endereco.uf}" required="true" />
 
 			<p:outputLabel for="foneEndereco" value="Fone:" />
-			<p:inputText id="foneEndereco" size="10"
+			<p:inputMask mask="99 9999-9999" id="foneEndereco" size="10"
 				value="#{pessoaBean.endereco.fone}" />
 
 			<p:outputLabel for="faxEndereco" value="Fax:" />
-			<p:inputText id="faxEndereco" size="10"
+			<p:inputMask mask="99 9999-9999" id="faxEndereco" size="10"
 				value="#{pessoaBean.endereco.fax}" />
 
 			<p:outputLabel for="principalEndereco" value="Principal:" />
