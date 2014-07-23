@@ -98,12 +98,8 @@
 				<p:inputText id="limiteCrediario" value="#{cadastroClienteBean.cliente.limiteCredito}" />
 				
 				<p:outputLabel value="Tipo Frete:" for="tipoFrete" />
-				<p:inputText id="tipoFrete" value="#{cadastroClienteBean.cliente.tipoFrete}" />
+				<p:inputText id="tipoFrete" value="#{cadastroClienteBean.cliente.tipoFrete}" />				
 				
-				<p:outputLabel value="Pessoa Teste" for="pessoaTeste" />
-				<p:autoComplete id="pessoaTeste" size="40" dropdown="true"
-		        	value="#{cadastroClienteBean.cliente.pessoa}" completeMethod="#{cadastroClienteBean.completarPessoa}"
-		        	var="pessoa" itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" forceSelection="true" />	        		
 			</p:panelGrid>
 			<p:panelGrid columns="1" 
 				style="width: 100%; margin-top: 3px; padding-right: 10px;" columnClasses="rotulo, campo">

@@ -256,7 +256,7 @@ public class PessoaFisica implements Serializable {
 	}
 	
 	@JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

@@ -64,9 +64,10 @@
 						icon="ui-icon-pencil" title="Selecionar"
 						action="#{cadastroClienteBean.selecionarAtividade}"					
 						process="@this"
-						update=":frmCliente:painel">	
+						update=":frmCliente:painel"
+						oncomplete="fecharListaAtividade(args)">	
 						<f:setPropertyActionListener target="#{cadastroClienteBean.atividadeSelecionada}"
-							value="#{atividadeForCli}" />					
+							value="#{atividadeForCli}" />											
 					</p:commandButton>				
 				</p:column>
 			</p:dataTable>		
