@@ -34,12 +34,16 @@
 			<h:panelGrid id="panelPessoaFisica" width="100%">
 				<p:dataTable rendered="#{pessoaBean.pessoa.tipo == 'FISICA'}"
 					style="margin-top: 15px;" id="pessoaFisicaTable"
-					value="#{pessoaBean.lazyModelFisica}" var="pessoaFisica" paginator="true"
-					rows="5" rowKey="#{pessoaFisica.id}" selectionMode="single"
+					value="#{pessoaBean.lazyModelFisica}" var="pessoaFisica"
+					paginator="true" rows="5" rowKey="#{pessoaFisica.id}"
+					selectionMode="single"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					paginatorAlwaysVisible="false" paginatorPosition="bottom"
 					lazy="true" rowsPerPageTemplate="5,10,15">
 
+					<p:column headerText="ID">
+						<h:outputText value="#{pessoaFisica.pessoa.id}" />
+					</p:column>
 					<p:column headerText="Nome">
 						<h:outputText value="#{pessoaFisica.pessoa.nome}" />
 					</p:column>
@@ -48,6 +52,9 @@
 					</p:column>
 					<p:column headerText="RG">
 						<h:outputText value="#{pessoaFisica.rg}" />
+					</p:column>
+					<p:column headerText="Fone">
+						<h:outputText value="#{pessoaFisica.pessoa.endereco.fone}" />
 					</p:column>
 
 					<p:column style="width: 100px; text-align: center">
@@ -62,7 +69,7 @@
 				</p:dataTable>
 
 				<p:confirmDialog header="Exclusão de Pessoa Física"
-					message="Tem certeza que deseja excluir a Pessoa Física #{pessoaBean.pessoaSelecionada.pessoaFisica.cpf} ?"
+					message="Tem certeza que deseja excluir a Pessoa Física #{pessoaBean.pessoaSelecionada.nome} ?"
 					widgetVar="confirmacaoExclusaoFisica"
 					id="confirmacaoExclusaoFisicaDialog">
 					<p:button value="Não"
@@ -78,18 +85,30 @@
 			<h:panelGrid id="panelPessoaJuridica" width="100%">
 				<p:dataTable rendered="#{pessoaBean.pessoa.tipo == 'JURIDICA'}"
 					style="margin-top: 15px;" id="pessoaJuridicaTable"
-					value="#{pessoaBean.lazyModelJuridica}" var="pessoaJuridica" paginator="true"
-					rows="5" rowKey="#{pessoaJuridica.id}" selectionMode="single"
+					value="#{pessoaBean.lazyModelJuridica}" var="pessoaJuridica"
+					paginator="true" rows="5" rowKey="#{pessoaJuridica.id}"
+					selectionMode="single"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					paginatorAlwaysVisible="false" paginatorPosition="bottom"
 					lazy="true" rowsPerPageTemplate="5,10,15">
 
-					
-					<p:column headerText="CNPJ">
+					<p:column headerText="ID">
+						<h:outputText value="#{pessoaJuridica.pessoa.id}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{pessoaJuridica.pessoa.nome}" />
+					</p:column>
+					<p:column headerText="CNPF">
 						<h:outputText value="#{pessoaJuridica.cnpj}" />
 					</p:column>
-					<p:column headerText="Fantasia">
+					<p:column headerText="Nome Fantasia">
 						<h:outputText value="#{pessoaJuridica.fantasia}" />
+					</p:column>
+					<p:column headerText="Inscrição Municipal">
+						<h:outputText value="#{pessoaJuridica.inscricaoMunicipal}" />
+					</p:column>
+					<p:column headerText="Inscrição Estadual">
+						<h:outputText value="#{pessoaJuridica.inscricaoEstadual}" />
 					</p:column>
 
 					<p:column style="width: 100px; text-align: center">

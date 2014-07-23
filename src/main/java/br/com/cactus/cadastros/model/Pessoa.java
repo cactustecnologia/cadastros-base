@@ -39,6 +39,7 @@ public class Pessoa implements Serializable {
     private TipoPessoa tipo;
     private PessoaFisica pessoaFisica;
     private PessoaJuridica pessoaJuridica;
+    private Endereco endereco;
     
     private List<Contato> contatos = new ArrayList<>();
     private List<Endereco> enderecos = new ArrayList<>();
@@ -182,6 +183,15 @@ public class Pessoa implements Serializable {
 
 	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
 		this.pessoaJuridica = pessoaJuridica;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "pessoa", cascade = CascadeType.ALL)
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override

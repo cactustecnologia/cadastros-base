@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -192,8 +193,8 @@ public class Endereco implements Serializable {
 		this.empresa = empresa;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
+    @OneToOne
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

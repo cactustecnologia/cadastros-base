@@ -58,6 +58,7 @@ public class PessoaBean implements Serializable {
 		filtro = new PessoaFisicaFilter();
 		filtroJuridica = new PessoaJuridicaFilter();
 		pesquisar();
+		pesquisarJuridica();
 	}
 	
 	public void limpar(){		
