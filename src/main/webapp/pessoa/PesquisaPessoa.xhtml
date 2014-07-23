@@ -63,7 +63,7 @@
 							oncomplete="confirmacaoExclusaoFisica.show()" process="@this"
 							update=":frmPesquisa:confirmacaoExclusaoFisicaDialog">
 							<f:setPropertyActionListener
-								target="#{pessoaBean.pessoaSelecionada}" value="#{pessoaFisica}" />
+								target="#{pessoaBean.pessoaFisicaSelecionada}" value="#{pessoaFisica}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -76,8 +76,8 @@
 						onclick="confirmacaoExclusaoFisica.hide(); return false;" />
 					<p:commandButton value="Sim"
 						oncomplete="confirmacaoExclusaoFisica.hide();"
-						action="#{pessoaBean.excluir}" process="@this"
-						update=":frmPesquisa:pessoaFisicaTable" />
+						action="#{pessoaBean.excluirFisica}" process="@this"
+						update=":frmPesquisa:panelPessoaFisica" />
 				</p:confirmDialog>
 			</h:panelGrid>
 
@@ -117,7 +117,7 @@
 							oncomplete="confirmacaoExclusaoJuridica.show()" process="@this"
 							update=":frmPesquisa:confirmacaoExclusaoJuridicaDialog">
 							<f:setPropertyActionListener
-								target="#{pessoaBean.pessoaSelecionada}" value="#{pessoaJuridica}" />
+								target="#{pessoaBean.pessoaJuridicaSelecionada}" value="#{pessoaJuridica}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -130,8 +130,8 @@
 						onclick="confirmacaoExclusaoJuridica.hide(); return false;" />
 					<p:commandButton value="Sim"
 						oncomplete="confirmacaoExclusaoJuridica.hide();"
-						action="#{pessoaBean.excluir}" process="@this"
-						update=":frmPesquisa:pessoaJuridicaTable" />
+						action="#{pessoaBean.excluirJuridica}" process="@this"
+						update=":frmPesquisa:panelPessoaJuridica" />
 				</p:confirmDialog>
 			</h:panelGrid>
 

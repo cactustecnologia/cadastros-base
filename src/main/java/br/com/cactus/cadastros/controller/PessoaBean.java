@@ -35,12 +35,14 @@ public class PessoaBean implements Serializable {
 
 	private Pessoa pessoa;
 	private Pessoa pessoaSelecionada;
+	private PessoaFisica pessoaFisica;
+	private PessoaFisica pessoaFisicaSelecionada;
+	private PessoaJuridica pessoaJuridica;
+	private PessoaJuridica pessoaJuridicaSelecionada;
 	private Contato contato;
 	private Contato contatoSelecionado;
 	private Endereco endereco;
-	private Endereco enderecoSelecionado;
-	private PessoaFisica pessoaFisica;
-	private PessoaJuridica pessoaJuridica;	
+	private Endereco enderecoSelecionado;		
 	private List<EstadoCivil> listaEstadoCivil;	
 	@Inject
 	private PessoaService pessoaService;
@@ -95,6 +97,20 @@ public class PessoaBean implements Serializable {
 		pessoaService.remover(pessoaSelecionada);
 		pesquisar();
 		FacesUtil.addInfoMessage("Pessoa " + pessoaSelecionada.getNome()
+				+ " excluída com sucesso!");
+	}
+	
+	public void excluirFisica(){
+		pessoaService.removerFisica(pessoaFisicaSelecionada);
+		pesquisar();
+		FacesUtil.addInfoMessage("Pessoa Física " + pessoaFisicaSelecionada.getCpf()
+				+ " excluída com sucesso!");
+	}
+	
+	public void excluirJuridica(){
+		pessoaService.removerJuridica(pessoaJuridicaSelecionada);
+		pesquisarJuridica();
+		FacesUtil.addInfoMessage("Pessoa Jurídica " + pessoaJuridicaSelecionada.getCnpj()
 				+ " excluída com sucesso!");
 	}
 		
@@ -159,6 +175,8 @@ public class PessoaBean implements Serializable {
 	
 	public void preparaAlterar(){
 		this.setPessoa(pessoaSelecionada);
+		this.setPessoaFisica(pessoaFisicaSelecionada);
+		this.setPessoaJuridica(pessoaJuridicaSelecionada);
 	}
 
 	//GETTER AND SETTER
@@ -261,4 +279,22 @@ public class PessoaBean implements Serializable {
 	public void setFiltroJuridica(PessoaJuridicaFilter filtroJuridica) {
 		this.filtroJuridica = filtroJuridica;
 	}
+
+	public PessoaFisica getPessoaFisicaSelecionada() {
+		return pessoaFisicaSelecionada;
+	}
+
+	public void setPessoaFisicaSelecionada(PessoaFisica pessoaFisicaSelecionada) {
+		this.pessoaFisicaSelecionada = pessoaFisicaSelecionada;
+	}
+
+	public PessoaJuridica getPessoaJuridicaSelecionada() {
+		return pessoaJuridicaSelecionada;
+	}
+
+	public void setPessoaJuridicaSelecionada(
+			PessoaJuridica pessoaJuridicaSelecionada) {
+		this.pessoaJuridicaSelecionada = pessoaJuridicaSelecionada;
+	}
+
 }

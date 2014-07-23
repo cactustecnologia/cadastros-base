@@ -83,6 +83,26 @@ public class PessoaService implements Serializable {
 		} catch (PersistenceException e) {
 			throw new NegocioException("Esta pessoa não pode ser excluída!");
 		}
+	}
+	
+	@Transactional
+	public void removerFisica(PessoaFisica pessoaFisica) {
+		try {
+			pessoaFisica = pessoaFisicaDao.pesquisarPorId(pessoaFisica.getId());
+			pessoaFisicaDao.excluir(pessoaFisica);
+		} catch (PersistenceException e) {
+			throw new NegocioException("Esta pessoa física não pode ser excluída!");
+		}
+	}	
+	
+	@Transactional
+	public void removerJuridica(PessoaJuridica pessoaJuridica) {
+		try {
+			pessoaJuridica = pessoaJuridicaDao.pesquisarPorId(pessoaJuridica.getId());
+			pessoaJuridicaDao.excluir(pessoaJuridica);
+		} catch (PersistenceException e) {
+			throw new NegocioException("Esta pessoa jurídica não pode ser excluída!");
+		}
 	}	
 	
 	//getter and setter
