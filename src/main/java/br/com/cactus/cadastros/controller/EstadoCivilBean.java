@@ -43,7 +43,7 @@ public class EstadoCivilBean implements Serializable {
 	public void salvar(){
 		civilService.salvar(estadoCivil);
 		limpar();
-		FacesUtil.addInfoMessage("Transação efetuada com sucesso.");
+		FacesUtil.addInfoMessage("Estado Civil salvo com sucesso!");
 	}
 	
 	public void pesquisar(){

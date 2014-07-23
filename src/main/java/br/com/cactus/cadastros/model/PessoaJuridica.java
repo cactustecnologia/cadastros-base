@@ -97,8 +97,8 @@ public class PessoaJuridica implements Serializable {
 		this.suframa = suframa;
 	}
 	
-	@OneToOne
 	@JoinColumn(name = "ID_PESSOA", nullable = false)
+	@OneToOne
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

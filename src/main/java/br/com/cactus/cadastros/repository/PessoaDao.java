@@ -1,13 +1,10 @@
 package br.com.cactus.cadastros.repository;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.NoResultException;
 
 import br.com.cactus.cadastros.model.Pessoa;
 
@@ -15,15 +12,21 @@ public class PessoaDao extends GenericRepositoryDaoImpl<Pessoa> implements Seria
 
 	private static final long serialVersionUID = 1L;
 	
-	private List<Criterion> params;	
-	private List<Pessoa> listaPessoas;
-	
-	public List<Pessoa> porNome(String nome){
-		params = new ArrayList<>();		
-		if(StringUtils.isNotBlank(nome)){
-			params.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+	public Pessoa guardar(Pessoa pessoa){
+		if(pessoa.getId() == null){
+			return this.salvar(pessoa);
+		}else{
+			return this.atualizar(pessoa);
 		}
-        listaPessoas = this.findByCriteria(params, null);
-		return listaPessoas;
 	}
+	
+	public Pessoa porNome(String nome){
+		try{
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("nome", nome);
+			return pesqParam("from Pessoa where upper(nome) = :nome", params);
+		} catch (NoResultException ex){
+			return null;
+		}
+	}	
 }

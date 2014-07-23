@@ -16,11 +16,12 @@
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/pessoa/CadastroPessoa" />
 					<p:commandButton value="Salvar" id="botaoSalvar"
-						process="@this painel tabPessoa:pessoa" action="#{pessoaBean.salvar}"
-						update="@form" />
+						process="@this painel tabPessoa:pessoa"
+						action="#{pessoaBean.salvar}" update="@form" />
 				</p:toolbarGroup>
+
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" />
+					<p:button value="Pesquisa" outcome="/pessoa/PesquisaPessoa" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -91,7 +92,7 @@
 				<p:tab id="pessoa" title="Informações do Tipo Pessoa">
 					<ui:include src="/pessoa/CadastroTipoPessoa.xhtml" />
 				</p:tab>
-				
+
 				<p:tab id="contato" title="Contatos">
 					<ui:include src="/pessoa/CadastroContato.xhtml" />
 				</p:tab>
@@ -100,10 +101,7 @@
 					<ui:include src="/pessoa/CadastroEndereco.xhtml" />
 				</p:tab>
 			</p:tabView>
-			
-			<p:dataTable id="TablePesquisaPessoa">
-				<ui:include src="/pessoa/PesquisaPessoa.xhtml" />
-			</p:dataTable>
+
 		</h:form>
 	</ui:define>
 </ui:composition>

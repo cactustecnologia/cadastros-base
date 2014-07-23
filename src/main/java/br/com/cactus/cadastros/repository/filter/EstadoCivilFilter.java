@@ -9,6 +9,7 @@ public class EstadoCivilFilter implements Serializable {
 	private String nome;
 	private String descricao;
 	
+	//getter and setter
 	public String getNome() {
 		return nome;
 	}

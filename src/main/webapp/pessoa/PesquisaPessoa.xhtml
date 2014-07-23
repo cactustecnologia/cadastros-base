@@ -1,38 +1,121 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-			<p:dataTable style="margin-top: 15px;" 
-					id="PesquisaPessoaTable" value="#{pessoaBean.lazyModel}" var="pesquisaPessoa" 
-					paginator="true" rows="5"
-                    rowKey="#{pesquisaPessoa.id}" selectionMode="single"                     
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    paginatorAlwaysVisible="false" paginatorPosition="bottom"                    
-                    lazy="true" rowsPerPageTemplate="5,10,15">
-				<p:column headerText="Nome">
-					<h:outputText value="#{pesquisaPessoa.nome}" />
-				</p:column>
-				<p:column headerText="Email">
-					<h:outputText value="#{pesquisaPessoa.email}" />
-				</p:column>
-				<p:column style="width: 100px; text-align: center">
-					<p:commandButton 
-						icon="ui-icon-pencil" title="Editar"
-						action="#{pessoaBean.preparaAlterar}"
-						oncomplete="inclusaoPesquisaPessoaDialog.show()"
-						process="@this" update=":frmPesquisa:inclusaoPesquisaPessoaPanel">
-						<f:setPropertyActionListener target="#{pessoaBean.pessoaSelecionada}"
-							value="#{pesquisaPessoa}" />
-					</p:commandButton>
+	<ui:define name="titulo">Pesquisa Cliente</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Pesquisa Cliente</h1>
+		<h:form id="frmPesquisa">
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" />
+					<p:button value="Limpar" outcome="/pessoa/PesquisaPessoa" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup>
+					<p:selectOneRadio id="tipo" value="#{pessoaBean.pessoa.tipo}">
+						<p:ajax event="change" process="@this "
+							update="panelPessoaFisica panelPessoaJuridica" />
+						<f:selectItems value="#{pessoaBean.tiposPessoas}" var="tipoPessoa"
+							itemLabel="#{tipoPessoa.descricao}" itemValue="#{tipoPessoa}" />
+					</p:selectOneRadio>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/pessoa/CadastroPessoa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<!-- PESSOA FÍSICA -->
+			<h:panelGrid id="panelPessoaFisica" width="100%">
+				<p:dataTable rendered="#{pessoaBean.pessoa.tipo == 'FISICA'}"
+					style="margin-top: 15px;" id="pessoaFisicaTable"
+					value="#{pessoaBean.lazyModelFisica}" var="pessoaFisica" paginator="true"
+					rows="5" rowKey="#{pessoaFisica.id}" selectionMode="single"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					paginatorAlwaysVisible="false" paginatorPosition="bottom"
+					lazy="true" rowsPerPageTemplate="5,10,15">
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{pessoaFisica.pessoa.nome}" />
+					</p:column>
+					<p:column headerText="CPF">
+						<h:outputText value="#{pessoaFisica.cpf}" />
+					</p:column>
+					<p:column headerText="RG">
+						<h:outputText value="#{pessoaFisica.rg}" />
+					</p:column>
+
+					<p:column style="width: 100px; text-align: center">
+
+						<p:commandButton icon="ui-icon-trash" title="Excluir"
+							oncomplete="confirmacaoExclusaoFisica.show()" process="@this"
+							update=":frmPesquisa:confirmacaoExclusaoFisicaDialog">
+							<f:setPropertyActionListener
+								target="#{pessoaBean.pessoaSelecionada}" value="#{pessoaFisica}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Exclusão de Pessoa Física"
+					message="Tem certeza que deseja excluir a Pessoa Física #{pessoaBean.pessoaSelecionada.pessoaFisica.cpf} ?"
+					widgetVar="confirmacaoExclusaoFisica"
+					id="confirmacaoExclusaoFisicaDialog">
+					<p:button value="Não"
+						onclick="confirmacaoExclusaoFisica.hide(); return false;" />
+					<p:commandButton value="Sim"
+						oncomplete="confirmacaoExclusaoFisica.hide();"
+						action="#{pessoaBean.excluir}" process="@this"
+						update=":frmPesquisa:pessoaFisicaTable" />
+				</p:confirmDialog>
+			</h:panelGrid>
+
+			<!-- PESSOA JURIDICA -->
+			<h:panelGrid id="panelPessoaJuridica" width="100%">
+				<p:dataTable rendered="#{pessoaBean.pessoa.tipo == 'JURIDICA'}"
+					style="margin-top: 15px;" id="pessoaJuridicaTable"
+					value="#{pessoaBean.lazyModelJuridica}" var="pessoaJuridica" paginator="true"
+					rows="5" rowKey="#{pessoaJuridica.id}" selectionMode="single"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					paginatorAlwaysVisible="false" paginatorPosition="bottom"
+					lazy="true" rowsPerPageTemplate="5,10,15">
+
 					
-					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="confirmacaoExclusao.show()"
-						process="@this" 
-						update=":frmPesquisa:confirmacaoExclusaoDialog">
-						<f:setPropertyActionListener target="#{pessoaBean.pessoaSelecionada}"
-							value="#{atividadeForCli}" />
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
-</html>
+					<p:column headerText="CNPJ">
+						<h:outputText value="#{pessoaJuridica.cnpj}" />
+					</p:column>
+					<p:column headerText="Fantasia">
+						<h:outputText value="#{pessoaJuridica.fantasia}" />
+					</p:column>
+
+					<p:column style="width: 100px; text-align: center">
+
+						<p:commandButton icon="ui-icon-trash" title="Excluir"
+							oncomplete="confirmacaoExclusaoJuridica.show()" process="@this"
+							update=":frmPesquisa:confirmacaoExclusaoJuridicaDialog">
+							<f:setPropertyActionListener
+								target="#{pessoaBean.pessoaSelecionada}" value="#{pessoaJuridica}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Exclusão de Pessoa Jurídica"
+					message="Tem certeza que deseja excluir a Pessoa Jurídica #{pessoaBean.pessoaSelecionada.pessoaJuridica.cnpj} ?"
+					widgetVar="confirmacaoExclusaoJuridica"
+					id="confirmacaoExclusaoJuridicaDialog">
+					<p:button value="Não"
+						onclick="confirmacaoExclusaoJuridica.hide(); return false;" />
+					<p:commandButton value="Sim"
+						oncomplete="confirmacaoExclusaoJuridica.hide();"
+						action="#{pessoaBean.excluir}" process="@this"
+						update=":frmPesquisa:pessoaJuridicaTable" />
+				</p:confirmDialog>
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -22,10 +22,9 @@ import br.com.cactus.cadastros.model.TipoRaca;
 import br.com.cactus.cadastros.model.TipoSangue;
 import br.com.cactus.cadastros.model.TipoSexo;
 import br.com.cactus.cadastros.repository.EstadoCivilDao;
-import br.com.cactus.cadastros.repository.PessoaDao;
-import br.com.cactus.cadastros.repository.PessoaFisicaDao;
-import br.com.cactus.cadastros.repository.PessoaJuridicaDao;
-import br.com.cactus.cadastros.util.jpa.Transactional;
+import br.com.cactus.cadastros.repository.filter.PessoaFisicaFilter;
+import br.com.cactus.cadastros.repository.filter.PessoaJuridicaFilter;
+import br.com.cactus.cadastros.service.PessoaService;
 import br.com.cactus.cadastros.util.jsf.FacesUtil;
 
 @Named
@@ -44,19 +43,21 @@ public class PessoaBean implements Serializable {
 	private PessoaJuridica pessoaJuridica;	
 	private List<EstadoCivil> listaEstadoCivil;	
 	@Inject
-	private PessoaDao pessoaDao;
+	private PessoaService pessoaService;
 	@Inject
-	private EstadoCivilDao estadoCivilDao; 
-	@Inject
-	private PessoaFisicaDao pessoaFisicaDao;
-	@Inject
-	private PessoaJuridicaDao pessoaJuridicaDao;
-	private LazyDataModel<Pessoa> lazyModel;
+	private EstadoCivilDao estadoCivilDao;
+	private LazyDataModel<PessoaFisica> lazyModelFisica;
+	private LazyDataModel<PessoaJuridica> lazyModelJuridica;
+	private PessoaFisicaFilter filtro;
+	private PessoaJuridicaFilter filtroJuridica;
 	
 	@PostConstruct
 	public void init(){
 		limpar();
 		this.listarEstadoCivil();
+		filtro = new PessoaFisicaFilter();
+		filtroJuridica = new PessoaJuridicaFilter();
+		pesquisar();
 	}
 	
 	public void limpar(){		
@@ -65,27 +66,36 @@ public class PessoaBean implements Serializable {
 		contato = new Contato();
 		endereco = new Endereco();
 		pessoaFisica = new PessoaFisica();
+		pessoa.setTipo(TipoPessoa.FISICA);
 	}
 		
-	@Transactional
 	public void salvar(){
-		if (pessoa.getId()  == null) {	
-			this.pessoa = pessoaDao.salvar(pessoa);
-			if(TipoPessoa.FISICA.equals(pessoa.getTipo())){
-				this.pessoaFisica.setPessoa(pessoa);
-				pessoaFisicaDao.salvar(pessoaFisica);
-			}
-			if (TipoPessoa.JURIDICA.equals(pessoa.getTipo())){
-				this.pessoaJuridica.setPessoa(pessoa);
-				pessoaJuridicaDao.salvar(pessoaJuridica);
-			}			
-			FacesUtil.addInfoMessage("Pessoa salvo com sucesso!");
-		} else {
-			pessoaDao.atualizar(pessoa);
-			FacesUtil.addInfoMessage("Pessoa atualizada com sucesso!");
-		}
+		this.pessoaService.salvar(pessoa, pessoaFisica, pessoaJuridica);
+		FacesUtil.addInfoMessage("Transação realizada com sucesso.");
 		limpar();
-	}	
+	}
+	
+	public void pesquisar(){
+		lazyModelFisica = pessoaService.filtrados(filtro);
+		limparPesquisa();
+	}
+	
+	public void pesquisarJuridica(){
+		lazyModelJuridica = pessoaService.filtradosJuridica(filtroJuridica);
+		limparPesquisa();
+	}
+	
+	public void limparPesquisa(){
+		this.filtro = new PessoaFisicaFilter();
+		this.filtroJuridica = new PessoaJuridicaFilter();
+	}
+	
+	public void excluir(){
+		pessoaService.remover(pessoaSelecionada);
+		pesquisar();
+		FacesUtil.addInfoMessage("Pessoa " + pessoaSelecionada.getNome()
+				+ " excluída com sucesso!");
+	}
 		
 	public void adicionaContato(){
 		if(this.contatoSelecionado == null){
@@ -211,12 +221,43 @@ public class PessoaBean implements Serializable {
 		return listaEstadoCivil;
 	}
 
-	public LazyDataModel<Pessoa> getLazyModel() {
-		return lazyModel;
+	public LazyDataModel<PessoaFisica> getLazyModelFisica() {
+		return lazyModelFisica;
 	}
 
-	public void setLazyModel(LazyDataModel<Pessoa> lazyModel) {
-		this.lazyModel = lazyModel;
+	public void setLazyModelFisica(LazyDataModel<PessoaFisica> lazyModelFisica) {
+		this.lazyModelFisica = lazyModelFisica;
 	}
 
+	public Pessoa getPessoaSelecionada() {
+		return pessoaSelecionada;
+	}
+
+	public void setPessoaSelecionada(Pessoa pessoaSelecionada) {
+		this.pessoaSelecionada = pessoaSelecionada;
+	}
+
+	public PessoaFisicaFilter getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(PessoaFisicaFilter filtro) {
+		this.filtro = filtro;
+	}
+
+	public LazyDataModel<PessoaJuridica> getLazyModelJuridica() {
+		return lazyModelJuridica;
+	}
+
+	public void setLazyModelJuridica(LazyDataModel<PessoaJuridica> lazyModelJuridica) {
+		this.lazyModelJuridica = lazyModelJuridica;
+	}
+
+	public PessoaJuridicaFilter getFiltroJuridica() {
+		return filtroJuridica;
+	}
+
+	public void setFiltroJuridica(PessoaJuridicaFilter filtroJuridica) {
+		this.filtroJuridica = filtroJuridica;
+	}
 }
