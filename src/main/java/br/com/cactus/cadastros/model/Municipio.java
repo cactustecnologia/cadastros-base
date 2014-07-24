@@ -16,14 +16,16 @@ import javax.persistence.Table;
 public class Municipio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
-	private Uf uf;
 	private String nome;
-	private int codigoIbge;
-	private int codigoReceitaFederal;
-	private int codigoEstadual;
+	private Integer codigoIbge;
+	private Integer codigoReceitaFederal;
+	private Integer codigoEstadual;
+	private Uf uf;
 	
+	
+	//getter and setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -34,17 +36,7 @@ public class Municipio implements Serializable {
 		this.id = id;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_UF", referencedColumnName = "ID")	
-	public Uf getUf() {
-		return uf;
-	}
-	
-	public void setUf(Uf uf) {
-		this.uf = uf;
-	}
-	
-	@Column(length = 100)
+	@Column(name = "NOME", nullable = false, length = 100)
 	public String getNome() {
 		return nome;
 	}
@@ -53,33 +45,44 @@ public class Municipio implements Serializable {
 		this.nome = nome;
 	}
 	
-	@Column(name = "CODIGO_IBGE", length = 10)
-	public int getCodigoIbge() {
+	@Column(name = "CODIGO_IBGE", nullable = false, length = 10)
+	public Integer getCodigoIbge() {
 		return codigoIbge;
 	}
 	
-	public void setCodigoIbge(int codigoIbge) {
+	public void setCodigoIbge(Integer codigoIbge) {
 		this.codigoIbge = codigoIbge;
 	}
 	
-	@Column(name = "CODIGO_RECEITA_FEDERAL", length = 10)
-	public int getCodigoReceitaFederal() {
+	@Column(name = "CODIGO_RECEITA_FEDERAL", nullable = false, length = 10)
+	public Integer getCodigoReceitaFederal() {
 		return codigoReceitaFederal;
 	}
 	
-	public void setCodigoReceitaFederal(int codigoReceitaFederal) {
+	public void setCodigoReceitaFederal(Integer codigoReceitaFederal) {
 		this.codigoReceitaFederal = codigoReceitaFederal;
 	}
 	
-	@Column(name = "CODIGO_ESTADUAL", length = 10)
-	public int getCodigoEstadual() {
+	@Column(name = "CODIGO_ESTADUAL", nullable = false, length = 10)
+	public Integer getCodigoEstadual() {
 		return codigoEstadual;
 	}
 	
-	public void setCodigoEstadual(int codigoEstadual) {
+	public void setCodigoEstadual(Integer codigoEstadual) {
 		this.codigoEstadual = codigoEstadual;
 	}
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_UF", referencedColumnName = "ID")
+	public Uf getUf() {
+		return uf;
+	}
+	
+	public void setUf(Uf uf) {
+		this.uf = uf;
+	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

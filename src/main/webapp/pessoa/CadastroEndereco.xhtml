@@ -88,19 +88,29 @@
 			<p:inputText id="municipioEndereco" size="10"
 				value="#{pessoaBean.endereco.municipioIbge}" />
 
+
 			<p:outputLabel for="ufEndereco" value="UF:" />
-			<p:selectOneMenu id="ufEndereco" value="#{pessoaBean.endereco.uf}">
+			<p:selectOneMenu id="ufEndereco" value="#{pessoaBean.endereco.uf}"
+				required="true" requiredMessage="Campo obrigatório"
+				converter="converterUf">
 				<f:selectItem itemLabel="Selecione" />
-				<f:selectItems var="ufEndereco" value="#{pessoaBean.listaUf}"
-					itemLabel="#{ufEndereco.nome}" itemValue="#{ufEndereco}" />
+				<f:selectItems value="#{pessoaBean.ufs}" var="ufEndereco"
+					itemValue="#{ufEndereco}" itemLabel="#{ufEndereco.nome}" />
+				<p:ajax render="cidadeEndereco" event="change"
+					listener="#{pessoaBean.listaMunicipios}" />
 			</p:selectOneMenu>
+			
 
 			<p:outputLabel for="cidadeEndereco" value="Cidade:" />
-			<p:selectOneMenu id="cidadeEndereco" value="#{pessoaBean.endereco.municipioIbge}">
+			<p:selectOneMenu id="cidadeEndereco" value="#{meuBean.cidade}"
+				required="true" requiredMessage="Campo obrigatório"
+				converter="converterMunicipio">
 				<f:selectItem itemLabel="Selecione" />
-				<f:selectItems var="cidadeEndereco" value="#{pessoaBean.listaMunicipio}"
-					itemLabel="#{cidadeEndereco.nome}" itemValue="#{cidadeEndereco}" />
+				<f:selectItems value="#{pessoaBean.municipios}" var="cidadeEndereco" itemValue="#{cidadeEndereco}"
+					itemLabel="#{cidadeEndereco.nome}" />
 			</p:selectOneMenu>
+			
+
 
 			<p:outputLabel for="foneEndereco" value="Fone:" />
 			<p:inputMask mask="99 9999-9999" id="foneEndereco" size="10"

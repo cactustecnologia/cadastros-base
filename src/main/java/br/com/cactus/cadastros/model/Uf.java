@@ -43,11 +43,11 @@ public class Uf implements Serializable {
 		this.pais = pais;
 	}
 	
+	@Column(name = "SIGLA", length = 2)
 	public String getSigla() {
 		return sigla;
 	}
 	
-	@Column(name = "SIGLA", length = 2)
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
 	}
@@ -61,11 +61,11 @@ public class Uf implements Serializable {
 		this.nome = nome;
 	}
 	
+	@Column(name = "CODIGO_IBGE", length = 10)
 	public Integer getCodigoIbge() {
 		return codigoIbge;
-	}
+	}	
 	
-	@Column(name = "CODIGO_IBGE", length = 10)
 	public void setCodigoIbge(Integer codigoIbge) {
 		this.codigoIbge = codigoIbge;
 	}

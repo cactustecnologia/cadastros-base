@@ -26,4 +26,6 @@
 		<converter-id>converter.CnpjConverter</converter-id>
 		<converter-class>br.com.cactus.cadastros.converter.CnpjConverter</converter-class>
 	</converter>
+	
+	
 </faces-config>
