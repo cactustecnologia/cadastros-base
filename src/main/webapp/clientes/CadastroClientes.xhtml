@@ -35,7 +35,7 @@
 				
 				<p:outputLabel value="Pessoa" for="pessoa" />
 				<h:panelGroup>
-					<p:inputText id="pessoa" 
+					<p:inputText id="pessoa" disabled="true"
 						value="#{cadastroClienteBean.cliente.pessoa}" size="40" />
 					<p:button value=".." onclick="pessoasDialog.show(); return false;" />  			
 				</h:panelGroup>
@@ -49,14 +49,17 @@
 				
 				<p:outputLabel value="Operação Fiscal:" for="operacaoFiscal" />
 				<h:panelGroup>
-					<p:inputText id="operacaoFiscal" 
-						value="#{cadastroClienteBean.cliente.operacaoFiscal}" size="40" />
-					<p:button value=".." onclick="operacaoFiscalDialog.show(); return false;" />  			
+					<p:inputText id="operacaoFiscal" disabled="true"
+						value="#{cadastroClienteBean.cliente.operacaoFiscal.descricao}" size="40" />
+					<p:commandButton icon="ui-icon-extlink"						
+						onclick="operacaoFiscalDialog.show(); return false;"
+						process="@this">
+					</p:commandButton>  			
 				</h:panelGroup>
 				
 				<p:outputLabel value="Atividade For. Cli.:" for="atividadeForCli" />
 				<h:panelGroup>
-					<p:inputText id="atividadeForCli" 						
+					<p:inputText id="atividadeForCli" disabled="true"						
 						value="#{cadastroClienteBean.atividadeSelecionada.nome}" size="40" />						
 					<p:commandButton icon="ui-icon-extlink"
 						onclick="atividadeForCliDialog.show(); return false"
@@ -66,9 +69,12 @@
 				
 				<p:outputLabel value="Situação For. Cli.:" for="situacaoForCli" />
 				<h:panelGroup>
-					<p:inputText id="situacaoForCli" 
-						value="#{cadastroClienteBean.cliente.situacaoForCli}" size="40" />
-					<p:button value=".." onclick="situacaoForCliDialog.show(); return false;" />  			
+					<p:inputText id="situacaoForCli" disabled="true"
+						value="#{cadastroClienteBean.situacaoSelecionada.nome}" size="40" />
+					<p:commandButton icon="ui-icon-extlink"
+						onclick="situacaoForCliDialog.show(); return false;"
+						process="@this">
+					</p:commandButton>  			
 				</h:panelGroup>
 				
 				<p:outputLabel value="Cliente desde:" for="desde" />

@@ -1,11 +1,79 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-
-	<p:dialog header="Pesquisa Operação Fiscal" 
-		widgetVar="operacaoFiscalDialog"
-		modal="true">
-		<h:outputLabel value="Operação Fiscal" />
-	</p:dialog>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">	
+	
+	<script>
+		function fecharListaOperacaoFiscal(args) {
+			if (!args.validationFailed) {
+				operacaoFiscalDialog.hide();
+			}
+		}
+	</script>
+		
+	<h:form id="frmPesquisaOperacaoFiscal">
+		<p:dialog header="Pesquisa Operação Fiscal" 
+			widgetVar="operacaoFiscalDialog"
+			modal="true">
+			<p:ajax event="close" update="painel" 
+				listener="#{cadastroClienteBean.handleOperacaoFiscalClose}" />
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						process="@this, descricaoOperacao"
+						action="#{cadastroClienteBean.pesquisarOperacaoFiscal}"
+						update="operacaoFiscalTable">
+					</p:commandButton>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">					
+					<p:commandButton						
+						value="Fechar"
+						action="#{cadastroClienteBean.limparFiltroOperacaoFiscal}"
+						oncomplete="operacaoFiscalDialog.hide(); return false;">						
+					</p:commandButton>
+				</p:toolbarGroup>	
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+								
+				<p:outputLabel value="Descrição" for="descricaoOperacao" />
+				<p:inputText id="descricaoOperacao" size="40" 
+					value="#{cadastroClienteBean.descricaoOperacao}"/>
+			</p:panelGrid>
+			
+			<p:dataTable style="margin-top: 15px;" 
+				id="operacaoFiscalTable" value="#{cadastroClienteBean.lazyOperacaoFiscal}" var="operacaoFiscal" 
+				paginator="true" rows="5"
+	            rowKey="#{operacaoFiscal.id}" selectionMode="single"                     
+	            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	            paginatorAlwaysVisible="false" paginatorPosition="bottom"                    
+	            lazy="true" rowsPerPageTemplate="5,10,15">
+				<p:column headerText="Descrição">
+					<h:outputText value="#{operacaoFiscal.descricao}" />
+				</p:column>
+				<p:column headerText="Descrição na NF">
+					<h:outputText value="#{operacaoFiscal.descricaoNaNf}" />
+				</p:column>
+				<p:column headerText="CFOP">
+					<h:outputText value="#{operacaoFiscal.cfop}" />
+				</p:column>
+				<p:column headerText="Observação">
+					<h:outputText value="#{operacaoFiscal.observacao}" />
+				</p:column>
+				<p:column style="width: 100px; text-align: center">
+					<p:commandButton 
+						icon="ui-icon-pencil" title="Selecionar"
+						action="#{cadastroClienteBean.selecionarOperacaoFiscal}"					
+						process="@this"
+						update=":frmCliente:painel"
+						oncomplete="fecharListaOperacaoFiscal(args)">	
+						<f:setPropertyActionListener target="#{cadastroClienteBean.operacaoFiscalSelecionada}"
+							value="#{operacaoFiscal}" />											
+					</p:commandButton>				
+				</p:column>
+			</p:dataTable>		
+		</p:dialog>	
+	</h:form>
 </html>
