@@ -35,7 +35,11 @@
 
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="30" maxlength="40"
-					value="#{pessoaBean.pessoa.email}" />
+					value="#{pessoaBean.pessoa.email}"
+					validatorMessage="Formato do E-mail Inválido">
+					<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
 
 				<p:outputLabel value="Site:" for="site" />
 				<p:inputText id="site" size="30" maxlength="50"

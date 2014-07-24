@@ -51,7 +51,9 @@
 						<h:outputText value="#{pessoaFisica.pessoa.nome}" />
 					</p:column>
 					<p:column headerText="CPF">
-						<h:outputText value="#{pessoaFisica.cpf}" />
+						<h:outputText value="#{pessoaFisica.cpf}">
+							 <f:converter converterId="converter.CpfConverter" />
+						</h:outputText>
 					</p:column>
 					<p:column headerText="RG">
 						<h:outputText value="#{pessoaFisica.rg}" />
@@ -103,7 +105,9 @@
 						<h:outputText value="#{pessoaJuridica.pessoa.nome}" />
 					</p:column>
 					<p:column headerText="CNPF">
-						<h:outputText value="#{pessoaJuridica.cnpj}" />
+						<h:outputText value="#{pessoaJuridica.cnpj}">
+							<f:converter converterId="converter.CnpjConverter" />
+						</h:outputText>
 					</p:column>
 					<p:column headerText="Nome Fantasia">
 						<h:outputText value="#{pessoaJuridica.fantasia}" />

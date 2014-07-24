@@ -23,11 +23,14 @@
 
 		<p:outputLabel value="CPF:" for="cpf" />
 		<p:inputMask mask="999.999.999-99" id="cpf" size="11" maxlength="11"
-			value="#{pessoaBean.pessoaFisica.cpf}" />
+			value="#{pessoaBean.pessoaFisica.cpf}">
+			 <f:converter converterId="converter.CpfConverter" />
+		</p:inputMask>
 
 		<p:outputLabel value="Data Nascimento:" for="dataNascimento" />
 		<p:calendar value="#{pessoaBean.pessoaFisica.dataNascimento}"
-			pattern="dd/MM/yyyy" id="dataNascimento" size="10" maxlength="10" />
+			pattern="dd/MM/yyyy" id="dataNascimento" size="10" maxlength="10"
+			locale="pt_BR" navigator="true" showOn="button" />
 
 		<p:outputLabel value="Sexo:" for="tipoSexo" />
 		<p:selectOneMenu id="tipoSexo"
@@ -88,7 +91,8 @@
 
 		<p:outputLabel value="Data Emissão RG:" for="dataEmissaoRg" />
 		<p:calendar value="#{pessoaBean.pessoaFisica.dataEmissaoRg}"
-			pattern="dd/MM/yyyy" id="dataEmissaoRg" size="10" maxlength="10" />
+			pattern="dd/MM/yyyy" id="dataEmissaoRg" size="10" maxlength="10"
+			locale="pt_BR" navigator="true" showOn="button" />
 
 		<p:outputLabel value="CHN Número:" for="cnhNumero" />
 		<p:inputText id="cnhNumero" size="20" maxlength="20"
@@ -100,7 +104,8 @@
 
 		<p:outputLabel value="CHN Vencimento:" for="cnhVencimento" />
 		<p:calendar value="#{pessoaBean.pessoaFisica.cnhVencimento}"
-			pattern="dd/MM/yyyy" id="cnhVencimento" size="10" maxlength="10" />
+			pattern="dd/MM/yyyy" id="cnhVencimento" size="10" maxlength="10"
+			locale="pt_BR" navigator="true" showOn="button" />
 
 		<p:outputLabel value="Título Eleitoral Número:"
 			for="tituloEleitoralNumero" />
@@ -134,7 +139,9 @@
 		
 		<p:outputLabel value="CNPJ:" for="cnpj" />
 		<p:inputMask mask="99.999.999/9999-99" id="cnpj" size="14" maxlength="14"
-			value="#{pessoaBean.pessoaJuridica.cnpj}" />
+			value="#{pessoaBean.pessoaJuridica.cnpj}">
+			<f:converter converterId="converter.CnpjConverter" />
+		</p:inputMask>
 
 		<p:outputLabel value="Nome Fantasia:" for="nomeFantasia" />
 		<p:inputText id="nomeFantasia" size="30" maxlength="150"
@@ -150,7 +157,8 @@
 
 		<p:outputLabel value="Data da Constituição:" for="dataConstituicao" />
 		<p:calendar value="#{pessoaBean.pessoaJuridica.dataConstituicao}"
-			pattern="dd/MM/yyyy" id="dataConstituicao" size="10" maxlength="10" />
+			pattern="dd/MM/yyyy" id="dataConstituicao" size="10" maxlength="10"
+			locale="pt_BR" navigator="true" showOn="button" />
 
 		<p:outputLabel value="Tipo do Regime:" for="tipoRegime" />
 		<p:inputText id="tipoRegime" size="20" maxlength="20"

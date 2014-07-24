@@ -46,6 +46,7 @@
 		listener="#{pessoaBean.handleClose}" />
 	<h:panelGroup id="inclusaoContatoPanel">
 		<p:messages id="msgContato" closable="true" />
+		
 
 		<p:panelGrid columns="2">
 			<p:outputLabel for="nomeContato" value="Nome:" />
@@ -59,7 +60,6 @@
 				<f:validateRegex
 					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 			</p:inputText>
-			<p:message for="emailContato" />
 
 			<p:outputLabel value="Fone comercial" for="foneComercial" />
 			<p:inputMask mask="99 9999-9999" id="foneComercial"

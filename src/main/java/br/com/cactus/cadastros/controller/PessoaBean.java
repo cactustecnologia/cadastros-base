@@ -21,7 +21,9 @@ import br.com.cactus.cadastros.model.TipoPessoa;
 import br.com.cactus.cadastros.model.TipoRaca;
 import br.com.cactus.cadastros.model.TipoSangue;
 import br.com.cactus.cadastros.model.TipoSexo;
+import br.com.cactus.cadastros.model.Uf;
 import br.com.cactus.cadastros.repository.EstadoCivilDao;
+import br.com.cactus.cadastros.repository.UfDao;
 import br.com.cactus.cadastros.repository.filter.PessoaFisicaFilter;
 import br.com.cactus.cadastros.repository.filter.PessoaJuridicaFilter;
 import br.com.cactus.cadastros.service.PessoaService;
@@ -43,11 +45,15 @@ public class PessoaBean implements Serializable {
 	private Contato contatoSelecionado;
 	private Endereco endereco;
 	private Endereco enderecoSelecionado;		
-	private List<EstadoCivil> listaEstadoCivil;	
+	private List<EstadoCivil> listaEstadoCivil;
+	private List<Uf> listaUf;
+	private List<>
 	@Inject
 	private PessoaService pessoaService;
 	@Inject
 	private EstadoCivilDao estadoCivilDao;
+	@Inject
+	private UfDao ufDao;
 	private LazyDataModel<PessoaFisica> lazyModelFisica;
 	private LazyDataModel<PessoaJuridica> lazyModelJuridica;
 	private PessoaFisicaFilter filtro;
@@ -57,6 +63,7 @@ public class PessoaBean implements Serializable {
 	public void init(){
 		limpar();
 		this.listarEstadoCivil();
+		this.listarUf();
 		filtro = new PessoaFisicaFilter();		
 		filtroJuridica = new PessoaJuridicaFilter();
 		pesquisar();
@@ -158,6 +165,10 @@ public class PessoaBean implements Serializable {
 	
 	public void listarEstadoCivil(){
 		listaEstadoCivil = estadoCivilDao.todos();
+	}
+	
+	public void listarUf(){
+		listaUf = ufDao.todos();
 	}
 	
 	public void handleClose(CloseEvent event) {
@@ -297,4 +308,7 @@ public class PessoaBean implements Serializable {
 		this.pessoaJuridicaSelecionada = pessoaJuridicaSelecionada;
 	}
 
+	public List<Uf> getListaUf() {
+		return listaUf;
+	}
 }
