@@ -14,6 +14,7 @@ import org.primefaces.model.LazyDataModel;
 import br.com.cactus.cadastros.model.Contato;
 import br.com.cactus.cadastros.model.Endereco;
 import br.com.cactus.cadastros.model.EstadoCivil;
+import br.com.cactus.cadastros.model.Municipio;
 import br.com.cactus.cadastros.model.Pessoa;
 import br.com.cactus.cadastros.model.PessoaFisica;
 import br.com.cactus.cadastros.model.PessoaJuridica;
@@ -23,6 +24,7 @@ import br.com.cactus.cadastros.model.TipoSangue;
 import br.com.cactus.cadastros.model.TipoSexo;
 import br.com.cactus.cadastros.model.Uf;
 import br.com.cactus.cadastros.repository.EstadoCivilDao;
+import br.com.cactus.cadastros.repository.MunicipioDao;
 import br.com.cactus.cadastros.repository.UfDao;
 import br.com.cactus.cadastros.repository.filter.PessoaFisicaFilter;
 import br.com.cactus.cadastros.repository.filter.PessoaJuridicaFilter;
@@ -47,13 +49,15 @@ public class PessoaBean implements Serializable {
 	private Endereco enderecoSelecionado;		
 	private List<EstadoCivil> listaEstadoCivil;
 	private List<Uf> listaUf;
-	private List<>
+	private List<Municipio> listaMunicipio;
 	@Inject
 	private PessoaService pessoaService;
 	@Inject
 	private EstadoCivilDao estadoCivilDao;
 	@Inject
 	private UfDao ufDao;
+	@Inject
+	private MunicipioDao municipioDao;
 	private LazyDataModel<PessoaFisica> lazyModelFisica;
 	private LazyDataModel<PessoaJuridica> lazyModelJuridica;
 	private PessoaFisicaFilter filtro;
@@ -64,6 +68,7 @@ public class PessoaBean implements Serializable {
 		limpar();
 		this.listarEstadoCivil();
 		this.listarUf();
+		this.listarMunicipio();
 		filtro = new PessoaFisicaFilter();		
 		filtroJuridica = new PessoaJuridicaFilter();
 		pesquisar();
@@ -169,6 +174,10 @@ public class PessoaBean implements Serializable {
 	
 	public void listarUf(){
 		listaUf = ufDao.todos();
+	}
+	
+	public void listarMunicipio(){
+		listaMunicipio = municipioDao.todos();
 	}
 	
 	public void handleClose(CloseEvent event) {
@@ -311,4 +320,9 @@ public class PessoaBean implements Serializable {
 	public List<Uf> getListaUf() {
 		return listaUf;
 	}
+
+	public List<Municipio> getListaMunicipio() {
+		return listaMunicipio;
+	}
+	
 }
