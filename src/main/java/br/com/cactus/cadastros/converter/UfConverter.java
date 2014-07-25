@@ -9,7 +9,7 @@ import br.com.cactus.cadastros.model.Uf;
 import br.com.cactus.cadastros.repository.UfDao;
 import br.com.cactus.cadastros.util.cdi.CDIServiceLocator;
 
-@FacesConverter(value="converterUf")
+@FacesConverter(value="converterUf", forClass = Uf.class)
 public class UfConverter implements Converter {
 	
 	//@Inject

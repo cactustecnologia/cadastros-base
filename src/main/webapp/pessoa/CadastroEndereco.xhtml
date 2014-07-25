@@ -91,13 +91,12 @@
 
 			<p:outputLabel for="ufEndereco" value="UF:" />
 			<p:selectOneMenu id="ufEndereco" value="#{pessoaBean.endereco.uf}"
-				required="true" requiredMessage="Campo obrigatório"
-				converter="converterUf">
+				required="true">
 				<f:selectItem itemLabel="Selecione" />
 				<f:selectItems value="#{pessoaBean.ufs}" var="ufEndereco"
-					itemValue="#{ufEndereco}" itemLabel="#{ufEndereco.nome}" />
-				<p:ajax process="@this" render="cidadeEndereco" event="change"
-					listener="#{pessoaBean.listaMunicipios}" />
+					itemValue="#{ufEndereco.nome}" itemLabel="#{ufEndereco.nome}" />
+				<p:ajax process="@this" listener="#{pessoaBean.listaMunicipios}"
+					update="cidadeEndereco" />
 			</p:selectOneMenu>
 			
 
