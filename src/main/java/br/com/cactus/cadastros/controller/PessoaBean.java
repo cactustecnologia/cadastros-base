@@ -369,7 +369,5 @@ public class PessoaBean implements Serializable {
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
 	}
-
-	
 	
 }
