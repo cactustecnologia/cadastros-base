@@ -11,14 +11,14 @@ import br.com.cactus.cadastros.util.cdi.CDIServiceLocator;
 
 @FacesConverter(value="converterUf", forClass = Uf.class)
 public class UfConverter implements Converter {
-	
+
 	//@Inject
 		private UfDao ufDao;
-		
+
 		public UfConverter() {
 			ufDao = CDIServiceLocator.getBean(UfDao.class);
 		}
-	
+
 	@Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Uf retorno = null;

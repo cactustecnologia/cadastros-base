@@ -19,7 +19,7 @@ public class UfDao extends GenericRepositoryDaoImpl<Uf> implements Serializable 
 			return this.atualizar(uf);
 		}
 	}
-	
+
 	public Uf porNome(String nome){
 		try{
 			Map<String, Object> params = new HashMap<String, Object>();

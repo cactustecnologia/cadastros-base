@@ -9,7 +9,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -186,16 +185,16 @@ public class PessoaBean implements Serializable {
 	public void listarEstadoCivil() {
 		listaEstadoCivil = estadoCivilDao.todos();
 	}
-	
+
 
 //	public void listarUf(){
 //		listaUf = ufDao.todos();
 //	}
-	
+
 //	public void listarMunicipio(){
 //		listaMunicipio = municipioDao.todos();
 //	}
-	
+
 
 	public void listaMunicipios(AjaxBehaviorEvent event) {
 		municipios = pessoaService.buscaUfMunicipio(endereco, uf);

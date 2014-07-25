@@ -18,7 +18,7 @@ public class MunicipioDao extends GenericRepositoryDaoImpl<Municipio> implements
 
 	private static final long serialVersionUID = 1L;
 	private List<Criterion> params;
-	
+
 	private Map<String, String> alias = new HashMap<>();
 
 	public Municipio guardar(Municipio municipio){
@@ -28,7 +28,7 @@ public class MunicipioDao extends GenericRepositoryDaoImpl<Municipio> implements
 			return this.atualizar(municipio);
 		}
 	}
-	
+
 	public List<Municipio> consultaCidades(Uf uf) {
 		List<Municipio> municipios;
 		alias.put("uf", "uf");
@@ -39,7 +39,7 @@ public class MunicipioDao extends GenericRepositoryDaoImpl<Municipio> implements
 		municipios = findByCriteria(params, alias);;
 		return municipios;
 	}
-	
+
 	public Municipio porNome(String nome){
 		try{
 			Map<String, Object> params = new HashMap<String, Object>();
@@ -49,6 +49,6 @@ public class MunicipioDao extends GenericRepositoryDaoImpl<Municipio> implements
 			return null;
 		}
 	}
-	
-	
+
+
 }

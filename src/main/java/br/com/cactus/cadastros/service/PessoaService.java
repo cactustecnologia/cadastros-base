@@ -33,7 +33,7 @@ import br.com.cactus.cadastros.util.jpa.Transactional;
 public class PessoaService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private PessoaDao pessoaDao;
 	@Inject
@@ -47,7 +47,7 @@ public class PessoaService implements Serializable {
 	private MunicipioDao municipioDao;
 	@Inject 
 	private UfDao ufDao;
-	
+
 	public LazyDataModel<PessoaFisica> filtrados(PessoaFisicaFilter filtro){
 		params = new ArrayList<>();
 		if(StringUtils.isNotBlank(filtro.getCpf())){
@@ -58,7 +58,7 @@ public class PessoaService implements Serializable {
 		}
 		return lazyModelFisica = new LazyDataModelBase<>(pessoaFisicaDao, params, null);
 	}
-	
+
 	public LazyDataModel<PessoaJuridica> filtradosJuridica(PessoaJuridicaFilter filtroJuridica){
 		params = new ArrayList<>();
 		if(StringUtils.isNotBlank(filtroJuridica.getCnpj())){
@@ -69,7 +69,7 @@ public class PessoaService implements Serializable {
 		}
 		return lazyModelJuridica = new LazyDataModelBase<>(pessoaJuridicaDao, params, null);
 	}
-	
+
 	//precisa ver isso aqui
 	@Transactional	
 	public Pessoa salvar(Pessoa pessoa, PessoaFisica pessoaFisica, PessoaJuridica pessoaJuridica) {
@@ -84,7 +84,7 @@ public class PessoaService implements Serializable {
 		}
 		return pessoa;
 	}
-	
+
 	@Transactional
 	public void remover(Pessoa pessoa) {
 		try {
@@ -94,7 +94,7 @@ public class PessoaService implements Serializable {
 			throw new NegocioException("Esta pessoa não pode ser excluída!");
 		}
 	}
-	
+
 	@Transactional
 	public void removerFisica(PessoaFisica pessoaFisica) {
 		try {
@@ -104,7 +104,7 @@ public class PessoaService implements Serializable {
 			throw new NegocioException("Esta pessoa física não pode ser excluída!");
 		}
 	}	
-	
+
 	@Transactional
 	public void removerJuridica(PessoaJuridica pessoaJuridica) {
 		try {
@@ -114,7 +114,7 @@ public class PessoaService implements Serializable {
 			throw new NegocioException("Esta pessoa jurídica não pode ser excluída!");
 		}
 	}	
-	
+
 	public List<Municipio> buscaUfMunicipio(Endereco endereco, Uf uf){
 		List<Municipio> municipios = null;
 		if(StringUtils.isNotBlank(endereco.getUf())){
@@ -125,7 +125,7 @@ public class PessoaService implements Serializable {
 		}
 		return municipios;
 	}
-	
+
 	//getter and setter
 	public LazyDataModel<PessoaFisica> getLazyModelFisica() {
 		return lazyModelFisica;
