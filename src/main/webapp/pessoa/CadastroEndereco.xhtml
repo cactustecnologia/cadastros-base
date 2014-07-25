@@ -96,13 +96,13 @@
 				<f:selectItem itemLabel="Selecione" />
 				<f:selectItems value="#{pessoaBean.ufs}" var="ufEndereco"
 					itemValue="#{ufEndereco}" itemLabel="#{ufEndereco.nome}" />
-				<p:ajax render="cidadeEndereco" event="change"
+				<p:ajax process="@this" render="cidadeEndereco" event="change"
 					listener="#{pessoaBean.listaMunicipios}" />
 			</p:selectOneMenu>
 			
 
 			<p:outputLabel for="cidadeEndereco" value="Cidade:" />
-			<p:selectOneMenu id="cidadeEndereco" value="#{meuBean.cidade}"
+			<p:selectOneMenu id="cidadeEndereco" value="#{pessoaBean.municipio.nome}"
 				required="true" requiredMessage="Campo obrigatório"
 				converter="converterMunicipio">
 				<f:selectItem itemLabel="Selecione" />

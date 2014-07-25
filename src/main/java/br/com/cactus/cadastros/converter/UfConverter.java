@@ -21,19 +21,20 @@ public class UfConverter implements Converter {
 	
 	@Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        if (value != null && !value.equals("")) {
-            ufDao = new UfDao();
-            return ufDao.pesquisarPorId(Integer.valueOf(value));
-        }
-        return null;
+		Uf retorno = null;
+		if (value != null) {
+			Integer id = new Integer(value);
+			retorno = ufDao.pesquisarPorId(id);
+		}
+		return retorno;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value instanceof Uf) {
-            Uf uf = (Uf) value;
-            return String.valueOf(uf.getId());
-        }
-        return "";
+    	if (value != null) {
+			Uf uf = (Uf) value;
+			return uf.getId() == null ? null : uf.getId().toString();
+		}
+		return "";
     }
 }
