@@ -14,13 +14,18 @@ import org.hibernate.criterion.Restrictions;
 import org.primefaces.model.LazyDataModel;
 
 import br.com.cactus.cadastros.lazy.LazyDataModelBase;
+import br.com.cactus.cadastros.model.Endereco;
+import br.com.cactus.cadastros.model.Municipio;
 import br.com.cactus.cadastros.model.Pessoa;
 import br.com.cactus.cadastros.model.PessoaFisica;
 import br.com.cactus.cadastros.model.PessoaJuridica;
 import br.com.cactus.cadastros.model.TipoPessoa;
+import br.com.cactus.cadastros.model.Uf;
+import br.com.cactus.cadastros.repository.MunicipioDao;
 import br.com.cactus.cadastros.repository.PessoaDao;
 import br.com.cactus.cadastros.repository.PessoaFisicaDao;
 import br.com.cactus.cadastros.repository.PessoaJuridicaDao;
+import br.com.cactus.cadastros.repository.UfDao;
 import br.com.cactus.cadastros.repository.filter.PessoaFisicaFilter;
 import br.com.cactus.cadastros.repository.filter.PessoaJuridicaFilter;
 import br.com.cactus.cadastros.util.jpa.Transactional;
@@ -38,6 +43,10 @@ public class PessoaService implements Serializable {
 	private List<Criterion> params;	
 	private LazyDataModel<PessoaFisica> lazyModelFisica;
 	private LazyDataModel<PessoaJuridica> lazyModelJuridica;
+	@Inject
+	private MunicipioDao municipioDao;
+	@Inject 
+	private UfDao ufDao;
 	
 	public LazyDataModel<PessoaFisica> filtrados(PessoaFisicaFilter filtro){
 		params = new ArrayList<>();
@@ -105,6 +114,17 @@ public class PessoaService implements Serializable {
 			throw new NegocioException("Esta pessoa jurídica não pode ser excluída!");
 		}
 	}	
+	
+	public List<Municipio> buscaUfMunicipio(Endereco endereco, Uf uf){
+		List<Municipio> municipios = null;
+		if(StringUtils.isNotBlank(endereco.getUf())){
+			uf = ufDao.porNome(endereco.getUf());
+		}
+		if(uf != null){
+			municipios = municipioDao.consultaCidades(uf);
+		}
+		return municipios;
+	}
 	
 	//getter and setter
 	public LazyDataModel<PessoaFisica> getLazyModelFisica() {

@@ -29,16 +29,6 @@ public class MunicipioDao extends GenericRepositoryDaoImpl<Municipio> implements
 		}
 	}
 	
-	public Municipio porNome(String nome){
-		try{
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("nome", nome);
-			return pesqParam("from municipio where upper(nome) = :nome", params);
-		} catch (NoResultException ex){
-			return null;
-		}
-	}
-	
 	public List<Municipio> consultaCidades(Uf uf) {
 		List<Municipio> municipios;
 		alias.put("uf", "uf");
@@ -49,4 +39,16 @@ public class MunicipioDao extends GenericRepositoryDaoImpl<Municipio> implements
 		municipios = findByCriteria(params, alias);;
 		return municipios;
 	}
+	
+	public Municipio porNome(String nome){
+		try{
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("nome", nome);
+			return pesqParam("from municipio where upper(nome) = :nome", params);
+		} catch (NoResultException ex){
+			return null;
+		}
+	}
+	
+	
 }

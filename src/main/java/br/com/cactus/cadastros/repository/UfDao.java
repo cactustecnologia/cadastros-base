@@ -24,7 +24,7 @@ public class UfDao extends GenericRepositoryDaoImpl<Uf> implements Serializable 
 		try{
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("nome", nome);
-			return pesqParam("from uf where upper(nome) = :nome", params);
+			return pesqParam("from Uf where upper(nome) = :nome", params);
 		} catch (NoResultException ex){
 			return null;
 		}

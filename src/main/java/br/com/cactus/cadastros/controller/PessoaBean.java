@@ -9,6 +9,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -94,6 +95,7 @@ public class PessoaBean implements Serializable {
 		endereco = new Endereco();
 		pessoaFisica = new PessoaFisica();
 		pessoa.setTipo(TipoPessoa.FISICA);
+		this.uf = new Uf();
 	}
 
 	public void salvar() {
@@ -196,7 +198,7 @@ public class PessoaBean implements Serializable {
 	
 
 	public void listaMunicipios(AjaxBehaviorEvent event) {
-        municipios = municipioDao.consultaCidades(uf);
+		municipios = pessoaService.buscaUfMunicipio(endereco, uf);
     }
 
 	/*public void listarUf() {
@@ -383,5 +385,5 @@ public class PessoaBean implements Serializable {
 
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
-	}
+	}	
 }
