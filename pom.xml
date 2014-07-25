@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.cactus</groupId>
-  <artifactId>CadastrosBase</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.cactus</groupId>
+	<artifactId>CadastrosBase</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -137,7 +138,7 @@
 			<version>1.1</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Spring Security (autenticação e autorização) -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -155,8 +156,15 @@
 			<version>3.1.4.RELEASE</version>
 		</dependency>
 
+		<!-- Dependencia do twiter bootstrap -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>1.0.9</version>
+		</dependency>
+
 	</dependencies>
-	
+
 	<build>
 		<finalName>CadastrosBase</finalName>
 		<plugins>
@@ -179,5 +187,5 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-  
+
 </project>
