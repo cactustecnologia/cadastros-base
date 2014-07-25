@@ -90,7 +90,7 @@
 
 
 			<p:outputLabel for="ufEndereco" value="UF:" />
-			<p:selectOneMenu id="ufEndereco" value="#{pessoaBean.municipio.nome}"
+			<p:selectOneMenu id="ufEndereco" value="#{pessoaBean.endereco.uf}"
 				required="true" requiredMessage="Campo obrigatório"
 				converter="converterUf">
 				<f:selectItem itemLabel="Selecione" />
@@ -102,7 +102,7 @@
 			
 
 			<p:outputLabel for="cidadeEndereco" value="Cidade:" />
-			<p:selectOneMenu id="cidadeEndereco" value="#{pessoaBean.endereco.uf}"
+			<p:selectOneMenu id="cidadeEndereco" value="#{pessoaBean.municipio.nome}"
 				required="true" requiredMessage="Campo obrigatório"
 				converter="converterMunicipio">
 				<f:selectItem itemLabel="Selecione" />

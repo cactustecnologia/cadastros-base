@@ -85,7 +85,6 @@ public class PessoaBean implements Serializable {
 		pesquisar();
 		pesquisarJuridica();
 		ufs = ufDao.todos();
-		municipios = municipioDao.todos();
 	}
 
 	public void limpar() {
@@ -384,5 +383,5 @@ public class PessoaBean implements Serializable {
 
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
-	}	
+	}
 }
