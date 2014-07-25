@@ -102,7 +102,7 @@
 			
 
 			<p:outputLabel for="cidadeEndereco" value="Cidade:" />
-			<p:selectOneMenu id="cidadeEndereco" value="#{meuBean.cidade}"
+			<p:selectOneMenu id="cidadeEndereco" value="#{pessoaBean.endereco.municipioIbge}"
 				required="true" requiredMessage="Campo obrigatório"
 				converter="converterMunicipio">
 				<f:selectItem itemLabel="Selecione" />
