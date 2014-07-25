@@ -181,7 +181,7 @@ public class PessoaBean implements Serializable {
 	}
 	
 	public void listaMunicipios(AjaxBehaviorEvent event) {
-        municipios = municipioDao.listPesqParam(uf);
+        municipios = municipioDao.listPesqParam("", null);
     }
 
 	/*public void listarUf() {
