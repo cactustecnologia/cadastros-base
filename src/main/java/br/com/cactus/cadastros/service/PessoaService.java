@@ -61,7 +61,8 @@ public class PessoaService implements Serializable {
 		return lazyModelJuridica = new LazyDataModelBase<>(pessoaJuridicaDao, params, null);
 	}
 	
-	@Transactional
+	//precisa ver isso aqui
+	@Transactional	
 	public Pessoa salvar(Pessoa pessoa, PessoaFisica pessoaFisica, PessoaJuridica pessoaJuridica) {
 		pessoa = pessoaDao.guardar(pessoa);
 		if(TipoPessoa.FISICA.equals(pessoa.getTipo())){
